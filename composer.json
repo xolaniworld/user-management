@@ -1,0 +1,10 @@
+{
+  "config": {
+    "vendor-dir": "composer_vendor"
+  },
+  "autoload" : {
+    "psr-4" : {
+      "Application\\": "src"
+    }
+  }
+}
