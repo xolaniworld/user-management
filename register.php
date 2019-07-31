@@ -29,9 +29,9 @@ $querynoti = $dbh->prepare($sqlnoti);
 $querynoti-> bindParam(':notiuser', $sender, PDO::PARAM_STR);
 $querynoti-> bindParam(':notireciver',$reciver, PDO::PARAM_STR);
 $querynoti-> bindParam(':notitype', $notitype, PDO::PARAM_STR);
-$querynoti->execute();    
-    
-$sql ="INSERT INTO users(name,email, password, gender, mobile, designation, image) VALUES(:name, :email, :password, :gender, :mobileno, :designation, :image)";
+$querynoti->execute();
+
+$sql ="INSERT INTO users(name,email, password, gender, mobile, designation, image, status) VALUES(:name, :email, :password, :gender, :mobileno, :designation, :image, :status)";
 $query= $dbh -> prepare($sql);
 $query-> bindParam(':name', $name, PDO::PARAM_STR);
 $query-> bindParam(':email', $email, PDO::PARAM_STR);
@@ -40,9 +40,10 @@ $query-> bindParam(':gender', $gender, PDO::PARAM_STR);
 $query-> bindParam(':mobileno', $mobileno, PDO::PARAM_STR);
 $query-> bindParam(':designation', $designation, PDO::PARAM_STR);
 $query-> bindParam(':image', $image, PDO::PARAM_STR);
-$query->execute();
+$query-> bindParam(':status', $image, PDO::PARAM_INT);
+$success = $query->execute();
 $lastInsertId = $dbh->lastInsertId();
-if($lastInsertId)
+if($success)
 {
 echo "<script type='text/javascript'>alert('Registration Sucessfull!');</script>";
 echo "<script type='text/javascript'> document.location = 'index.php'; </script>";
@@ -106,6 +107,12 @@ $error="Something went wrong. Please try again";
 				<div class="row">
 					<div class="col-md-12">
 						<h1 class="text-center text-bold mt-2x">Register</h1>
+                        <?php if (isset($error)): ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= $error ?>
+                        </div>
+                        <?php endif ?>
+
                         <div class="hr-dashed"></div>
 						<div class="well row pt-2x pb-3x bk-light text-center">
                          <form method="post" class="form-horizontal" enctype="multipart/form-data" name="regform" onSubmit="return validate();">
