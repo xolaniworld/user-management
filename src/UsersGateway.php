@@ -12,7 +12,7 @@ class UsersGateway
         $this->pdo = $pdo;
     }
 
-    public function countByEmailPassowrdAndStatus($email, $password, $status)
+    public function countByEmailPasswordAndStatus($email, $password, $status)
     {
         $sql = "SELECT email,password FROM users WHERE email=:email and password=:password and status=(:status)";
         $query = $this->pdo->prepare($sql);
@@ -24,4 +24,5 @@ class UsersGateway
 
         return $query->rowCount();
     }
+ 
 }
