@@ -3,15 +3,8 @@
 namespace Application;
 use PDO;
 
-class UsersGateway
+class UsersGateway extends AbstractGateway
 {
-    private $pdo;
-
-    public function __construct(PDO $pdo)
-    {
-        $this->pdo = $pdo;
-    }
-
     public function countByEmailPasswordAndStatus($email, $password, $status)
     {
         $sql = "SELECT email,password FROM users WHERE email=:email and password=:password and status=(:status)";

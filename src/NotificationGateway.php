@@ -3,15 +3,8 @@ namespace Application;
 
 use PDO;
 
-class NotificationGateway
+class NotificationGateway extends AbstractGateway
 {
-    private $pdo;
-
-    public function __construct(PDO $pdo)
-    {
-        $this->pdo = $pdo;
-    }
-
     public function insertUserReciverType($user, $notireciver, $notitype)
     {
         $sqlnoti="insert into notification (notiuser,notireciver,notitype) values (:notiuser,:notireciver,:notitype)";
