@@ -1,7 +1,6 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
+include __DIR__ . '/bootstrap.php';
+
 if(strlen($_SESSION['alogin'])==0)
 	{	
 header('location:index.php');
@@ -28,12 +27,8 @@ if(isset($_POST['submit']))
 			$attachment=$final_file;
 		}
 	$notireciver = 'Admin';
-    $sqlnoti="insert into notification (notiuser,notireciver,notitype) values (:notiuser,:notireciver,:notitype)";
-    $querynoti = $dbh->prepare($sqlnoti);
-	$querynoti-> bindParam(':notiuser', $user, PDO::PARAM_STR);
-	$querynoti-> bindParam(':notireciver', $notireciver, PDO::PARAM_STR);
-    $querynoti-> bindParam(':notitype', $notitype, PDO::PARAM_STR);
-    $querynoti->execute();
+	$notificationGateway = new \Application\NotificationGateway($dbh);
+	$notificationGateway->insertUserReciverType($user, $notireciver, $notitype);
 
 	$sql="insert into feedback (sender, reciver, title,feedbackdata,attachment) values (:user,:reciver,:title,:description,:attachment)";
 	$query = $dbh->prepare($sql);

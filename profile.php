@@ -1,6 +1,5 @@
 <?php
-session_start();
-error_reporting(0);
+
 include __DIR__ . '/bootstrap.php';
 
 if(strlen($_SESSION['alogin'])==0)
