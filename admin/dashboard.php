@@ -1,7 +1,6 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
+include __DIR__ . '/../bootstrap.php';
+
 if(strlen($_SESSION['alogin'])==0)
 	{	
 header('location:index.php');
@@ -59,12 +58,9 @@ else{
 										<div class="panel panel-default">
 											<div class="panel-body bk-primary text-light">
 												<div class="stat-panel text-center">
-<?php 
-$sql ="SELECT id from users";
-$query = $dbh -> prepare($sql);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-$bg=$query->rowCount();
+<?php
+$userGateway = new \Application\UsersGateway($dbh);
+$bg=$userGateway->countById();
 ?>
 													<div class="stat-panel-number h1 "><?php echo htmlentities($bg);?></div>
 													<div class="stat-panel-title text-uppercase">Total Users</div>
@@ -80,12 +76,8 @@ $bg=$query->rowCount();
 
 <?php 
 $reciver = 'Admin';
-$sql1 ="SELECT id from feedback where reciver = (:reciver)";
-$query1 = $dbh -> prepare($sql1);;
-$query1-> bindParam(':reciver', $reciver, PDO::PARAM_STR);
-$query1->execute();
-$results1=$query1->fetchAll(PDO::FETCH_OBJ);
-$regbd=$query1->rowCount();
+$feedbackGateway = new \Application\FeedbackGateway($dbh);
+$regbd = $feedbackGateway->countByReciver($reciver);
 ?>
 													<div class="stat-panel-number h1 "><?php echo htmlentities($regbd);?></div>
 													<div class="stat-panel-title text-uppercase">Feedback Messages</div>
@@ -102,12 +94,8 @@ $regbd=$query1->rowCount();
 
 <?php 
 $reciver = 'Admin';
-$sql12 ="SELECT id from notification where notireciver = (:reciver)";
-$query12 = $dbh -> prepare($sql12);;
-$query12-> bindParam(':reciver', $reciver, PDO::PARAM_STR);
-$query12->execute();
-$results12=$query12->fetchAll(PDO::FETCH_OBJ);
-$regbd2=$query12->rowCount();
+$notificationGateway = new \Application\NotificationGateway($dbh);
+$regbd2 = $notificationGateway->countByReciver($reciver);
 ?>
 													<div class="stat-panel-number h1 "><?php echo htmlentities($regbd2);?></div>
 													<div class="stat-panel-title text-uppercase">Notifications</div>
@@ -120,12 +108,9 @@ $regbd2=$query12->rowCount();
 										<div class="panel panel-default">
 											<div class="panel-body bk-info text-light">
 												<div class="stat-panel text-center">
-												<?php 
-$sql6 ="SELECT id from deleteduser ";
-$query6 = $dbh -> prepare($sql6);;
-$query6->execute();
-$results6=$query6->fetchAll(PDO::FETCH_OBJ);
-$query=$query6->rowCount();
+												<?php
+                                                $deletedUserGateway = new \Application\DeletedUserGateway($dbh);
+                                                $query = $deletedUserGateway->countById();
 ?>
 													<div class="stat-panel-number h1 "><?php echo htmlentities($query);?></div>
 													<div class="stat-panel-title text-uppercase">Deleted Users</div>
