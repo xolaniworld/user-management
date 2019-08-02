@@ -60,4 +60,30 @@ class UsersGateway extends AbstractGateway
         $results = $query->fetchAll(PDO::FETCH_OBJ);
         return $query->rowCount();
     }
+
+    public function deleteById($id)
+    {
+        $sql = "delete from users WHERE id=:id";
+        $query = $this->pdo->prepare($sql);
+        $query->bindParam(':id', $id, PDO::PARAM_STR);
+        $query->execute();
+    }
+
+    public function updateStatusById($memstatus, $aeid)
+    {
+        $sql = "UPDATE users SET status=:status WHERE  id=:aeid";
+        $query = $this->pdo->prepare($sql);
+        $query->bindParam(':status', $memstatus, PDO::PARAM_STR);
+        $query->bindParam(':aeid', $aeid, PDO::PARAM_STR);
+        $query->execute();
+    }
+
+    public function findAllUsers()
+    {
+        $sql = "SELECT * from  users ";
+        $query = $this->pdo -> prepare($sql);
+        $query->execute();
+        $results=$query->fetchAll(PDO::FETCH_OBJ);
+        return [$results, $query->rowCount()];
+    }
 }

@@ -1,7 +1,7 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
+
+include __DIR__ . '/../bootstrap.php';
+
 if(strlen($_SESSION['alogin'])==0)
 	{	
 header('location:index.php');
@@ -12,15 +12,11 @@ if(isset($_GET['del']) && isset($_GET['name']))
 $id=$_GET['del'];
 $name=$_GET['name'];
 
-$sql = "delete from users WHERE id=:id";
-$query = $dbh->prepare($sql);
-$query -> bindParam(':id',$id, PDO::PARAM_STR);
-$query -> execute();
+$usersGateway = new \Application\UsersGateway($dbh);
+$usersGateway->deleteById($id);
 
-$sql2 = "insert into deleteduser (email) values (:name)";
-$query2 = $dbh->prepare($sql2);
-$query2 -> bindParam(':name',$name, PDO::PARAM_STR);
-$query2 -> execute();
+$deletedUserGateway = new \Application\DeletedUserGateway($dbh);
+$deletedUserGateway->insertByName($name);
 
 $msg="Data Deleted successfully";
 }
@@ -29,23 +25,16 @@ if(isset($_REQUEST['unconfirm']))
 	{
 	$aeid=intval($_GET['unconfirm']);
 	$memstatus=1;
-	$sql = "UPDATE users SET status=:status WHERE  id=:aeid";
-	$query = $dbh->prepare($sql);
-	$query -> bindParam(':status',$memstatus, PDO::PARAM_STR);
-	$query-> bindParam(':aeid',$aeid, PDO::PARAM_STR);
-	$query -> execute();
+	$usersGateway->updateStatusById($memstatus, $aeid);
 	$msg="Changes Sucessfully";
+
 	}
 
 	if(isset($_REQUEST['confirm']))
 	{
 	$aeid=intval($_GET['confirm']);
 	$memstatus=0;
-	$sql = "UPDATE users SET status=:status WHERE  id=:aeid";
-	$query = $dbh->prepare($sql);
-	$query -> bindParam(':status',$memstatus, PDO::PARAM_STR);
-	$query-> bindParam(':aeid',$aeid, PDO::PARAM_STR);
-	$query -> execute();
+        $usersGateway->updateStatusById($memstatus, $aeid);
 	$msg="Changes Sucessfully";
 	}
 
@@ -143,12 +132,11 @@ if(isset($_REQUEST['unconfirm']))
 									
 									<tbody>
 
-<?php $sql = "SELECT * from  users ";
-$query = $dbh -> prepare($sql);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
+<?php
+$usersGateway = new \Application\UsersGateway($dbh);
+list($results, $rowCount) = $usersGateway->findAllUsers();
 $cnt=1;
-if($query->rowCount() > 0)
+if($rowCount> 0)
 {
 foreach($results as $result)
 {				?>	
