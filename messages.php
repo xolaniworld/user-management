@@ -1,15 +1,10 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
-if(strlen($_SESSION['alogin'])==0)
-	{	
-header('location:index.php');
-}
-else{
+include __DIR__ . '/bootstrap.php';
 
+if (strlen($_SESSION['alogin']) == 0) {
+    header('location:index.php');
+} else {
  ?>
-
 <!doctype html>
 <html lang="en" class="no-js">
 
@@ -94,13 +89,10 @@ else{
 
 <?php 
 $reciver = $_SESSION['alogin'];
-$sql = "SELECT * from  feedback where reciver = (:reciver)";
-$query = $dbh -> prepare($sql);
-$query-> bindParam(':reciver', $reciver, PDO::PARAM_STR);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
+$feedbackGateway = new \Application\FeedbackGateway($dbh);
+list($results, $count) = $feedbackGateway->findByReciver($reciver);
 $cnt=1;
-if($query->rowCount() > 0)
+if($count > 0)
 {
 foreach($results as $result)
 {				?>	
@@ -109,8 +101,7 @@ foreach($results as $result)
                                             <td><?php echo htmlentities($result->sender);?></td>
 											<td><?php echo htmlentities($result->feedbackdata);?></td>
 										</tr>
-										<?php $cnt=$cnt+1; }} ?>
-										
+										<?php $cnt++; }} ?>
 									</tbody>
 								</table>
 							</div>
@@ -141,4 +132,4 @@ foreach($results as $result)
 		</script>
 </body>
 </html>
-<?php } ?>
+<?php }

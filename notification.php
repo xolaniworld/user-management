@@ -2,11 +2,9 @@
 
 include __DIR__ . '/bootstrap.php';
 
-if(strlen($_SESSION['alogin'])==0)
-	{	
-header('location:index.php');
-}
-else{   
+if (strlen($_SESSION['alogin']) == 0) {
+    header('location:index.php');
+} else {
 ?>
 
 <!doctype html>
@@ -78,13 +76,10 @@ else{
 									   <div class="panel-body">
 <?php 
 $reciver = $_SESSION['alogin'];
-$sql = "SELECT * from  notification where notireciver = (:reciver) order by time DESC";
-$query = $dbh -> prepare($sql);
-$query-> bindParam(':reciver', $reciver, PDO::PARAM_STR);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
+$notifucationGateway = new \Application\NotificationGateway($dbh);
+list($results, $count) = $notifucationGateway->findByNotiReciver($reciver);
 $cnt=1;
-if($query->rowCount() > 0)
+if($count > 0)
 {
 foreach($results as $result)
 {				?>	
@@ -119,4 +114,4 @@ foreach($results as $result)
 	</script>
 </body>
 </html>
-<?php } ?>
+<?php }

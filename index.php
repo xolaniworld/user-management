@@ -1,24 +1,18 @@
 <?php
 include __DIR__ . '/bootstrap.php';
 
-if(isset($_POST['login']))
-{
-$status='1';
-$email=$_POST['username'];
-$password=md5($_POST['password']);
-$usersGateway = new \Application\UsersGateway($dbh);
-if($usersGateway->countByEmailPasswordAndStatus($email, $password, $status) > 0)
-{
-$_SESSION['alogin']=$_POST['username'];
-echo "<script type='text/javascript'> document.location = 'profile.php'; </script>";
-} else{
-  
-  echo "<script>alert('Invalid Details Or Account Not Confirmed');</script>";
-
+if (isset($_POST['login'])) {
+    $status = '1';
+    $email = $_POST['username'];
+    $password = md5($_POST['password']);
+    $usersGateway = new \Application\UsersGateway($dbh);
+    if ($usersGateway->countByEmailPasswordAndStatus($email, $password, $status) > 0) {
+        $_SESSION['alogin'] = $_POST['username'];
+        echo "<script type='text/javascript'> document.location = 'profile.php'; </script>";
+    } else {
+        echo "<script>alert('Invalid Details Or Account Not Confirmed');</script>";
+    }
 }
-
-}
-
 ?>
 <!doctype html>
 <html lang="en" class="no-js">
