@@ -29,4 +29,14 @@ class FeedbackGateway extends AbstractGateway
         $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
         return $query1->rowCount();
     }
+
+    public function findByReciver($reciver)
+    {
+        $sql = "SELECT * from  feedback where reciver = (:reciver)";
+        $query = $this->pdo -> prepare($sql);
+        $query-> bindParam(':reciver', $reciver, PDO::PARAM_STR);
+        $query->execute();
+        $results=$query->fetchAll(PDO::FETCH_OBJ);
+       return [$results, $query->rowCount()];
+    }
 }

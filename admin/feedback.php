@@ -1,51 +1,32 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
-if(strlen($_SESSION['alogin'])==0)
-	{	
-header('location:index.php');
-}
-else{
-if(isset($_GET['del']))
-{
-$id=$_GET['del'];
-$sql = "delete from users WHERE id=:id";
-$query = $dbh->prepare($sql);
-$query -> bindParam(':id',$id, PDO::PARAM_STR);
-$query -> execute();
-$msg="Data Deleted successfully";
-}
+include __DIR__ . '/../bootstrap.php';
 
-if(isset($_REQUEST['unconfirm']))
-	{
-	$aeid=intval($_GET['unconfirm']);
-	$memstatus=1;
-	$sql = "UPDATE users SET status=:status WHERE  id=:aeid";
-	$query = $dbh->prepare($sql);
-	$query -> bindParam(':status',$memstatus, PDO::PARAM_STR);
-	$query-> bindParam(':aeid',$aeid, PDO::PARAM_STR);
-	$query -> execute();
-	$msg="Changes Sucessfully";
-	}
+if (strlen($_SESSION['alogin']) == 0) {
+    header('location:index.php');
+} else {
+    if (isset($_GET['del'])) {
+        $id = $_GET['del'];
+        $userGateway = new \Application\UsersGateway($dbh);
+        $userGateway->deleteById($id);
+        $msg = "Data Deleted successfully";
+    }
 
-	if(isset($_REQUEST['confirm']))
-	{
-	$aeid=intval($_GET['confirm']);
-	$memstatus=0;
-	$sql = "UPDATE users SET status=:status WHERE  id=:aeid";
-	$query = $dbh->prepare($sql);
-	$query -> bindParam(':status',$memstatus, PDO::PARAM_STR);
-	$query-> bindParam(':aeid',$aeid, PDO::PARAM_STR);
-	$query -> execute();
-	$msg="Changes Sucessfully";
-	}
+    if (isset($_REQUEST['unconfirm'])) {
+        $aeid = intval($_GET['unconfirm']);
+        $memstatus = 1;
+        $userGateway = new \Application\UsersGateway($dbh);
+        $userGateway->updateStatusById($memstatus, $aeid);
+        $msg = "Changes Sucessfully";
+    }
 
-
-
-
-
- ?>
+    if (isset($_REQUEST['confirm'])) {
+        $aeid = intval($_GET['confirm']);
+        $memstatus = 0;
+        $userGateway = new \Application\UsersGateway($dbh);
+        $userGateway->updateStatusById($memstatus, $aeid);
+        $msg = "Changes Sucessfully";
+    }
+?>
 
 <!doctype html>
 <html lang="en" class="no-js">
@@ -134,13 +115,10 @@ if(isset($_REQUEST['unconfirm']))
 
 <?php 
 $reciver = 'Admin';
-$sql = "SELECT * from  feedback where reciver = (:reciver)";
-$query = $dbh -> prepare($sql);
-$query-> bindParam(':reciver', $reciver, PDO::PARAM_STR);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
+$feedbackGateway = new \Application\FeedbackGateway($dbh);
+list($results, $count) = $feedbackGateway->findByReciver($reciver);
 $cnt=1;
-if($query->rowCount() > 0)
+if($count > 0)
 {
 foreach($results as $result)
 {				?>	
@@ -155,7 +133,7 @@ foreach($results as $result)
 <a href="sendreply.php?reply=<?php echo $result->sender;?>">&nbsp; <i class="fa fa-mail-reply"></i></a>&nbsp;&nbsp;
 </td>
 										</tr>
-										<?php $cnt=$cnt+1; }} ?>
+										<?php $cnt++; }} ?>
 										
 									</tbody>
 								</table>
@@ -187,4 +165,4 @@ foreach($results as $result)
 		</script>
 </body>
 </html>
-<?php } ?>
+<?php }
