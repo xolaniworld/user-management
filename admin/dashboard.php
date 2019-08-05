@@ -60,7 +60,7 @@ else{
 												<div class="stat-panel text-center">
 <?php
 $userGateway = new \Application\UsersGateway($dbh);
-$bg=$userGateway->countById();
+$bg=$userGateway->countIds();
 ?>
 													<div class="stat-panel-number h1 "><?php echo htmlentities($bg);?></div>
 													<div class="stat-panel-title text-uppercase">Total Users</div>

@@ -12,7 +12,7 @@ if (strlen($_SESSION['alogin']) == 0) {
         $username = $_SESSION['alogin'];
         $usersGateway = new \Application\UsersGateway($dbh);
         if ($usersGateway->countByUsernameAndPassword($username, $password) > 0) {
-            $usersGateway->updatePasswordByUsername($username, $newpassword);
+            $usersGateway->updatePasswordByUsername($newpassword, $username);
             $msg = "Your Password succesfully changed";
         } else {
             $error = "Your current password is not valid.";

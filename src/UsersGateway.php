@@ -52,7 +52,7 @@ class UsersGateway extends AbstractGateway
         $query->execute();
     }
 
-    public function updatePasswordByUsername($username, $newpassword)
+    public function updatePasswordByUsername($newpassword, $username)
     {
         $con = "update users set password=:newpassword where email=:username";
         $chngpwd1 = $this->pdo->prepare($con);
@@ -61,7 +61,7 @@ class UsersGateway extends AbstractGateway
         $chngpwd1->execute();
     }
 
-    public function countById()
+    public function countIds()
     {
         $sql = "SELECT id from users";
         $query = $this->pdo->prepare($sql);

@@ -23,6 +23,64 @@ class UsersGatewayTest extends \PHPUnit\Framework\TestCase
         $this->defaultDetails();
     }
 
+    public function testFindByEmail()
+    {
+        $this->detailsTest();
+        $this->assertEquals(25, $this->result->id);
+        $this->assertEquals($this->md5Password, $this->result->password);
+    }
+
+    public function testCountByEmailPasswordAndStatus()
+    {
+        $result = $this->gateway->countByEmailPasswordAndStatus($this->email, $this->md5Password, $this->status);
+        $this->assertTrue($result > 0);
+    }
+
+    public function testCountByUsernameAndPassword()
+    {
+        $this->assertTrue($this->gateway->countByUsernameAndPassword($this->email, $this->md5Password) > 0);
+    }
+
+    public function testInsertUpdateAndDelete()
+    {
+        $this->insertUser();
+
+        $this->detailsTest();
+
+        $name = 'testtest';
+        $email = 'emailemail@email.com';
+        $mobileno = '0987654321';
+        $designation = 'test-designation-test';
+        $image = 'tester.jpg';
+        $id = $this->pdo->lastInsertId();
+        $this->gateway->updateById($name, $email, $mobileno, $designation, $image, $id);
+        $result = $this->gateway->findByEmail($email);
+        $this->assertEquals($name, $result->name);
+        $this->assertEquals($email, $result->email);
+        $this->assertEquals($designation, $result->designation);
+        $this->assertEquals($image, $result->image);
+
+        $this->assertTrue($this->gateway->findAllUsers() > 0);
+
+        $this->assertTrue($this->gateway->countIds($id) > 0);
+
+        $this->assertTrue($this->gateway->deleteByEmail($this->email));
+    }
+
+    public function testDeleteById()
+    {
+        $this->insertUser();
+        $id = $this->pdo->lastInsertId();
+
+        $newpassword = md5('newpassword');
+        $this->gateway->updatePasswordByUsername($newpassword,  $this->email);
+        $result = $this->gateway->findByEmail($this->email);
+        $this->assertEquals($newpassword, $result->password);
+
+        $this->gateway->deleteById($id);
+        $this->assertTrue($this->gateway->countByUsernameAndPassword($this->email, $this->md5Password) === 0);
+    }
+
     private function defaultDetails()
     {
         $this->name = 'name';
@@ -49,25 +107,7 @@ class UsersGatewayTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($this->status, $this->result->status);
     }
 
-    public function testFindByEmail()
-    {
-        $this->detailsTest();
-        $this->assertEquals(25, $this->result->id);
-        $this->assertEquals($this->md5Password, $this->result->password);
-    }
-
-    public function testCountByEmailPasswordAndStatus()
-    {
-        $result = $this->gateway->countByEmailPasswordAndStatus($this->email, $this->md5Password, $this->status);
-        $this->assertTrue($result > 0);
-    }
-
-    public function testCountByUsernameAndPassword()
-    {
-        $this->assertTrue($this->gateway->countByUsernameAndPassword($this->email, $this->md5Password) > 0);
-    }
-
-    public function testInsertUpdateAndDelete()
+    private function insertUser()
     {
         $this->name = "test-{$this->name}";
         $this->email = "test-{$this->email}";
@@ -77,22 +117,5 @@ class UsersGatewayTest extends \PHPUnit\Framework\TestCase
         $this->designation = "test-{$this->designation}";
         $this->image = "test-{$this->image}";
         $this->gateway->insertUser($this->name, $this->email, $this->md5Password, $this->gender, $this->mobileno, $this->designation, $this->image, $this->status);
-        $this->detailsTest();
-
-        $name = 'testtest';
-        $email = 'emailemail@email.com';
-        $mobileno = '0987654321';
-        $designation = 'test-designation-test';
-        $image = 'tester.jpg';
-        $id = $this->pdo->lastInsertId();
-        $this->gateway->updateById($name, $email, $mobileno, $designation, $image, $id);
-        $result = $this->gateway->findByEmail($email);
-        $this->assertEquals($name, $result->name);
-        $this->assertEquals($email, $result->email);
-        $this->assertEquals($designation, $result->designation);
-        $this->assertEquals($image, $result->image);
-
-
-        $this->assertTrue($this->gateway->deleteByEmail($this->email));
     }
 }
