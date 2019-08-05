@@ -14,5 +14,4 @@ abstract class AbstractGateway
     {
         $this->pdo = $pdo;
     }
-
 }

@@ -1,14 +1,10 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
-if(strlen($_SESSION['alogin'])==0)
-	{	
-header('location:index.php');
-}
-else{
+include __DIR__ . '/../bootstrap.php';
 
- ?>
+if (strlen($_SESSION['alogin']) == 0) {
+    header('location:index.php');
+} else {
+?>
 
 <!doctype html>
 <html lang="en" class="no-js">
@@ -92,22 +88,21 @@ else{
 									
 									<tbody>
 
-<?php $sql = "SELECT * from  deleteduser";
-$query = $dbh -> prepare($sql);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
+<?php
+$deletedUserGateway = new \Application\DeletedUserGateway($dbh);
+list($results, $count) = $deletedUserGateway->findAll();
 $cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $result)
-{				?>	
+?>
+<?php if($count > 0) : ?>
+<?php foreach($results as $result): ?>
 										<tr>
 											<td><?php echo htmlentities($cnt);?></td>
                                             <td><?php echo htmlentities($result->email);?></td>
 											<td><?php echo htmlentities($result->deltime);?></td>
 										</tr>
-										<?php $cnt=$cnt+1; }} ?>
-										
+										<?php $cnt++; ?>
+    <?php endforeach;?>
+<?php endif;?>
 									</tbody>
 								</table>
 							</div>

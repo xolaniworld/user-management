@@ -1,37 +1,22 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
-if(strlen($_SESSION['alogin'])==0)
-	{	
-header('location:index.php');
-}
-else{
+include __DIR__ . '/../bootstrap.php';
+
+if (strlen($_SESSION['alogin']) == 0) {
+    header('location:index.php');
+} else {
 // Code for change password	
-if(isset($_POST['submit']))
-	{
-$password=md5($_POST['password']);
-$newpassword=md5($_POST['newpassword']);
-$username=$_SESSION['alogin'];
-$sql ="SELECT Password FROM admin WHERE UserName=:username and Password=:password";
-$query= $dbh -> prepare($sql);
-$query-> bindParam(':username', $username, PDO::PARAM_STR);
-$query-> bindParam(':password', $password, PDO::PARAM_STR);
-$query-> execute();
-$results = $query -> fetchAll(PDO::FETCH_OBJ);
-if($query -> rowCount() > 0)
-{
-$con="update admin set Password=:newpassword where UserName=:username";
-$chngpwd1 = $dbh->prepare($con);
-$chngpwd1-> bindParam(':username', $username, PDO::PARAM_STR);
-$chngpwd1-> bindParam(':newpassword', $newpassword, PDO::PARAM_STR);
-$chngpwd1->execute();
-$msg="Your Password succesfully changed";
-}
-else {
-$error="Your current password is not valid.";	
-}
-}
+    if (isset($_POST['submit'])) {
+        $password = md5($_POST['password']);
+        $newpassword = md5($_POST['newpassword']);
+        $username = $_SESSION['alogin'];
+        $adminGateway = new \Application\AdminGateway($dbh);
+        if ($adminGateway->countPasswordByPasswordAndUsername($username, $password) > 0) {
+           $adminGateway->updatePasswordByUsername($username, $newpassword);
+            $msg = "Your Password succesfully changed";
+        } else {
+            $error = "Your current password is not valid.";
+        }
+    }
 ?>
 
 <!doctype html>
@@ -44,7 +29,7 @@ $error="Your current password is not valid.";
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
-	
+
 	<title>BBDMS | Admin Change Password</title>
 
 	<!-- Font awesome -->
@@ -106,7 +91,7 @@ return true;
 
 				<div class="row">
 					<div class="col-md-12">
-					
+
 						<h2 class="page-title">Change Password</h2>
 
 						<div class="row">
@@ -115,9 +100,9 @@ return true;
 									<div class="panel-heading">Form fields</div>
 									<div class="panel-body">
 										<form method="post" name="chngpwd" class="form-horizontal" onSubmit="return valid();">
-										
-											
-  	        	  <?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } 
+
+
+  	        	  <?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php }
 				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
 											<div class="form-group">
 												<label class="col-sm-4 control-label">Current Password</label>
@@ -126,7 +111,7 @@ return true;
 												</div>
 											</div>
 											<div class="hr-dashed"></div>
-											
+
 											<div class="form-group">
 												<label class="col-sm-4 control-label">New Password</label>
 												<div class="col-sm-8">
@@ -142,12 +127,12 @@ return true;
 												</div>
 											</div>
 											<div class="hr-dashed"></div>
-										
-								
-											
+
+
+
 											<div class="form-group">
 												<div class="col-sm-8 col-sm-offset-4">
-								
+
 													<button class="btn btn-primary" name="submit" type="submit">Save changes</button>
 												</div>
 											</div>
@@ -157,15 +142,15 @@ return true;
 									</div>
 								</div>
 							</div>
-							
+
 						</div>
-						
-					
+
+
 
 					</div>
 				</div>
-				
-			
+
+
 			</div>
 		</div>
 	</div>
@@ -181,7 +166,7 @@ return true;
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
 	<script type="text/javascript">
-				 $(document).ready(function () {          
+				 $(document).ready(function () {
 					setTimeout(function() {
 						$('.succWrap').slideUp("slow");
 					}, 3000);

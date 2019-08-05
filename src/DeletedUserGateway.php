@@ -26,4 +26,13 @@ class DeletedUserGateway extends AbstractGateway
         $query2->bindParam(':name', $name, PDO::PARAM_STR);
         $query2->execute();
     }
+
+    public function findAll()
+    {
+        $sql = "SELECT * from  deleteduser";
+        $query = $this->pdo -> prepare($sql);
+        $query->execute();
+        $results=$query->fetchAll(PDO::FETCH_OBJ);
+        return [$results, $query->rowCount()];
+    }
 }
