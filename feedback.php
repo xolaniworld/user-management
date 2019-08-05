@@ -91,10 +91,8 @@ if(isset($_POST['submit']))
 
 <body>
 <?php
-		$sql = "SELECT * from users;";
-		$query = $dbh -> prepare($sql);
-		$query->execute();
-		$result=$query->fetch(PDO::FETCH_OBJ);
+$usersGateway = new \Application\UsersGateway($dbh);
+$result = $usersGateway->findAll();
 		$cnt=1;	
 ?>
 	<?php include('includes/header.php');?>
@@ -172,4 +170,4 @@ if(isset($_POST['submit']))
 	</script>
 </body>
 </html>
-<?php } ?>
+<?php } 
