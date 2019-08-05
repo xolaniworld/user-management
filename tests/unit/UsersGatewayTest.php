@@ -62,7 +62,7 @@ class UsersGatewayTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue($this->gateway->findAllUsers() > 0);
 
-        $this->assertTrue($this->gateway->countIds($id) > 0);
+        $this->assertTrue($this->gateway->countIds() > 0);
 
         $this->assertTrue($this->gateway->deleteByEmail($this->email));
     }
@@ -79,6 +79,12 @@ class UsersGatewayTest extends \PHPUnit\Framework\TestCase
 
         $this->gateway->deleteById($id);
         $this->assertTrue($this->gateway->countByUsernameAndPassword($this->email, $this->md5Password) === 0);
+    }
+
+    public function testFindAll()
+    {
+        $all = $this->gateway->findAll();
+        $this->assertInstanceOf('stdClass', $all);
     }
 
     private function defaultDetails()
