@@ -29,7 +29,7 @@ if(isset($_POST['submit']))
 		}
 
 	$userGateway = new \Application\UsersGateway($dbh);
-	$userGateway->update($name, $email, $mobileno, $designation, $image, $idedit);
+	$userGateway->updateById($name, $email, $mobileno, $designation, $image, $idedit);
 	$msg="Information Updated Successfully";
 }    
 ?>

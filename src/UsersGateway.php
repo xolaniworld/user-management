@@ -25,7 +25,6 @@ class UsersGateway extends AbstractGateway
         $query->bindParam(':status', $status, PDO::PARAM_STR);
         $query->execute();
         $results = $query->fetchAll(PDO::FETCH_OBJ);
-
         return $query->rowCount();
     }
 
@@ -40,7 +39,7 @@ class UsersGateway extends AbstractGateway
         return $query->rowCount();
     }
 
-    public function update($name, $email, $mobileno, $designation, $image, $idedit)
+    public function updateById($name, $email, $mobileno, $designation, $image, $idedit)
     {
         $sql = "UPDATE users SET name=(:name), email=(:email), mobile=(:mobileno), designation=(:designation), Image=(:image) WHERE id=(:idedit)";
         $query = $this->pdo->prepare($sql);
@@ -76,7 +75,7 @@ class UsersGateway extends AbstractGateway
         $sql = "delete from users WHERE id=:id";
         $query = $this->pdo->prepare($sql);
         $query->bindParam(':id', $id, PDO::PARAM_STR);
-        $query->execute();
+        return $query->execute();
     }
 
     public function updateStatusById($memstatus, $aeid)
@@ -85,7 +84,7 @@ class UsersGateway extends AbstractGateway
         $query = $this->pdo->prepare($sql);
         $query->bindParam(':status', $memstatus, PDO::PARAM_STR);
         $query->bindParam(':aeid', $aeid, PDO::PARAM_STR);
-        $query->execute();
+        return $query->execute();
     }
 
     public function findAllUsers()
@@ -100,25 +99,33 @@ class UsersGateway extends AbstractGateway
     public function findAll()
     {
         $sql = "SELECT * from users;";
-        $query = $this->pdo -> prepare($sql);
+        $query = $this->pdo->prepare($sql);
         $query->execute();
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
     public function insertUser($name, $email, $password, $gender, $mobileno, $designation, $image, $status)
     {
-        $sql ="INSERT INTO users(name,email, password, gender, mobile, designation, image, status) VALUES(:name, :email, :password, :gender, :mobileno, :designation, :image, :status)";
-        $query= $this->pdo -> prepare($sql);
-        $query-> bindParam(':name', $name, PDO::PARAM_STR);
-        $query-> bindParam(':email', $email, PDO::PARAM_STR);
-        $query-> bindParam(':password', $password, PDO::PARAM_STR);
-        $query-> bindParam(':gender', $gender, PDO::PARAM_STR);
-        $query-> bindParam(':mobileno', $mobileno, PDO::PARAM_STR);
-        $query-> bindParam(':designation', $designation, PDO::PARAM_STR);
-        $query-> bindParam(':image', $image, PDO::PARAM_STR);
-        $query-> bindParam(':status', $status, PDO::PARAM_INT);
+        $sql = "INSERT INTO users(name,email, password, gender, mobile, designation, image, status) VALUES(:name, :email, :password, :gender, :mobileno, :designation, :image, :status)";
+        $query = $this->pdo->prepare($sql);
+        $query->bindParam(':name', $name, PDO::PARAM_STR);
+        $query->bindParam(':email', $email, PDO::PARAM_STR);
+        $query->bindParam(':password', $password, PDO::PARAM_STR);
+        $query->bindParam(':gender', $gender, PDO::PARAM_STR);
+        $query->bindParam(':mobileno', $mobileno, PDO::PARAM_STR);
+        $query->bindParam(':designation', $designation, PDO::PARAM_STR);
+        $query->bindParam(':image', $image, PDO::PARAM_STR);
+        $query->bindParam(':status', $status, PDO::PARAM_INT);
         $success = $query->execute();
 
         return $success;
+    }
+
+    public function deleteByEmail($email)
+    {
+        $sql = 'delete from users where email = :email';
+        $query = $this->pdo->prepare($sql);
+        $query->bindParam(':email', $email, PDO::PARAM_STR);
+        return $query->execute();
     }
 }
