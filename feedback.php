@@ -85,10 +85,7 @@ if(isset($_POST['submit']))
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
 }
 		</style>
-
-
 </head>
-
 <body>
 <?php
 $usersGateway = new \Application\UsersGateway($dbh);
@@ -170,4 +167,4 @@ $result = $usersGateway->findAll();
 	</script>
 </body>
 </html>
-<?php } 
+<?php }

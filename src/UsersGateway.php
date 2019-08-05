@@ -9,10 +9,10 @@ class UsersGateway extends AbstractGateway
     public function findByEmail($email)
     {
         $sql = "SELECT * from users where email = (:email);";
-        $query = $this->pdo -> prepare($sql);
-        $query-> bindParam(':email', $email, PDO::PARAM_STR);
+        $query = $this->pdo->prepare($sql);
+        $query->bindParam(':email', $email, PDO::PARAM_STR);
         $query->execute();
-        $result=$query->fetch(PDO::FETCH_OBJ);
+        $result = $query->fetch(PDO::FETCH_OBJ);
         return $result;
     }
 
