@@ -86,4 +86,13 @@ class UsersGateway extends AbstractGateway
         $results = $query->fetchAll(PDO::FETCH_OBJ);
         return [$results, $query->rowCount()];
     }
+
+    public function findAll()
+    {
+
+        $sql = "SELECT * from users;";
+        $query = $this->pdo -> prepare($sql);
+        $query->execute();
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
 }

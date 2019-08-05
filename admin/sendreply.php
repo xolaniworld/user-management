@@ -79,11 +79,9 @@ if (strlen($_SESSION['alogin']) == 0) {
 
 <body>
 <?php
-		$sql = "SELECT * from users;";
-		$query = $dbh -> prepare($sql);
-		$query->execute();
-		$result=$query->fetch(PDO::FETCH_OBJ);
-		$cnt=1;	
+$usersGateway = new \Application\UsersGateway($dbh);
+$result = $usersGateway->findAll();
+$cnt = 1;
 ?>
 	<?php include('includes/header.php');?>
 	<div class="ts-main-content">
@@ -155,4 +153,4 @@ if (strlen($_SESSION['alogin']) == 0) {
 	</script>
 </body>
 </html>
-<?php } ?>
+<?php }
