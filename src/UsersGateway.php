@@ -6,6 +6,16 @@ use PDO;
 
 class UsersGateway extends AbstractGateway
 {
+    public function findByEmail($email)
+    {
+        $sql = "SELECT * from users where email = (:email);";
+        $query = $this->pdo -> prepare($sql);
+        $query-> bindParam(':email', $email, PDO::PARAM_STR);
+        $query->execute();
+        $result=$query->fetch(PDO::FETCH_OBJ);
+        return $result;
+    }
+
     public function countByEmailPasswordAndStatus($email, $password, $status)
     {
         $sql = "SELECT email,password FROM users WHERE email=:email and password=:password and status=(:status)";
@@ -93,5 +103,22 @@ class UsersGateway extends AbstractGateway
         $query = $this->pdo -> prepare($sql);
         $query->execute();
         return $query->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function insertUser($name, $email, $password, $gender, $mobileno, $designation, $image, $status)
+    {
+        $sql ="INSERT INTO users(name,email, password, gender, mobile, designation, image, status) VALUES(:name, :email, :password, :gender, :mobileno, :designation, :image, :status)";
+        $query= $this->pdo -> prepare($sql);
+        $query-> bindParam(':name', $name, PDO::PARAM_STR);
+        $query-> bindParam(':email', $email, PDO::PARAM_STR);
+        $query-> bindParam(':password', $password, PDO::PARAM_STR);
+        $query-> bindParam(':gender', $gender, PDO::PARAM_STR);
+        $query-> bindParam(':mobileno', $mobileno, PDO::PARAM_STR);
+        $query-> bindParam(':designation', $designation, PDO::PARAM_STR);
+        $query-> bindParam(':image', $image, PDO::PARAM_STR);
+        $query-> bindParam(':status', $status, PDO::PARAM_INT);
+        $success = $query->execute();
+
+        return $success;
     }
 }

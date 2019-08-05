@@ -89,13 +89,10 @@ if(isset($_POST['submit']))
 
 <body>
 <?php
-		$email = $_SESSION['alogin'];
-		$sql = "SELECT * from users where email = (:email);";
-		$query = $dbh -> prepare($sql);
-		$query-> bindParam(':email', $email, PDO::PARAM_STR);
-		$query->execute();
-		$result=$query->fetch(PDO::FETCH_OBJ);
-		$cnt=1;	
+    $email = $_SESSION['alogin'];
+    $usersGateway = new \Application\UsersGateway($dbh);
+    $result = $usersGateway->findByEmail($email);
+    $cnt=1;
 ?>
 	<?php include('includes/header.php');?>
 	<div class="ts-main-content">
