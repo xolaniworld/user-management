@@ -1,23 +1,17 @@
 <?php
 include __DIR__ . '/../bootstrap.php';
 
-if(isset($_POST['login']))
-{
-$email=$_POST['username'];
-$password=md5($_POST['password']);
-$adminGateway = new \Application\AdminGateway($dbh);
-if($adminGateway->countByEmailAndPassword($email, $password) > 0)
-{
-$_SESSION['alogin']=$_POST['username'];
-echo "<script type='text/javascript'> document.location = 'admin/dashboard.php'; </script>";
-} else{
-  
-  echo "<script>alert('Invalid Details');</script>";
-
+if (isset($_POST['login'])) {
+    $email = $_POST['username'];
+    $password = md5($_POST['password']);
+    $adminGateway = new \Application\AdminGateway($dbh);
+    if ($adminGateway->countByEmailAndPassword($email, $password) > 0) {
+        $_SESSION['alogin'] = $_POST['username'];
+        echo "<script type='text/javascript'> document.location = 'admin/dashboard.php'; </script>";
+    } else {
+        echo "<script>alert('Invalid Details');</script>";
+    }
 }
-
-}
-
 ?>
 <!doctype html>
 <html lang="en" class="no-js">

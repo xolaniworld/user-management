@@ -1,40 +1,27 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
-if(strlen($_SESSION['alogin'])==0)
-	{	
-header('location:index.php');
-}
-else{
+include __DIR__ . '/../bootstrap.php';
 
-	if(isset($_GET['reply']))
-	{
-	$replyto=$_GET['reply'];
-	}   
+if (strlen($_SESSION['alogin']) == 0) {
+    header('location:index.php');
+} else {
 
-	if(isset($_POST['submit']))
-  {	
-	$reciver=$_POST['email'];
-    $message=$_POST['message'];
-	$notitype='Send Message';
-	$sender='Admin';
-	
-    $sqlnoti="insert into notification (notiuser,notireciver,notitype) values (:notiuser,:notireciver,:notitype)";
-    $querynoti = $dbh->prepare($sqlnoti);
-	$querynoti-> bindParam(':notiuser', $sender, PDO::PARAM_STR);
-	$querynoti-> bindParam(':notireciver',$reciver, PDO::PARAM_STR);
-    $querynoti-> bindParam(':notitype', $notitype, PDO::PARAM_STR);
-    $querynoti->execute();
+    if (isset($_GET['reply'])) {
+        $replyto = $_GET['reply'];
+    }
 
-	$sql="insert into feedback (sender, reciver, feedbackdata) values (:user,:reciver,:description)";
-	$query = $dbh->prepare($sql);
-	$query-> bindParam(':user', $sender, PDO::PARAM_STR);
-	$query-> bindParam(':reciver', $reciver, PDO::PARAM_STR);
-	$query-> bindParam(':description', $message, PDO::PARAM_STR);
-    $query->execute(); 
-	$msg="Feedback Send";
-  }
+    if (isset($_POST['submit'])) {
+        $reciver = $_POST['email'];
+        $message = $_POST['message'];
+        $notitype = 'Send Message';
+        $sender = 'Admin';
+
+        $notificationGateway = new \Application\NotificationGateway($dbh);
+        $notificationGateway->insertUserReciverType($sender, $reciver, $notitype);
+
+        $feedbackGateway = new \Application\FeedbackGateway($dbh);
+        $feedbackGateway->insertByUserReciverDescription($sender, $reciver, $message);
+        $msg = "Feedback Send";
+    }
 ?>
 
 <!doctype html>

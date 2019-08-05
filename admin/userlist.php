@@ -37,11 +37,6 @@ if(isset($_REQUEST['unconfirm']))
         $usersGateway->updateStatusById($memstatus, $aeid);
 	$msg="Changes Sucessfully";
 	}
-
-
-
-
-
  ?>
 
 <!doctype html>

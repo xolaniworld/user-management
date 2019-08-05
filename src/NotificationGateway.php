@@ -26,4 +26,15 @@ class NotificationGateway extends AbstractGateway
 
         return $regbd2;
     }
+
+    public function findByNotiReciver($reciver)
+    {
+        $sql = "SELECT * from  notification where notireciver = (:reciver) order by time DESC";
+        $query = $this->pdo -> prepare($sql);
+        $query-> bindParam(':reciver', $reciver, PDO::PARAM_STR);
+        $query->execute();
+        $results=$query->fetchAll(PDO::FETCH_OBJ);
+
+        return [$results, $query->rowCount()];
+    }
 }

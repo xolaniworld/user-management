@@ -39,4 +39,14 @@ class FeedbackGateway extends AbstractGateway
         $results=$query->fetchAll(PDO::FETCH_OBJ);
        return [$results, $query->rowCount()];
     }
+
+    public function insertByUserReciverDescription($sender, $reciver, $message)
+    {
+        $sql="insert into feedback (sender, reciver, feedbackdata) values (:user,:reciver,:description)";
+        $query = $this->pdo->prepare($sql);
+        $query-> bindParam(':user', $sender, PDO::PARAM_STR);
+        $query-> bindParam(':reciver', $reciver, PDO::PARAM_STR);
+        $query-> bindParam(':description', $message, PDO::PARAM_STR);
+        $query->execute();
+    }
 }
