@@ -61,6 +61,9 @@ class UsersGateway extends AbstractGateway
         $chngpwd1->execute();
     }
 
+    /**
+     * @return int
+     */
     public function countIds()
     {
         $sql = "SELECT id from users";
@@ -70,6 +73,10 @@ class UsersGateway extends AbstractGateway
         return $query->rowCount();
     }
 
+    /**
+     * @param $id
+     * @return bool
+     */
     public function deleteById($id)
     {
         $sql = "delete from users WHERE id=:id";
@@ -78,6 +85,11 @@ class UsersGateway extends AbstractGateway
         return $query->execute();
     }
 
+    /**
+     * @param $memstatus
+     * @param $aeid
+     * @return bool
+     */
     public function updateStatusById($memstatus, $aeid)
     {
         $sql = "UPDATE users SET status=:status WHERE  id=:aeid";
@@ -87,6 +99,9 @@ class UsersGateway extends AbstractGateway
         return $query->execute();
     }
 
+    /**
+     * @return array
+     */
     public function findAllUsers()
     {
         $sql = "SELECT * from  users ";
@@ -96,6 +111,9 @@ class UsersGateway extends AbstractGateway
         return [$results, $query->rowCount()];
     }
 
+    /**
+     * @return mixed
+     */
     public function findAll()
     {
         $sql = "SELECT * from users;";
@@ -104,6 +122,17 @@ class UsersGateway extends AbstractGateway
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
+    /**
+     * @param $name
+     * @param $email
+     * @param $password
+     * @param $gender
+     * @param $mobileno
+     * @param $designation
+     * @param $image
+     * @param $status
+     * @return bool
+     */
     public function insertUser($name, $email, $password, $gender, $mobileno, $designation, $image, $status)
     {
         $sql = "INSERT INTO users(name,email, password, gender, mobile, designation, image, status) VALUES(:name, :email, :password, :gender, :mobileno, :designation, :image, :status)";
@@ -121,6 +150,10 @@ class UsersGateway extends AbstractGateway
         return $success;
     }
 
+    /**
+     * @param $email
+     * @return bool
+     */
     public function deleteByEmail($email)
     {
         $sql = 'delete from users where email = :email';
