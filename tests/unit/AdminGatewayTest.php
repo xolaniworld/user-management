@@ -7,14 +7,12 @@ class AdminGatewayTest extends \PHPUnit\Framework\TestCase
     private $pdo;
     private $id;
 
-    private $username;
-    private $email;
-    private $username;
-
+    
     public function setUp(): void
     {
         $this->pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
         $this->gateway = new \Application\AdminGateway($this->pdo);
+
 
         $this->pdo->query("insert into admin(email, username, Password) values ('test@test.com', 'test-admin','test')");
         $this->id = $this->pdo->lastInsertId();
@@ -22,15 +20,7 @@ class AdminGatewayTest extends \PHPUnit\Framework\TestCase
 
     public function testCountByEmailAndPassword()
     {
-        $this->assertTrue($this->gateway->countByEmailAndPassword('test@test.com', 'test') > 0);
-//        $sql = "SELECT UserName,Password FROM admin WHERE UserName=:email and Password=:password";
-//        $query = $this->pdo->prepare($sql);
-//        $query->bindParam(':email', $email, PDO::PARAM_STR);
-//        $query->bindParam(':password', $password, PDO::PARAM_STR);
-//        $query->execute();
-//        $results = $query->fetchAll(PDO::FETCH_OBJ);
-//
-//        return $query->rowCount();
+        $this->assertTrue($this->gateway->countByUsernameAndPassword('test-admin', 'test') > 0);
     }
 
 //    public function countPasswordByPasswordAndUsername($username, $password)
@@ -65,6 +55,6 @@ class AdminGatewayTest extends \PHPUnit\Framework\TestCase
 
     public function tearDown(): void
     {
-        $this->pdo->query("delete from admin where id=" . $this->id);
+//        $this->pdo->query("delete from admin where id=" . $this->id);
     }
 }

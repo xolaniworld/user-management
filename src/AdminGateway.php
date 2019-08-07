@@ -8,16 +8,14 @@ use PDO;
 
 class AdminGateway extends AbstractGateway
 {
-    public function countByEmailAndPassword($email, $password)
+    public function countByUsernameAndPassword($username, $password)
     {
-        $sql = "SELECT UserName,Password FROM admin WHERE UserName=:email and Password=:password";
+        $sql = "SELECT UserName,Password FROM admin WHERE UserName=:username and Password=:password";
         $query = $this->pdo->prepare($sql);
-        $query->bindParam(':email', $email, PDO::PARAM_STR);
+        $query->bindParam(':username', $username, PDO::PARAM_STR);
         $query->bindParam(':password', $password, PDO::PARAM_STR);
         $query->execute();
         $results = $query->fetchAll(PDO::FETCH_OBJ);
-        var_dump($results);
-echo "------------------------$email---$password-------->". $query->rowCount();
         return $query->rowCount();
     }
 
