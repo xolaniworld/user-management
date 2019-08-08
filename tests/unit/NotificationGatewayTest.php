@@ -47,7 +47,7 @@ class NotificationGateway extends \PHPUnit\Framework\TestCase
     {
         $this->pdo->query("delete from notification where id=" . $this->id);
     }
-    
+
     private function insertTestUser()
     {
         $this->pdo->query("insert into notification (notireciver, notiuser, notitype) values ('foo', 'bar', 'baz')");
