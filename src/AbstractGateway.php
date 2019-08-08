@@ -8,6 +8,7 @@ abstract class AbstractGateway
 {
     protected $pdo;
     protected $table;
+    protected $fields;
 
     public function __construct(PDO $pdo)
     {
@@ -29,13 +30,8 @@ abstract class AbstractGateway
             throw new Exception('table required');
         }
 
-        $sth = $this->pdo->prepare("insert into {$this->table} ({$fields}) values({$values})");
+        $sth = $this->pdo->prepare("insert into {$this->table}({$fields}) values({$values})");
 
         $sth->execute($data);
-    }
-
-    private function getFields(array $array)
-    {
-        return implode(', ', array_keys($array));
     }
 }

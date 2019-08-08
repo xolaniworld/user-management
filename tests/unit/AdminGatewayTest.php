@@ -17,7 +17,7 @@ class AdminGatewayTest extends \PHPUnit\Framework\TestCase
 
     public function testCountByUsernameAndPassword()
     {
-        $this->assertTrue($this->gateway->countByUsernameAndPassword('test-admin', 'test') > 0);
+        $this->assertGreaterThan(0, $this->gateway->countByUsernameAndPassword('test-admin', 'test'));
     }
 
     public function testCountPasswordByPasswordAndUsername()
@@ -27,10 +27,10 @@ class AdminGatewayTest extends \PHPUnit\Framework\TestCase
 
     public function testUpdatePasswordByUsername()
     {
-        $this->gateway->updatePasswordByUsername('test-admin', 'foo');
+        $this->gateway->updatePasswordByUsername('test-admin', 'foo-1');
 
         $result = $this->pdo->query("select password from admin where username='test-admin'", PDO::FETCH_OBJ);
-        $this->assertEquals('foo', $result->fetch()->password );
+        $this->assertEquals('foo-1', $result->fetch()->password);
     }
 
     public function testUpdateUsernameAndEmail()
