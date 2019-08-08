@@ -17,9 +17,7 @@ class DeletedUserGateway extends \PHPUnit\Framework\TestCase
 
     public function testCountById()
     {
-        $this->assertTrue(
-            $this->gateway->countById() > 0
-        );
+        $this->assertGreaterThan(0,         $this->gateway->countById());
     }
 
     public function testInsertByName()
@@ -33,8 +31,8 @@ class DeletedUserGateway extends \PHPUnit\Framework\TestCase
     public function testFindAll()
     {
         list($results, $count) = $this->gateway->findAll();
-        $this->assertTrue(is_array($results));
-        $this->assertTrue($count > 0);
+        $this->assertIsArray($results);
+        $this->assertGreaterThan(0, $count);
     }
 
     public function tearDown(): void

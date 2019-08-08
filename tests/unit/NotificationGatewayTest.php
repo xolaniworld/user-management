@@ -31,16 +31,14 @@ class NotificationGateway extends \PHPUnit\Framework\TestCase
 
     public function testCountByReciver()
     {
-        $this->assertTrue(
-            $this->gateway->countByReciver('foo') > 0
-        );
+        $this->assertGreaterThan(0,$this->gateway->countByReciver('foo'));
     }
 
     public function testFindByNotiReciver()
     {
         list($results, $count) = $this->gateway->findByNotiReciver('foo');
-        $this->assertTrue(is_array($results));
-        $this->assertTrue($count > 0);
+        $this->assertIsArray($results);
+        $this->assertGreaterThan(0, $count);
     }
 
     public function tearDown(): void

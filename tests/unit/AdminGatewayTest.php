@@ -22,9 +22,7 @@ class AdminGatewayTest extends \PHPUnit\Framework\TestCase
 
     public function testCountPasswordByPasswordAndUsername()
     {
-        $this->assertTrue(
-            $this->gateway->countPasswordByPasswordAndUsername('test-admin', 'test') > 0
-        );
+        $this->assertGreaterThan(0,     $this->gateway->countPasswordByPasswordAndUsername('test-admin', 'test'));
     }
 
     public function testUpdatePasswordByUsername()

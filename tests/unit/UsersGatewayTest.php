@@ -33,12 +33,12 @@ class UsersGatewayTest extends \PHPUnit\Framework\TestCase
     public function testCountByEmailPasswordAndStatus()
     {
         $result = $this->gateway->countByEmailPasswordAndStatus($this->email, $this->md5Password, $this->status);
-        $this->assertTrue($result > 0);
+        $this->assertGreaterThan(0,$result);
     }
 
     public function testCountByUsernameAndPassword()
     {
-        $this->assertTrue($this->gateway->countByUsernameAndPassword($this->email, $this->md5Password) > 0);
+        $this->assertGreaterThan(0, $this->gateway->countByUsernameAndPassword($this->email, $this->md5Password));
     }
 
     public function testInsertUpdateAndDelete()
@@ -60,9 +60,9 @@ class UsersGatewayTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($designation, $result->designation);
         $this->assertEquals($image, $result->image);
 
-        $this->assertTrue($this->gateway->findAllUsers() > 0);
+        $this->assertGreaterThan(0, $this->gateway->findAllUsers());
 
-        $this->assertTrue($this->gateway->countIds() > 0);
+        $this->assertGreaterThan(0, $this->gateway->countIds());
 
         $this->assertTrue($this->gateway->deleteByEmail($this->email));
     }

@@ -32,9 +32,7 @@ class FeedbackGateway extends \PHPUnit\Framework\TestCase
 
     public function testCountByReciver()
     {
-        $this->assertTrue(
-        $this->gateway->countByReciver('reciver') > 0
-        );
+        $this->assertGreaterThan(0,      $this->gateway->countByReciver('reciver'));
     }
 
     public function testFindByReciver()
