@@ -8,16 +8,17 @@ use PDO;
 
 class FeedbackGateway extends AbstractGateway
 {
+    protected $table = 'feedback';
+
     public function insertSenderReciverTitleFeedbackAttachment($user, $reciver, $title, $description, $attachment)
     {
-        $sql = "insert into feedback (sender, reciver, title,feedbackdata,attachment) values (:user,:reciver,:title,:description,:attachment)";
-        $query = $this->pdo->prepare($sql);
-        $query->bindParam(':user', $user, PDO::PARAM_STR);
-        $query->bindParam(':reciver', $reciver, PDO::PARAM_STR);
-        $query->bindParam(':title', $title, PDO::PARAM_STR);
-        $query->bindParam(':description', $description, PDO::PARAM_STR);
-        $query->bindParam(':attachment', $attachment, PDO::PARAM_STR);
-        $query->execute();
+        $this->insert([
+            'sender' => $user,
+            'reciver' => $reciver,
+            'title' => $title,
+            'feedbackdata' => $description,
+            'attachment' => $attachment,
+        ]);
     }
 
     public function countByReciver($reciver)
@@ -33,20 +34,21 @@ class FeedbackGateway extends AbstractGateway
     public function findByReciver($reciver)
     {
         $sql = "SELECT * from  feedback where reciver = (:reciver)";
-        $query = $this->pdo -> prepare($sql);
-        $query-> bindParam(':reciver', $reciver, PDO::PARAM_STR);
+        $query = $this->pdo->prepare($sql);
+        $query->bindParam(':reciver', $reciver, PDO::PARAM_STR);
         $query->execute();
-        $results=$query->fetchAll(PDO::FETCH_OBJ);
-       return [$results, $query->rowCount()];
+        $results = $query->fetchAll(PDO::FETCH_OBJ);
+        return [$results, $query->rowCount()];
     }
 
     public function insertByUserReciverDescription($sender, $reciver, $message)
     {
-        $sql="insert into feedback (sender, reciver, feedbackdata) values (:user,:reciver,:description)";
-        $query = $this->pdo->prepare($sql);
-        $query-> bindParam(':user', $sender, PDO::PARAM_STR);
-        $query-> bindParam(':reciver', $reciver, PDO::PARAM_STR);
-        $query-> bindParam(':description', $message, PDO::PARAM_STR);
-        $query->execute();
+        $this->insert([
+            'sender' => $sender,
+            'reciver' => $reciver,
+            'feedbackdata' => $message,
+            'attachment' => '',
+            'title' => ''
+        ]);
     }
 }

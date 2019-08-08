@@ -16,16 +16,16 @@ class FeedbackGateway extends \PHPUnit\Framework\TestCase
 
     public function testInsertSenderReciverTitleFeedbackAttachment()
     {
-        $this->gateway->insertSenderReciverTitleFeedbackAttachment('user', 'reciver', 'title', 'description', 'attachment');
+        $this->gateway->insertSenderReciverTitleFeedbackAttachment('user-1', 'reciver-1', 'title-1', 'description-1', 'attachment-1');
         $id = $this->pdo->lastInsertId();
         $sth = $this->pdo->query('select sender, reciver, title,feedbackdata,attachment from feedback where id='.$id, PDO::FETCH_OBJ);
         $obj = $sth->fetch();
 
-        $this->assertEquals('user', $obj->sender);
-        $this->assertEquals('reciver', $obj->reciver);
-        $this->assertEquals('title', $obj->title);
-        $this->assertEquals('description', $obj->feedbackdata);
-        $this->assertEquals('attachment', $obj->attachment);
+        $this->assertEquals('user-1', $obj->sender);
+        $this->assertEquals('reciver-1', $obj->reciver);
+        $this->assertEquals('title-1', $obj->title);
+        $this->assertEquals('description-1', $obj->feedbackdata);
+        $this->assertEquals('attachment-1', $obj->attachment);
 
         $this->delete($id);
     }
@@ -42,16 +42,16 @@ class FeedbackGateway extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThan(0, $count);
     }
 
-    public function insertByUserReciverDescription($sender, $reciver, $message)
+    public function testInsertByUserReciverDescription()
     {
-        $this->gateway->insertByUserReciverDescription('sender', 'reciver', 'message');
+        $this->gateway->insertByUserReciverDescription('sender-2', 'reciver-2', 'message-2');
         $id = $this->pdo->lastInsertId();
         $sth = $this->pdo->query('select sender, reciver, feedbackdata from feedback where id='.$id, PDO::FETCH_OBJ);
         $obj = $sth->fetch();
 
-        $this->assertEquals('user', $obj->sender);
-        $this->assertEquals('reciver', $obj->reciver);
-        $this->assertEquals('message', $obj->feedbackdata);
+        $this->assertEquals('sender-2', $obj->sender);
+        $this->assertEquals('reciver-2', $obj->reciver);
+        $this->assertEquals('message-2', $obj->feedbackdata);
 
         $this->delete($id);
     }

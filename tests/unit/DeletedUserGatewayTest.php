@@ -17,15 +17,15 @@ class DeletedUserGateway extends \PHPUnit\Framework\TestCase
 
     public function testCountById()
     {
-        $this->assertGreaterThan(0,         $this->gateway->countById());
+        $this->assertGreaterThan(0, $this->gateway->countById());
     }
 
     public function testInsertByName()
     {
-        $this->gateway->insertByName('foo');
+        $this->gateway->insertByName('foo-1');
 
-        $sth = $this->pdo->query("select email from deleteduser where email='foo'", PDO::FETCH_OBJ);
-        $this->assertEquals('foo', $sth->fetch()->email);
+        $sth = $this->pdo->query("select email from deleteduser where email='foo-1'", PDO::FETCH_OBJ);
+        $this->assertEquals('foo-1', $sth->fetch()->email);
     }
 
     public function testFindAll()

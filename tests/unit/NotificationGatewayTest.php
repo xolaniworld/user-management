@@ -17,14 +17,14 @@ class NotificationGateway extends \PHPUnit\Framework\TestCase
     public function testInsertUserReciverType()
     {
 
-        $this->gateway->insertUserReciverType('foo', 'bar', 'baz');
+        $this->gateway->insertUserReciverType('foo-1', 'bar-1', 'baz-1');
         $id = $this->pdo->lastInsertId();
         $sth = $this->pdo->query('select notiuser, notireciver, notitype from notification where id=' . $id, PDO::FETCH_OBJ);
         $obj = $sth->fetch();
 
-        $this->assertEquals('foo', $obj->notiuser);
-        $this->assertEquals('bar', $obj->notireciver);
-        $this->assertEquals('baz', $obj->notitype);
+        $this->assertEquals('foo-1', $obj->notiuser);
+        $this->assertEquals('bar-1', $obj->notireciver);
+        $this->assertEquals('baz-1', $obj->notitype);
 
         $this->pdo->exec('delete from notification where id='.$id);
     }

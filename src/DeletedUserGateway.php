@@ -8,6 +8,8 @@ use PDO;
 
 class DeletedUserGateway extends AbstractGateway
 {
+    protected $table = 'deleteduser';
+
     public function countById()
     {
         $sql6 = "SELECT id from deleteduser ";
@@ -21,10 +23,7 @@ class DeletedUserGateway extends AbstractGateway
 
     public function insertByName($name)
     {
-        $sql2 = "insert into deleteduser (email) values (:name)";
-        $query2 = $this->pdo->prepare($sql2);
-        $query2->bindParam(':name', $name, PDO::PARAM_STR);
-        $query2->execute();
+        $this->insert(['email' => $name]);
     }
 
     public function findAll()
