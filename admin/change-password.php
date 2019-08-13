@@ -6,12 +6,9 @@ if (strlen($_SESSION['alogin']) == 0) {
 } else {
 // Code for change password	
     if (isset($_POST['submit'])) {
-        $password = md5($_POST['password']);
-        $newpassword = md5($_POST['newpassword']);
-        $username = $_SESSION['alogin'];
         $adminGateway = new \Application\AdminGateway($dbh);
-        if ($adminGateway->countPasswordByPasswordAndUsername($username, $password) > 0) {
-           $adminGateway->updatePasswordByUsername($username, $newpassword);
+        $changePasswordTransaction = new \Application\ChangePasswordTransaction($adminGateway, new \Application\Request());
+        if ($changePasswordTransaction->changePassword($_POST['password'], $_POST['newpassword'])) {
             $msg = "Your Password succesfully changed";
         } else {
             $error = "Your current password is not valid.";

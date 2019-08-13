@@ -10,4 +10,9 @@ class Request
     {
         $_SESSION[$name] = $value;
     }
+
+    public function getSession($name)
+    {
+        return $_SESSION[$name];
+    }
 }

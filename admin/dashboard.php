@@ -1,11 +1,9 @@
 <?php
 include __DIR__ . '/../bootstrap.php';
 
-if(strlen($_SESSION['alogin'])==0)
-	{	
-header('location:index.php');
-}
-else{
+if(strlen($_SESSION['alogin']) == 0) {
+    header('location:index.php');
+} else {
 ?>
 <!doctype html>
 <html lang="en" class="no-js">
@@ -17,7 +15,7 @@ else{
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
-	
+
 	<title>Admin Dashboard</title>
 
 	<!-- Font awesome -->
@@ -50,7 +48,7 @@ else{
 					<div class="col-md-12">
 
 						<h2 class="page-title">Dashboard</h2>
-						
+
 						<div class="row">
 							<div class="col-md-12">
 								<div class="row">
@@ -60,7 +58,7 @@ else{
 												<div class="stat-panel text-center">
 <?php
 $userGateway = new \Application\UsersGateway($dbh);
-$bg=$userGateway->countIds();
+$bg = $userGateway->countIds();
 ?>
 													<div class="stat-panel-number h1 "><?php echo htmlentities($bg);?></div>
 													<div class="stat-panel-title text-uppercase">Total Users</div>
@@ -74,10 +72,10 @@ $bg=$userGateway->countIds();
 											<div class="panel-body bk-success text-light">
 												<div class="stat-panel text-center">
 
-<?php 
-$reciver = 'Admin';
-$feedbackGateway = new \Application\FeedbackGateway($dbh);
-$regbd = $feedbackGateway->countByReciver($reciver);
+<?php
+    $reciver = 'Admin';
+    $feedbackGateway = new \Application\FeedbackGateway($dbh);
+    $regbd = $feedbackGateway->countByReciver($reciver);
 ?>
 													<div class="stat-panel-number h1 "><?php echo htmlentities($regbd);?></div>
 													<div class="stat-panel-title text-uppercase">Feedback Messages</div>
@@ -92,10 +90,10 @@ $regbd = $feedbackGateway->countByReciver($reciver);
 											<div class="panel-body bk-danger text-light">
 												<div class="stat-panel text-center">
 
-<?php 
-$reciver = 'Admin';
-$notificationGateway = new \Application\NotificationGateway($dbh);
-$regbd2 = $notificationGateway->countByReciver($reciver);
+<?php
+    $reciver = 'Admin';
+    $notificationGateway = new \Application\NotificationGateway($dbh);
+    $regbd2 = $notificationGateway->countByReciver($reciver);
 ?>
 													<div class="stat-panel-number h1 "><?php echo htmlentities($regbd2);?></div>
 													<div class="stat-panel-title text-uppercase">Notifications</div>
@@ -108,9 +106,9 @@ $regbd2 = $notificationGateway->countByReciver($reciver);
 										<div class="panel panel-default">
 											<div class="panel-body bk-info text-light">
 												<div class="stat-panel text-center">
-												<?php
-                                                $deletedUserGateway = new \Application\DeletedUserGateway($dbh);
-                                                $query = $deletedUserGateway->countById();
+<?php
+    $deletedUserGateway = new \Application\DeletedUserGateway($dbh);
+    $query = $deletedUserGateway->countById();
 ?>
 													<div class="stat-panel-number h1 "><?php echo htmlentities($query);?></div>
 													<div class="stat-panel-title text-uppercase">Deleted Users</div>
@@ -119,24 +117,12 @@ $regbd2 = $notificationGateway->countByReciver($reciver);
 											<a href="deleteduser.php" class="block-anchor panel-footer text-center">Full Detail &nbsp; <i class="fa fa-arrow-right"></i></a>
 										</div>
 									</div>
-							
+
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
-
-
-
-
-
-
-
-
-
-
-
 			</div>
 		</div>
 	</div>
@@ -151,11 +137,10 @@ $regbd2 = $notificationGateway->countByReciver($reciver);
 	<script src="js/fileinput.js"></script>
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
-	
+
 	<script>
-		
-	window.onload = function(){
-    
+	window.onload = function() {
+
 		// Line chart from swirlData for dashReport
 		var ctx = document.getElementById("dashReport").getContext("2d");
 		window.myLine = new Chart(ctx).Line(swirlData, {
@@ -163,8 +148,8 @@ $regbd2 = $notificationGateway->countByReciver($reciver);
 			scaleShowVerticalLines: false,
 			scaleBeginAtZero : true,
 			multiTooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>",
-		}); 
-		
+		});
+
 		// Pie Chart from doughutData
 		var doctx = document.getElementById("chart-area3").getContext("2d");
 		window.myDoughnut = new Chart(doctx).Pie(doughnutData, {responsive : true});
