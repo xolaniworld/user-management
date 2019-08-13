@@ -6,5 +6,8 @@
     "psr-4" : {
       "Application\\": "src"
     }
+  },
+  "require": {
+    "phpspec/prophecy": "^1.8"
   }
 }

@@ -1,18 +1,17 @@
 <?php
 include __DIR__ . '/../bootstrap.php';
 
-if (isset($_POST['login'])) {
-    $username = $_POST['username'];
-    $password = md5($_POST['password']);
+if (isset($_POST['login'])) :
+    $request = new \Application\Request();
     $adminGateway = new \Application\AdminGateway($dbh);
-    if ($adminGateway->countByUsernameAndPassword($username, $password) > 0) {
-        $_SESSION['alogin'] = $_POST['username'];
-        echo "<script type='text/javascript'> document.location = 'admin/dashboard.php'; </script>";
-    } else {
-        echo "<script>alert('Invalid Details');</script>";
-    }
-}
-?>
+    $transaction = new \Application\AdminTransaction($adminGateway, $request);
+    ?>
+    <?php if ($transaction->login($_POST['username'], $_POST['password'])): ?>
+        <script type='text/javascript'> document.location = 'dashboard.php'; </script>
+    <?php else : ?>
+        <script> alert('Invalid Details');</script>
+    <?php endif; ?>
+<?php endif; ?>
 <!doctype html>
 <html lang="en" class="no-js">
 
