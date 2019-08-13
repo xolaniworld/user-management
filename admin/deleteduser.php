@@ -5,10 +5,8 @@ if (strlen($_SESSION['alogin']) == 0) {
     header('location:index.php');
 } else {
 ?>
-
 <!doctype html>
 <html lang="en" class="no-js">
-
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -109,11 +107,9 @@ $cnt=1;
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
-
 	<!-- Loading Scripts -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap-select.min.js"></script>

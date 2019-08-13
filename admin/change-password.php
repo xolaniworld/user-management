@@ -15,7 +15,6 @@ if (strlen($_SESSION['alogin']) == 0) {
         }
     }
 ?>
-
 <!doctype html>
 <html lang="en" class="no-js">
 
@@ -139,19 +138,12 @@ return true;
 									</div>
 								</div>
 							</div>
-
 						</div>
-
-
-
 					</div>
 				</div>
-
-
 			</div>
 		</div>
 	</div>
-
 	<!-- Loading Scripts -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap-select.min.js"></script>
@@ -169,8 +161,6 @@ return true;
 					}, 3000);
 					});
 	</script>
-
 </body>
-
 </html>
 <?php } ?>

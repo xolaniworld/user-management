@@ -38,7 +38,6 @@ if(strlen($_SESSION['alogin']) == 0) {
 
 <body>
 <?php include('includes/header.php');?>
-
 	<div class="ts-main-content">
 <?php include('includes/leftbar.php');?>
 		<div class="content-wrapper">
@@ -117,7 +116,6 @@ $bg = $userGateway->countIds();
 											<a href="deleteduser.php" class="block-anchor panel-footer text-center">Full Detail &nbsp; <i class="fa fa-arrow-right"></i></a>
 										</div>
 									</div>
-
 								</div>
 							</div>
 						</div>
@@ -157,7 +155,6 @@ $bg = $userGateway->countIds();
 		// Dougnut Chart from doughnutData
 		var doctx = document.getElementById("chart-area4").getContext("2d");
 		window.myDoughnut = new Chart(doctx).Doughnut(doughnutData, {responsive : true});
-
 	}
 	</script>
 </body>
