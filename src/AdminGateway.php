@@ -15,7 +15,6 @@ class AdminGateway extends AbstractGateway
         $query->bindParam(':username', $username, PDO::PARAM_STR);
         $query->bindParam(':password', $password, PDO::PARAM_STR);
         $query->execute();
-        $results = $query->fetchAll(PDO::FETCH_OBJ);
         return $query->rowCount();
     }
 
@@ -26,8 +25,6 @@ class AdminGateway extends AbstractGateway
         $query->bindParam(':username', $username, PDO::PARAM_STR);
         $query->bindParam(':password', $password, PDO::PARAM_STR);
         $query->execute();
-        $results = $query->fetchAll(PDO::FETCH_OBJ);
-
         return $query->rowCount();
     }
 

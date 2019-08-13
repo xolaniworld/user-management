@@ -1,18 +1,27 @@
 <?php
 
 
+use Prophecy\Argument;
+
 class AdminGatewayTest extends \PHPUnit\Framework\TestCase
 {
+    private $prophet;
     private $gateway;
     private $pdo;
-    private $id;
 
     public function setUp(): void
     {
-        $this->pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
-        $this->gateway = new \Application\AdminGateway($this->pdo);
+        $this->prophet = new \Prophecy\Prophet();
+        $this->pdo = $this->prophet->prophesize('PDO');
 
-        $this->insertTestUser();
+        $this->gateway = new \Application\AdminGateway($this->pdo->reveal());
+
+        $query = $this->prophet->prophesize('PDOStatement');
+        $this->pdo->prepare(Argument::type('string'))->willReturn($query->reveal());
+        $query->bindParam(Argument::type('string'), Argument::type('string'), Argument::type('int'))
+            ->willReturn(function () { });
+        $query->execute()->willReturn(true);
+        $query->rowCount()->willReturn(1);
     }
 
     public function testCountByUsernameAndPassword()
@@ -22,31 +31,11 @@ class AdminGatewayTest extends \PHPUnit\Framework\TestCase
 
     public function testCountPasswordByPasswordAndUsername()
     {
-        $this->assertGreaterThan(0,     $this->gateway->countPasswordByPasswordAndUsername('test-admin', 'test'));
-    }
-
-    public function testUpdatePasswordByUsername()
-    {
-        $this->gateway->updatePasswordByUsername('test-admin', 'foo-1');
-
-        $result = $this->pdo->query("select password from admin where username='test-admin'", PDO::FETCH_OBJ);
-        $this->assertEquals('foo-1', $result->fetch()->password);
-    }
-
-    public function testUpdateUsernameAndEmail()
-    {
-        //not sure how to test this
-        $this->assertTrue(true);
+        $this->assertGreaterThan(0, $this->gateway->countPasswordByPasswordAndUsername('test-admin', 'test'));
     }
 
     public function tearDown(): void
     {
-        $this->pdo->query("delete from admin where id=" . $this->id);
-    }
-
-    private function insertTestUser()
-    {
-        $this->pdo->query("insert into admin(email, username, Password) values ('test@test.com', 'test-admin','test')");
-        $this->id = $this->pdo->lastInsertId();
+        $this->prophet->checkPredictions();
     }
 }
