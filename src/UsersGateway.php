@@ -52,6 +52,20 @@ class UsersGateway extends AbstractGateway
         $query->execute();
     }
 
+    public function updateByIdWithGender($name, $email, $gender, $mobileno, $designation, $image, $idedit)
+    {
+        $sql = "UPDATE users SET name=(:name), email=(:email), gender=(:gender), mobile=(:mobileno), designation=(:designation), Image=(:image) WHERE id=(:idedit)";
+        $query = $this->pdo->prepare($sql);
+        $query->bindParam(':name', $name, PDO::PARAM_STR);
+        $query->bindParam(':email', $email, PDO::PARAM_STR);
+        $query->bindParam(':gender', $gender, PDO::PARAM_STR);
+        $query->bindParam(':mobileno', $mobileno, PDO::PARAM_STR);
+        $query->bindParam(':designation', $designation, PDO::PARAM_STR);
+        $query->bindParam(':image', $image, PDO::PARAM_STR);
+        $query->bindParam(':idedit', $idedit, PDO::PARAM_STR);
+        $query->execute();
+    }
+
     public function updatePasswordByUsername($newpassword, $username)
     {
         $con = "update users set password=:newpassword where email=:username";
