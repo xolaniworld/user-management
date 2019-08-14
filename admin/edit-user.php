@@ -4,32 +4,11 @@ include __DIR__ . '/../bootstrap.php';
 if (strlen($_SESSION['alogin']) == 0) {
     header('location:index.php');
 } else {
-    if (isset($_GET['edit'])) {
-        $editid = $_GET['edit'];
-    }
-
-    if (isset($_POST['submit'])) {
-        $file = $_FILES['image']['name'];
-        $file_loc = $_FILES['image']['tmp_name'];
-        $folder = "../images/";
-        $new_file_name = strtolower($file);
-        $final_file = str_replace(' ', '-', $new_file_name);
-
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $gender = $_POST['gender'];
-        $mobileno = $_POST['mobileno'];
-        $designation = $_POST['designation'];
-        $idedit = $_POST['idedit'];
-        $image = $_POST['image'];
-
-        if (move_uploaded_file($file_loc, $folder . $final_file)) {
-            $image = $final_file;
-        }
-        $usersGateway = new \Application\UsersGateway($dbh);
-        $usersGateway->updateByIdWithGender($name, $email, $gender, $mobileno, $designation, $image, $idedit);
-        $msg = "Information Updated Successfully";
-    }
+    $usersGateway = new \Application\UsersGateway($dbh);
+    $request = new \Application\Request();
+    $filesystem = new \Application\Filesystem();
+    $editUserTransaction = new \Application\Users\UsersTransactions($usersGateway, $request, $filesystem);
+    $msg = $editUserTransaction->edit();
     ?>
     <!doctype html>
     <html lang="en" class="no-js">
@@ -85,11 +64,8 @@ if (strlen($_SESSION['alogin']) == 0) {
 
     <body>
     <?php
-    $sql = "SELECT * from users where id = :editid";
-    $query = $dbh->prepare($sql);
-    $query->bindParam(':editid', $editid, PDO::PARAM_INT);
-    $query->execute();
-    $result = $query->fetch(PDO::FETCH_OBJ);
+    $editid = $request->getQuery('edit');
+    $result = $usersGateway->findById($editid);
     $cnt = 1;
     ?>
     <?php include('includes/header.php'); ?>

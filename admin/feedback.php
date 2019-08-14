@@ -4,28 +4,10 @@ include __DIR__ . '/../bootstrap.php';
 if (strlen($_SESSION['alogin']) == 0) {
     header('location:index.php');
 } else {
-    if (isset($_GET['del'])) {
-        $id = $_GET['del'];
-        $userGateway = new \Application\UsersGateway($dbh);
-        $userGateway->deleteById($id);
-        $msg = "Data Deleted successfully";
-    }
-
-    if (isset($_REQUEST['unconfirm'])) {
-        $aeid = intval($_GET['unconfirm']);
-        $memstatus = 1;
-        $userGateway = new \Application\UsersGateway($dbh);
-        $userGateway->updateStatusById($memstatus, $aeid);
-        $msg = "Changes Sucessfully";
-    }
-
-    if (isset($_REQUEST['confirm'])) {
-        $aeid = intval($_GET['confirm']);
-        $memstatus = 0;
-        $userGateway = new \Application\UsersGateway($dbh);
-        $userGateway->updateStatusById($memstatus, $aeid);
-        $msg = "Changes Sucessfully";
-    }
+    $userGateway = new \Application\UsersGateway($dbh);
+    $request = new \Application\Request();
+    $feedbackTransaction = new \Application\FeedbackTransaction($userGateway, $request);
+    $msg = $feedbackTransaction->updateFeedback();
 ?>
 
 <!doctype html>

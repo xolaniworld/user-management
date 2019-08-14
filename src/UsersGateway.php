@@ -16,6 +16,17 @@ class UsersGateway extends AbstractGateway
         return $result;
     }
 
+    public function findById($id)
+    {
+        $sql = "SELECT * from users where id = :editid";
+        $query = $this->pdo->prepare($sql);
+        $query->bindParam(':editid', $id, PDO::PARAM_INT);
+        $query->execute();
+        $result = $query->fetch(PDO::FETCH_OBJ);
+
+        return $result;
+    }
+
     public function countByEmailPasswordAndStatus($email, $password, $status)
     {
         $sql = "SELECT email,password FROM users WHERE email=:email and password=:password and status=(:status)";
