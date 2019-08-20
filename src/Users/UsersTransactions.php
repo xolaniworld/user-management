@@ -23,11 +23,13 @@ class UsersTransactions
 
     public function edit()
     {
+        $msg = '';
+
         if ($this->request->queryIsset('edit')) {
             $editid = $this->request->getQuery('edit');
         }
+
         if ($this->request->postIsset('submit')) {
-            echo "hello--";
             $imageFiles = $this->request->getFile('image');
             $file = $imageFiles['name'];
             $file_loc = $imageFiles['tmp_name'];
@@ -50,10 +52,34 @@ class UsersTransactions
             $this->usersGateway->updateByIdWithGender($name, $email, $gender, $mobileno, $designation, $image, $idedit);
 
             $msg = "Information Updated Successfully";
-
-            return $msg;
         }
-        return '';
+
+        return $msg;
+    }
+
+    public function updateFeedback()
+    {
+        if ($this->request->queryIsset('del')) {
+            $id = $this->getQuery('del');
+            $this->userGateway->deleteById($id);
+            $msg = "Data Deleted successfully";
+        }
+
+        if ($this->request->requestIsset('unconfirm')) {
+            $aeid = intval($this->request->getQuery('unconfirm'));
+            $memstatus = 1;
+            $this->userGateway->updateStatusById($memstatus, $aeid);
+            $msg = "Changes Sucessfully";
+        }
+
+        if (isset($_REQUEST['confirm'])) {
+            $aeid = intval($this->request->getQuery('confirm'));
+            $memstatus = 0;
+            $this->userGateway->updateStatusById($memstatus, $aeid);
+            $msg = "Changes Sucessfully";
+        }
+
+        return $msg;
     }
 
 }

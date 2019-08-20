@@ -1,28 +1,22 @@
 <?php
-include __DIR__ . '/../bootstrap.php';
-if(strlen($_SESSION['alogin'])==0)
-	{	
-header('location:index.php');
-}
-else{
-	
-if(isset($_POST['submit']))
-  {	
-	$name=$_POST['name'];
-	$email=$_POST['email'];
+include dirname(__DIR__) . '/bootstrap.php';
+if (strlen($_SESSION['alogin']) == 0) {
+    header('location:index.php');
+} else {
+    if (isset($_POST['submit'])) {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
 
-	$sql="UPDATE admin SET username=(:name), email=(:email)";
-	$query = $dbh->prepare($sql);
-	$query-> bindParam(':name', $name, PDO::PARAM_STR);
-	$query-> bindParam(':email', $email, PDO::PARAM_STR);
-	$query->execute();
-	$msg="Information Updated Successfully";
-}    
+        $sql = "UPDATE admin SET username=(:name), email=(:email)";
+        $query = $dbh->prepare($sql);
+        $query->bindParam(':name', $name, PDO::PARAM_STR);
+        $query->bindParam(':email', $email, PDO::PARAM_STR);
+        $query->execute();
+        $msg = "Information Updated Successfully";
+    }
 ?>
-
 <!doctype html>
 <html lang="en" class="no-js">
-
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">

@@ -1,5 +1,5 @@
 <?php
-include __DIR__ . '/../bootstrap.php';
+include dirname(__DIR__) . '/bootstrap.php';
 
 if (strlen($_SESSION['alogin']) == 0) :
     header('location:index.php');

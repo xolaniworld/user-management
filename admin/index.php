@@ -1,12 +1,13 @@
 <?php
-include __DIR__ . '/../bootstrap.php';
+include dirname(__DIR__) . '/bootstrap.php';
 
 if (isset($_POST['login'])) :
     $request = new \Application\Request();
     $adminGateway = new \Application\AdminGateway($dbh);
     $transaction = new \Application\AdminTransaction($adminGateway, $request);
+    $loginResult = $transaction->login($_POST['username'], $_POST['password']);
     ?>
-    <?php if ($transaction->login($_POST['username'], $_POST['password'])): ?>
+    <?php if ($loginResult): ?>
         <script type='text/javascript'> document.location = 'dashboard.php'; </script>
     <?php else : ?>
         <script> alert('Invalid Details');</script>

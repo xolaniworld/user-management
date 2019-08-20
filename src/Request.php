@@ -11,6 +11,26 @@ class Request
         $_SESSION[$name] = $value;
     }
 
+    public function setSessionToEmptyArray()
+    {
+        $_SESSION = [];
+    }
+
+    public function getName()
+    {
+        return session_name();
+    }
+
+    public function unLoginSetSession()
+    {
+        unset($_SESSION['login']);
+    }
+
+    public function destroySession()
+    {
+        session_destroy(); // destroy session
+    }
+
     public function requestIsset($name)
     {
         return $_REQUEST[$name];

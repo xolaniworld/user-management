@@ -6,10 +6,10 @@ if (strlen($_SESSION['alogin']) == 0) {
 } else {
     $userGateway = new \Application\UsersGateway($dbh);
     $request = new \Application\Request();
-    $feedbackTransaction = new \Application\FeedbackTransaction($userGateway, $request);
-    $msg = $feedbackTransaction->updateFeedback();
+    $filesystem = new \Application\Filesystem();
+    $usersTransaction = new Application\Users\UsersTransactions($userGateway, $request, $filesystem);
+    $msg = $usersTransaction->updateFeedback();
 ?>
-
 <!doctype html>
 <html lang="en" class="no-js">
 

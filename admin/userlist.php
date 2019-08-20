@@ -1,44 +1,37 @@
 <?php
+include dirname(__DIR__) . '/bootstrap.php';
 
-include __DIR__ . '/../bootstrap.php';
+if (strlen($_SESSION['alogin']) == 0) {
+    header('location:index.php');
+} else {
+    if (isset($_GET['del']) && isset($_GET['name'])) {
+        $id = $_GET['del'];
+        $name = $_GET['name'];
 
-if(strlen($_SESSION['alogin'])==0)
-	{	
-header('location:index.php');
-}
-else{
-if(isset($_GET['del']) && isset($_GET['name']))
-{
-$id=$_GET['del'];
-$name=$_GET['name'];
+        $usersGateway = new \Application\UsersGateway($dbh);
+        $usersGateway->deleteById($id);
 
-$usersGateway = new \Application\UsersGateway($dbh);
-$usersGateway->deleteById($id);
+        $deletedUserGateway = new \Application\DeletedUserGateway($dbh);
+        $deletedUserGateway->insertByName($name);
 
-$deletedUserGateway = new \Application\DeletedUserGateway($dbh);
-$deletedUserGateway->insertByName($name);
+        $msg = "Data Deleted successfully";
+    }
 
-$msg="Data Deleted successfully";
-}
-
-if(isset($_REQUEST['unconfirm']))
-	{
-	$aeid=intval($_GET['unconfirm']);
-	$memstatus=1;
-	$usersGateway->updateStatusById($memstatus, $aeid);
-	$msg="Changes Sucessfully";
-
-	}
-
-	if(isset($_REQUEST['confirm']))
-	{
-	$aeid=intval($_GET['confirm']);
-	$memstatus=0;
+    if (isset($_REQUEST['unconfirm'])) {
+        $aeid = intval($_GET['unconfirm']);
+        $memstatus = 1;
         $usersGateway->updateStatusById($memstatus, $aeid);
-	$msg="Changes Sucessfully";
-	}
- ?>
+        $msg = "Changes Sucessfully";
 
+    }
+
+    if (isset($_REQUEST['confirm'])) {
+        $aeid = intval($_GET['confirm']);
+        $memstatus = 0;
+        $usersGateway->updateStatusById($memstatus, $aeid);
+        $msg = "Changes Sucessfully";
+    }
+?>
 <!doctype html>
 <html lang="en" class="no-js">
 

@@ -7,8 +7,8 @@ if (strlen($_SESSION['alogin']) == 0) {
     $usersGateway = new \Application\UsersGateway($dbh);
     $request = new \Application\Request();
     $filesystem = new \Application\Filesystem();
-    $editUserTransaction = new \Application\Users\UsersTransactions($usersGateway, $request, $filesystem);
-    $msg = $editUserTransaction->edit();
+    $usersTransactions = new \Application\Users\UsersTransactions($usersGateway, $request, $filesystem);
+    $msg = $usersTransactions->edit();
     ?>
     <!doctype html>
     <html lang="en" class="no-js">

@@ -1,13 +1,16 @@
 <?php
 include __DIR__ . '/../bootstrap.php';
 
+$session = new \Application\Session();
+$request = new \Application\Request();
 
-if(strlen($_SESSION['alogin'])==0)
-	{	
-header('location:index.php');
-}
-else{
-	
+if($session->get('alogin') == 0 ) {
+    header('location:index.php');
+} else {
+    $adminGateway = new \Application\AdminGateway($dbh);
+    $adminTransaction = new \Application\AdminTransaction($adminGateway, $request);
+    $adminTransaction->update();
+    
 if(isset($_POST['submit']))
   {	
 	$name=$_POST['name'];

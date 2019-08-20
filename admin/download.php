@@ -1,5 +1,5 @@
 <?php
-include __DIR__ . '/../bootstrap.php';
+include dirname(__DIR__) . '/bootstrap.php';
 
 session_regenerate_id(true);
 
