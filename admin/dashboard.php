@@ -1,8 +1,18 @@
 <?php
 include dirname(__DIR__) . '/bootstrap.php';
-if(strlen($_SESSION['alogin']) == 0):
+
+if(strlen($_SESSION['alogin']) === 0):
     header('location:index.php');
 else :
+
+    $dashboardTransaction = new \Application\Admin\DashboardTransaction(
+        new \Application\UsersGateway($dbh),
+        new \Application\FeedbackGateway($dbh),
+        new \Application\NotificationGateway($dbh),
+        new \Application\DeletedUserGateway($dbh)
+    );
+
+    list($bg, $regbd, $regbd2, $query) = $dashboardTransaction->dashboard();
 ?>
 <!doctype html>
 <html lang="en" class="no-js">
@@ -54,10 +64,6 @@ else :
 										<div class="panel panel-default">
 											<div class="panel-body bk-primary text-light">
 												<div class="stat-panel text-center">
-<?php
-$userGateway = new \Application\UsersGateway($dbh);
-$bg = $userGateway->countIds();
-?>
 													<div class="stat-panel-number h1 "><?php echo htmlentities($bg);?></div>
 													<div class="stat-panel-title text-uppercase">Total Users</div>
 												</div>
@@ -69,12 +75,6 @@ $bg = $userGateway->countIds();
 										<div class="panel panel-default">
 											<div class="panel-body bk-success text-light">
 												<div class="stat-panel text-center">
-
-<?php
-    $reciver = 'Admin';
-    $feedbackGateway = new \Application\FeedbackGateway($dbh);
-    $regbd = $feedbackGateway->countByReciver($reciver);
-?>
 													<div class="stat-panel-number h1 "><?php echo htmlentities($regbd);?></div>
 													<div class="stat-panel-title text-uppercase">Feedback Messages</div>
 												</div>
@@ -87,12 +87,6 @@ $bg = $userGateway->countIds();
 										<div class="panel panel-default">
 											<div class="panel-body bk-danger text-light">
 												<div class="stat-panel text-center">
-
-<?php
-    $reciver = 'Admin';
-    $notificationGateway = new \Application\NotificationGateway($dbh);
-    $regbd2 = $notificationGateway->countByReciver($reciver);
-?>
 													<div class="stat-panel-number h1 "><?php echo htmlentities($regbd2);?></div>
 													<div class="stat-panel-title text-uppercase">Notifications</div>
 												</div>
@@ -104,10 +98,6 @@ $bg = $userGateway->countIds();
 										<div class="panel panel-default">
 											<div class="panel-body bk-info text-light">
 												<div class="stat-panel text-center">
-<?php
-    $deletedUserGateway = new \Application\DeletedUserGateway($dbh);
-    $query = $deletedUserGateway->countById();
-?>
 													<div class="stat-panel-number h1 "><?php echo htmlentities($query);?></div>
 													<div class="stat-panel-title text-uppercase">Deleted Users</div>
 												</div>

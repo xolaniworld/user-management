@@ -65,4 +65,9 @@ class Request
     {
         return $_SESSION[$name];
     }
+
+    public function getRequestMethod()
+    {
+        return $_SERVER['REQUEST_METHOD'];
+    }
 }

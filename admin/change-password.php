@@ -1,15 +1,20 @@
 <?php
 include dirname(__DIR__) . '/bootstrap.php';
 
-if (strlen($_SESSION['alogin']) == 0) :
+if(strlen($_SESSION['alogin']) === 0) {
     header('location:index.php');
-else :
-    $request = new \Application\Request();
-    $adminGateway = new \Application\AdminGateway($dbh);
-    $adminTransactions = new \Application\Admin\AdminTransactions($adminGateway, $request);
-    $adminTransactions->changePassword();
-    $msg = $adminTransactions->getMsg();
-    $error = $adminTransactions->getError();
+} else{
+    if(isset($_POST['submit'])) {
+        $adminTransactions = new \Application\Admin\AdminTransaction(
+            new \Application\AdminGateway($dbh),
+            new \Application\Request(),
+            new \Application\Session(),
+            new \Application\Response()
+        );
+        $adminTransactions->submitChangePassword($_SESSION['alogin'], $_POST['password'], $_POST['newpassword']);
+        $msg = $adminTransactions->getMsg();
+        $error = $adminTransactions->getError();
+    }
 ?>
 <!doctype html>
 <html lang="en" class="no-js">
@@ -159,4 +164,4 @@ else :
     </script>
 </body>
 </html>
-<?php endif;
+<?php }

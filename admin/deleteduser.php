@@ -1,7 +1,7 @@
 <?php
 include dirname(__DIR__) . '/bootstrap.php';
 
-if (strlen($_SESSION['alogin']) == 0) {
+if (strlen($_SESSION['alogin']) === 0) {
     header('location:index.php');
 } else {
 ?>

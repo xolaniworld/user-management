@@ -1,21 +1,22 @@
 <?php
 include dirname(__DIR__) . '/bootstrap.php';
+$request = new \Application\Request();
+$session = new \Application\Session();
 
-if (isset($_POST['login'])) :
-    $request = new \Application\Request();
-    $adminGateway = new \Application\AdminGateway($dbh);
-    $transaction = new \Application\AdminTransaction($adminGateway, $request);
-    $loginResult = $transaction->login($_POST['username'], $_POST['password']);
-    ?>
-    <?php if ($loginResult): ?>
+
+if ($request->getRequestMethod() === 'POST') :
+    $username = $request->getPost('username');
+    $password = $request->getPost('password');
+    $transaction = new \Application\Admin\AdminTransaction(new \Application\AdminGateway($dbh));
+    if ($transaction->submitLogin($username, $password)):
+        $session->set('alogin', $username); ?>
         <script type='text/javascript'> document.location = 'dashboard.php'; </script>
     <?php else : ?>
         <script> alert('Invalid Details');</script>
-    <?php endif; ?>
-<?php endif; ?>
+    <?php endif;
+endif; ?>
 <!doctype html>
 <html lang="en" class="no-js">
-
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,7 +24,7 @@ if (isset($_POST['login'])) :
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	
+	<?php  ?>
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
@@ -43,13 +44,13 @@ if (isset($_POST['login'])) :
 						<h1 class="text-center text-bold mt-4x">Admin Login</h1>
 						<div class="well row pt-2x pb-3x bk-light">
 							<div class="col-md-8 col-md-offset-2">
-								<form method="post">
+								<form method="POST">
 
 									<label for="" class="text-uppercase text-sm">Your Username </label>
-									<input type="text" placeholder="Username" name="username" class="form-control mb" required>
+									<input type="text" value="admin" placeholder="Username" name="username" class="form-control mb" required>
 
 									<label for="" class="text-uppercase text-sm">Password</label>
-									<input type="password" placeholder="Password" name="password" class="form-control mb" required>
+									<input type="password" value="963852741" placeholder="Password" name="password" class="form-control mb" required>
 									<button class="btn btn-primary btn-block" name="login" type="submit">LOGIN</button>
 								</form>
 							</div>

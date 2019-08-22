@@ -1,11 +1,14 @@
 <?php
-include __DIR__ . '/../bootstrap.php';
-
-$authTransaction = new \Application\AuthTransaction(
-    new \Application\Session(),
-    new \Application\Request(),
-    ini_get("session.use_cookies")
-);
-$authTransaction->logout();
+session_start();
+$_SESSION = array();
+if (ini_get("session.use_cookies")) {
+    $params = session_get_cookie_params();
+    setcookie(session_name(), '', time() - 60 * 60,
+        $params["path"], $params["domain"],
+        $params["secure"], $params["httponly"]
+    );
+}
+unset($_SESSION['login']);
+session_destroy(); // destroy session
 header("location:index.php");
 

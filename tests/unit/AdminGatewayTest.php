@@ -1,6 +1,4 @@
 <?php
-
-
 use Prophecy\Argument;
 
 class AdminGatewayTest extends \PHPUnit\Framework\TestCase

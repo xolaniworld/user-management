@@ -3,7 +3,7 @@ include dirname(__DIR__) . '/bootstrap.php';
 
 session_regenerate_id(true);
 
-if (strlen($_SESSION['alogin']) == 0) {
+if (strlen($_SESSION['alogin']) === 0) {
     header("Location: index.php");
 } else {
     echo "#, Name, Email, Gender, Phone, Designation \n";
