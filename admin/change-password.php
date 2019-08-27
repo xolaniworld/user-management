@@ -5,15 +5,12 @@ if(strlen($_SESSION['alogin']) === 0) {
     header('location:index.php');
 } else{
     if(isset($_POST['submit'])) {
-        $adminTransactions = new \Application\Admin\AdminTransaction(
-            new \Application\AdminGateway($dbh),
-            new \Application\Request(),
-            new \Application\Session(),
-            new \Application\Response()
-        );
-        $adminTransactions->submitChangePassword($_SESSION['alogin'], $_POST['password'], $_POST['newpassword']);
-        $msg = $adminTransactions->getMsg();
-        $error = $adminTransactions->getError();
+        $adminTransactions = new \Application\Admin\AdminTransaction(new \Application\AdminGateway($dbh));
+        if ($adminTransactions->submitChangePassword($_SESSION['alogin'], $_POST['password'], $_POST['newpassword'])) {
+            $msg = "Your Password succesfully changed";
+        } else {
+            $error =  "Your current password is not valid.";
+        }
     }
 ?>
 <!doctype html>

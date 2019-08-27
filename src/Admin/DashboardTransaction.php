@@ -3,8 +3,6 @@ namespace Application\Admin;
 
 use Application\DeletedUserGateway;
 use Application\NotificationGateway;
-use Application\Response;
-use Application\Session;
 use Application\UsersGateway;
 use Application\FeedbackGateway;
 

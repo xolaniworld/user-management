@@ -1,14 +1,14 @@
-<?php
+<?php declare(strict_types=1);
 
-
-namespace Application;
+namespace Application\Admin;
 
 
 use PDO;
+use Application\AbstractGateway;
 
 class AdminGateway extends AbstractGateway
 {
-    public function countByUsernameAndPassword($username, $password)
+    public function countByUsernameAndPassword(string $username, string $password):int
     {
         $sql = "SELECT UserName,Password FROM admin WHERE UserName=:username and Password=:password";
         $query = $this->pdo->prepare($sql);
@@ -18,7 +18,7 @@ class AdminGateway extends AbstractGateway
         return $query->rowCount();
     }
 
-    public function countPasswordByPasswordAndUsername($username, $password)
+    public function countPasswordByPasswordAndUsername(string $username, string $password):int
     {
         $sql = "SELECT Password FROM admin WHERE UserName=:username and Password=:password";
         $query = $this->pdo->prepare($sql);

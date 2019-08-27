@@ -4,7 +4,11 @@ include dirname(__DIR__) . '/bootstrap.php';
 if (strlen($_SESSION['alogin']) === 0) {
     header('location:index.php');
 } else {
-?>
+    $deletedUserGateway = new \Application\DeletedUserGateway($dbh);
+    $transaction = new \Application\DeletedUsersTransaction($deletedUserGateway);
+    list($results, $count) = $transaction->findAllDeletedUsers();
+    $cnt = 1;
+    ?>
 <!doctype html>
 <html lang="en" class="no-js">
 <head>
@@ -85,12 +89,6 @@ if (strlen($_SESSION['alogin']) === 0) {
 									</thead>
 									
 									<tbody>
-
-<?php
-$deletedUserGateway = new \Application\DeletedUserGateway($dbh);
-list($results, $count) = $deletedUserGateway->findAll();
-$cnt=1;
-?>
 <?php if($count > 0) : ?>
 <?php foreach($results as $result): ?>
 										<tr>

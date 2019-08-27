@@ -1,36 +1,35 @@
-<?php
+<?php declare(strict_types=1);
+
 include dirname(__DIR__) . '/bootstrap.php';
 
 if (strlen($_SESSION['alogin']) == 0) {
     header('location:index.php');
 } else {
+    $userListTransaction = new \Application\UserListTransaction(
+        new \Application\UsersGateway($dbh),
+        new \Application\DeletedUserGateway($dbh)
+    );
+
     if (isset($_GET['del']) && isset($_GET['name'])) {
         $id = $_GET['del'];
         $name = $_GET['name'];
-
-        $usersGateway = new \Application\UsersGateway($dbh);
-        $usersGateway->deleteById($id);
-
-        $deletedUserGateway = new \Application\DeletedUserGateway($dbh);
-        $deletedUserGateway->insertByName($name);
-
+        $userListTransaction->deleteUserAndUpdateDeletedUsers($id, $name);
         $msg = "Data Deleted successfully";
     }
 
     if (isset($_REQUEST['unconfirm'])) {
         $aeid = intval($_GET['unconfirm']);
-        $memstatus = 1;
-        $usersGateway->updateStatusById($memstatus, $aeid);
+        $userListTransaction->userConfirmed($aeid);
         $msg = "Changes Sucessfully";
-
     }
 
     if (isset($_REQUEST['confirm'])) {
         $aeid = intval($_GET['confirm']);
-        $memstatus = 0;
-        $usersGateway->updateStatusById($memstatus, $aeid);
+        $userListTransaction->userUnconfirmed($aeid);
         $msg = "Changes Sucessfully";
     }
+
+    list($results, $rowCount) = $userListTransaction->findAllUsers();
 ?>
 <!doctype html>
 <html lang="en" class="no-js">
@@ -121,8 +120,6 @@ if (strlen($_SESSION['alogin']) == 0) {
 									<tbody>
 
 <?php
-$usersGateway = new \Application\UsersGateway($dbh);
-list($results, $rowCount) = $usersGateway->findAllUsers();
 $cnt=1;
 if($rowCount> 0)
 {
