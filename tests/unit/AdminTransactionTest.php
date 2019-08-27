@@ -16,48 +16,43 @@ class AdminTransactionTest extends \PHPUnit\Framework\TestCase
 
     }
 
-    public function testSubmitChangePassword()
+    public function test_can_login_if_at_least_one_user_is_found()
     {
-        $this->gateway->countByUsernameAndPassword('admin', md5('password'))->willReturn(1);
+        $this->gateway->countByUsernameAndPassword('username', md5('password'))->willReturn(1);
 
         $this->assertTrue(
-            $this->transaction->submitLogin('admin', 'password')
+            $this->transaction->submitLogin('username', 'password')
         );
     }
 
-    public function testLoginFalse()
+    public function test_Login_fails_when_zero_users_are_founds_when_submitting_username_and_password()
     {
-        $this->gateway->countByUsernameAndPassword('admin', md5('wrong-password'))->willReturn(0);
+        $this->gateway->countByUsernameAndPassword('username', md5('wrong-password'))->willReturn(0);
 
         $this->assertFalse(
-            $this->transaction->submitLogin('admin', 'wrong-password')
+            $this->transaction->submitLogin('username', 'wrong-password')
         );
     }
 
-    public function testChangePassword()
+    public function test_submitChangePassword_returns_true_when_matching_username_password_is_found()
     {
-        $username = 'admin';
-        $oldPassword = 'secret';
-        $newPassword = 'secret2';
+        //user is found returns 1
+        $this->gateway->countPasswordByPasswordAndUsername('username', md5('password'))->willReturn(1);
 
-        $this->gateway->countPasswordByPasswordAndUsername($username, md5($oldPassword))->willReturn(1);
-        $this->gateway->updatePasswordByUsername($username, md5($newPassword))->willReturn(0);
+        $this->gateway->updatePasswordByUsername('username', md5('password2'))->willReturn('void');
 
         $this->assertTrue(
-            $this->transaction->submitChangePassword($username, $oldPassword, $newPassword)
+            $this->transaction->submitChangePassword('username', 'password', 'password2')
         );
     }
 
-    public function testChangePasswordFalse()
+    public function test_submitChangePassword_returns_false_when_username_with_Matching_Password_Is_Not_Found()
     {
-        $username = 'admin';
-        $oldPassword = 'secret';
-        $newPassword = 'secret2';
-
-        $this->gateway->countPasswordByPasswordAndUsername($username, md5($oldPassword))->willReturn(0);
+        // user not found returns 0
+        $this->gateway->countPasswordByPasswordAndUsername('username', md5('password'))->willReturn(0);
 
         $this->assertFalse(
-            $this->transaction->submitChangePassword($username, $oldPassword, $newPassword)
+            $this->transaction->submitChangePassword('username', 'password', 'password2')
         );
     }
 
