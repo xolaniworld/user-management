@@ -12,18 +12,16 @@ if (strlen($_SESSION['alogin']) == 0) {
     if (isset($_POST['submit'])) {
         $reciver = $_POST['email'];
         $message = $_POST['message'];
-        $notitype = 'Send Message';
-        $sender = 'Admin';
-
         $notificationGateway = new \Application\NotificationGateway($dbh);
-        $notificationGateway->insertUserReciverType($sender, $reciver, $notitype);
-
         $feedbackGateway = new \Application\FeedbackGateway($dbh);
-        $feedbackGateway->insertByUserReciverDescription($sender, $reciver, $message);
+        $sendReplyTransaction = new \Application\SendReplyTransaction(
+            $notificationGateway,
+            $feedbackGateway
+        );
+        $sendReplyTransaction->notifyAdmin($_POST['email'], $_POST['message']);
         $msg = "Feedback Send";
     }
 ?>
-
 <!doctype html>
 <html lang="en" class="no-js">
 
@@ -95,9 +93,7 @@ $cnt = 1;
                             <h2>Reply Feedback</h2>
 								<div class="panel panel-default">
 									<div class="panel-heading">Edit Info</div>
-<?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } 
-				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
-
+                                    <?php include INCLUDES_DIR . 'alerts.php'; ?>
 									<div class="panel-body">
 <form method="post" class="form-horizontal" enctype="multipart/form-data">
 

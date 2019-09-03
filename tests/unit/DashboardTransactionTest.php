@@ -31,7 +31,7 @@ class DashboardTransactionTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testDashboard()
+    public function test_dashboard()
     {
         $this->usersGateway->countIds()->willReturn(2);
         $this->feedbackGateway->countByReciver(Argument::type('string'))->willReturn(4);

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Application;
 
@@ -74,7 +74,7 @@ class UsersGateway extends AbstractGateway
         $query->bindParam(':designation', $designation, PDO::PARAM_STR);
         $query->bindParam(':image', $image, PDO::PARAM_STR);
         $query->bindParam(':idedit', $idedit, PDO::PARAM_STR);
-        $query->execute();
+        return $query->execute();
     }
 
     public function updatePasswordByUsername($newpassword, $username)

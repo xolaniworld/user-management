@@ -3,9 +3,9 @@ include dirname(__DIR__) . '/bootstrap.php';
 
 if(strlen($_SESSION['alogin']) === 0) {
     header('location:index.php');
-} else{
+} else {
     if(isset($_POST['submit'])) {
-        $adminTransactions = new \Application\Admin\AdminTransaction(new \Application\AdminGateway($dbh));
+        $adminTransactions = new \Application\Admin\AdminTransaction(new \Application\Admin\AdminGateway($dbh));
         if ($adminTransactions->submitChangePassword($_SESSION['alogin'], $_POST['password'], $_POST['newpassword'])) {
             $msg = "Your Password succesfully changed";
         } else {
@@ -92,13 +92,7 @@ if(strlen($_SESSION['alogin']) === 0) {
                                     <div class="panel-heading">Form fields</div>
                                     <div class="panel-body">
                                         <form method="post" name="chngpwd" class="form-horizontal" onSubmit="return valid();">
-                                            <?php if ($error): ?>
-                                                <div class="errorWrap"><strong>ERROR</strong>
-                                                :<?= htmlentities($error); ?> </div>
-                                            <?php elseif ($msg): ?>
-                                                <div class="succWrap"><strong>SUCCESS</strong>
-                                                :<?= htmlentities($msg); ?> </div>
-                                            <?php endif; ?>
+                                            <?php include INCLUDES_DIR . 'alerts.php'; ?>
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label">Current Password</label>
                                                 <div class="col-sm-8">

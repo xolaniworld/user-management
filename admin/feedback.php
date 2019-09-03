@@ -6,9 +6,25 @@ if (strlen($_SESSION['alogin']) == 0) {
 } else {
     $userGateway = new \Application\UsersGateway($dbh);
     $request = new \Application\Request();
-    $filesystem = new \Application\Filesystem();
+    $filesystem = new \Application\Filesystem(IMAGES_DIR);
     $usersTransaction = new Application\Users\UsersTransactions($userGateway, $request, $filesystem);
-    $msg = $usersTransaction->updateFeedback();
+//    $msg = $usersTransaction->updateFeedback();
+    if(isset($_GET['del'])) {
+        $usersTransaction->deleteUserById();
+        $msg="Data Deleted successfully";
+    }
+
+    if(isset($_REQUEST['unconfirm'])) {
+        $usersTransaction->updateStatusUnConfirmed();
+
+        $msg="Changes Sucessfully";
+    }
+
+    if(isset($_REQUEST['confirm'])) {
+        $usersTransaction->updateStatusConfirmed();
+
+        $msg="Changes Sucessfully";
+    }
 ?>
 <!doctype html>
 <html lang="en" class="no-js">
@@ -79,9 +95,8 @@ if (strlen($_SESSION['alogin']) == 0) {
 						<div class="panel panel-default">
 							<div class="panel-heading">List Users</div>
 							<div class="panel-body">
-							<?php if($error){?><div class="errorWrap" id="msgshow"><?php echo htmlentities($error); ?> </div><?php } 
-				else if($msg){?><div class="succWrap" id="msgshow"><?php echo htmlentities($msg); ?> </div><?php }?>
-								<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                                <?php include INCLUDES_DIR . 'alerts_mgshow.php'; ?>
+                                <table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 									<thead>
 										<tr>
 										       <th>#</th>
@@ -98,19 +113,20 @@ if (strlen($_SESSION['alogin']) == 0) {
 <?php 
 $reciver = 'Admin';
 $feedbackGateway = new \Application\FeedbackGateway($dbh);
-list($results, $count) = $feedbackGateway->findByReciver($reciver);
+$feedbackTransaction = new \Application\FeedbckTransation($feedbackGateway);
+$feedbackTransaction->finAdmin();
+$results = $feedbackTransaction->getFeedback();
+$count = $feedbackTransaction->getTotal();
 $cnt=1;
-if($count > 0)
-{
+if($count > 0) {
 foreach($results as $result)
-{				?>	
+{?>
 										<tr>
 											<td><?php echo htmlentities($cnt);?></td>
                                             <td><?php echo htmlentities($result->sender);?></td>
 											<td><?php echo htmlentities($result->title);?></td>
                                             <td><?php echo htmlentities($result->feedbackdata);?></td>
                                             <td><a href="../attachment/<?php echo htmlentities($result->attachment);?>" ><?php echo htmlentities($result->attachment);?></a></td>
-											
 <td>
 <a href="sendreply.php?reply=<?php echo $result->sender;?>">&nbsp; <i class="fa fa-mail-reply"></i></a>&nbsp;&nbsp;
 </td>
@@ -123,11 +139,9 @@ foreach($results as $result)
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
-
 	<!-- Loading Scripts -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap-select.min.js"></script>

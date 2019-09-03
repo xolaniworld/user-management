@@ -33,7 +33,7 @@ class Request
 
     public function requestIsset($name)
     {
-        return $_REQUEST[$name];
+        return isset($_REQUEST[$name]);
     }
 
     public function queryIsset($name)
@@ -43,7 +43,7 @@ class Request
 
     public function getQuery($name)
     {
-        return $_GET[$name];
+        return $this->filter($_GET[$name]);
     }
 
     public function getFile($name)
@@ -53,7 +53,7 @@ class Request
 
     public function getPost($name)
     {
-        return $_POST[$name];
+        return $this->filter($_POST[$name]);
     }
 
     public function postIsset($name)
@@ -69,5 +69,10 @@ class Request
     public function getRequestMethod()
     {
         return $_SERVER['REQUEST_METHOD'];
+    }
+
+    private function filter($string)
+    {
+        return strip_tags($string);
     }
 }

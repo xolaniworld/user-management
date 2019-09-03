@@ -6,6 +6,11 @@ namespace Application;
 
 class Session
 {
+    public static function start()
+    {
+        session_start();
+    }
+
     public function get($name)
     {
         return $_SESSION[$name];

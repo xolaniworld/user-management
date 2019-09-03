@@ -1,5 +1,4 @@
-<?php declare(strict_types=1);
-
+<?php
 include dirname(__DIR__) . '/bootstrap.php';
 
 if (strlen($_SESSION['alogin']) == 0) {
@@ -18,14 +17,12 @@ if (strlen($_SESSION['alogin']) == 0) {
     }
 
     if (isset($_REQUEST['unconfirm'])) {
-        $aeid = intval($_GET['unconfirm']);
-        $userListTransaction->userConfirmed($aeid);
+        $userListTransaction->userConfirmed($_GET['unconfirm']);
         $msg = "Changes Sucessfully";
     }
 
     if (isset($_REQUEST['confirm'])) {
-        $aeid = intval($_GET['confirm']);
-        $userListTransaction->userUnconfirmed($aeid);
+        $userListTransaction->userUnconfirmed($_GET['confirm']);
         $msg = "Changes Sucessfully";
     }
 
@@ -100,8 +97,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 						<div class="panel panel-default">
 							<div class="panel-heading">List Users</div>
 							<div class="panel-body">
-							<?php if($error){?><div class="errorWrap" id="msgshow"><?php echo htmlentities($error); ?> </div><?php } 
-				else if($msg){?><div class="succWrap" id="msgshow"><?php echo htmlentities($msg); ?> </div><?php }?>
+                                <?php include INCLUDES_DIR . 'alerts_mgshow.php'; ?>
 								<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 									<thead>
 										<tr>
@@ -126,7 +122,7 @@ if($rowCount> 0)
 foreach($results as $result)
 {				?>	
 										<tr>
-											<td><?php echo htmlentities($cnt);?></td>
+											<td><?php echo htmlentities((string) $cnt);?></td>
 											<td><img src="../images/<?php echo htmlentities($result->image);?>" style="width:50px; border-radius:50%;"/></td>
                                             <td><?php echo htmlentities($result->name);?></td>
                                             <td><?php echo htmlentities($result->email);?></td>

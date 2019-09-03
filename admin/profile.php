@@ -3,15 +3,12 @@ include dirname(__DIR__) . '/bootstrap.php';
 if (strlen($_SESSION['alogin']) == 0) {
     header('location:index.php');
 } else {
+    $adminGateway = new \Application\Admin\AdminGateway($dbh);
+    $adminTransaction = new \Application\Admin\AdminTransaction($adminGateway);
     if (isset($_POST['submit'])) {
         $name = $_POST['name'];
         $email = $_POST['email'];
-
-        $sql = "UPDATE admin SET username=(:name), email=(:email)";
-        $query = $dbh->prepare($sql);
-        $query->bindParam(':name', $name, PDO::PARAM_STR);
-        $query->bindParam(':email', $email, PDO::PARAM_STR);
-        $query->execute();
+        $adminTransaction->submitUpdateAdminUpdateUsernameAndPassword($name, $email);
         $msg = "Information Updated Successfully";
     }
 ?>
@@ -68,13 +65,10 @@ if (strlen($_SESSION['alogin']) == 0) {
 
 <body>
 <?php
-		$sql = "SELECT * from admin;";
-		$query = $dbh -> prepare($sql);
-		$query->execute();
-		$result=$query->fetch(PDO::FETCH_OBJ);
-		$cnt=1;	
+    $result = $adminTransaction->getAll();
+    $cnt=1;
+    include('includes/header.php');
 ?>
-	<?php include('includes/header.php');?>
 	<div class="ts-main-content">
 	<?php include('includes/leftbar.php');?>
 		<div class="content-wrapper">
@@ -86,9 +80,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 							<div class="col-md-12">
 								<div class="panel panel-default">
 									<div class="panel-heading">Edit Info</div>
-<?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } 
-				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
-
+                                    <?php include INCLUDES_DIR . 'alerts.php'; ?>
 									<div class="panel-body">
 <form method="post" class="form-horizontal" enctype="multipart/form-data">
 <div class="form-group">
@@ -139,4 +131,4 @@ if (strlen($_SESSION['alogin']) == 0) {
 	</script>
 </body>
 </html>
-<?php } ?>
+<?php }

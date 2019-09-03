@@ -15,12 +15,12 @@ class DeletedUserGateway extends \PHPUnit\Framework\TestCase
         $this->insertTestUser();
     }
 
-    public function testCountById()
+    public function test_countById()
     {
         $this->assertGreaterThan(0, $this->gateway->countById());
     }
 
-    public function testInsertByName()
+    public function test_InsertByName()
     {
         $this->gateway->insertByName('foo-1');
 
@@ -28,7 +28,7 @@ class DeletedUserGateway extends \PHPUnit\Framework\TestCase
         $this->assertEquals('foo-1', $sth->fetch()->email);
     }
 
-    public function testFindAll()
+    public function test_findAll()
     {
         list($results, $count) = $this->gateway->findAll();
         $this->assertIsArray($results);

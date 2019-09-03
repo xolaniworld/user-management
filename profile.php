@@ -2,36 +2,15 @@
 
 include __DIR__ . '/bootstrap.php';
 
-if(strlen($_SESSION['alogin'])==0)
-	{	
+if(strlen($_SESSION['alogin']) === 0) {
 header('location:index.php');
-}
-else{
-	
-if(isset($_POST['submit']))
-  {	
-	$file = $_FILES['image']['name'];
-	$file_loc = $_FILES['image']['tmp_name'];
-	$folder="images/";
-	$new_file_name = strtolower($file);
-	$final_file=str_replace(' ','-',$new_file_name);
-	
-	$name=$_POST['name'];
-	$email=$_POST['email'];
-	$mobileno=$_POST['mobile'];
-	$designation=$_POST['designation'];
-	$idedit=$_POST['editid'];
-	$image=$_POST['image'];
-
-	if(move_uploaded_file($file_loc,$folder.$final_file))
-		{
-			$image=$final_file;
-		}
-
-	$userGateway = new \Application\UsersGateway($dbh);
-	$userGateway->updateById($name, $email, $mobileno, $designation, $image, $idedit);
-	$msg="Information Updated Successfully";
-}    
+} else {
+    if(isset($_POST['submit'])) {
+	    $userGateway = new \Application\UsersGateway($dbh);
+        $usersTransaction = new \Application\Users\UsersTransactions($userGateway, new \Application\Request(), new \Application\Filesystem(IMAGES_DIR));
+        $usersTransaction->submitEditFrontEnd();
+	    $msg = "Information Updated Successfully";
+    }
 ?>
 
 <!doctype html>

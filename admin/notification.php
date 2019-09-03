@@ -4,24 +4,20 @@ include __DIR__ . '/../bootstrap.php';
 $session = new \Application\Session();
 $request = new \Application\Request();
 
-if($session->get('alogin') == 0 ) {
+if(strlen($_SESSION['alogin']) === 0) {
     header('location:index.php');
 } else {
-    $adminGateway = new \Application\AdminGateway($dbh);
-    $adminTransaction = new \Application\AdminTransaction($adminGateway, $request);
-    $adminTransaction->update();
+    $adminGateway = new \Application\Admin\AdminGateway($dbh);
+    $adminTransaction = new \Application\Admin\AdminTransaction($adminGateway);
     
-if(isset($_POST['submit']))
-  {	
-	$name=$_POST['name'];
-	$email=$_POST['email'];
-
-    $adminGateway = new \Application\AdminGateway($dbh);
-    $adminGateway->updateUsernameAndEmail($name, $email);
+if($request->postIsset('submit')) {
+    $adminTransaction->submitUpdateAdminUpdateUsernameAndPassword(
+        $request->getPost('name'),
+        $request->getPost('email')
+    );
 	$msg="Information Updated Successfully";
 }    
 ?>
-
 <!doctype html>
 <html lang="en" class="no-js">
 
@@ -89,15 +85,15 @@ if(isset($_POST['submit']))
 								<div class="panel panel-default">
 									<div class="panel-heading">Notification</div>
 									   <div class="panel-body">
-<?php 
-$reciver = 'Admin';
+<?php
 $notificationGateway = new \Application\NotificationGateway($dbh);
-list($results, $count) = $notificationGateway->findByNotiReciver($reciver);
+$notificationTransaction = new \Application\NotificationTransaction($notificationGateway);
+$notificationTransaction->findAdminNotifications();
+$results = $notificationTransaction->getNotications();
+$count = $notificationTransaction->getTotal();
 $cnt=1;
-if($count > 0)
-{
-foreach($results as $result)
-{				?>	
+if($count > 0) {
+foreach($results as $result) {	?>
         <h5 style="background:#ededed;padding:20px;"><i class="fa fa-bell text-primary"></i>&nbsp;&nbsp;<b class="text-primary"><?php echo htmlentities($result->time);?></b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlentities($result->notiuser);?> -----> <?php echo htmlentities($result->notitype);?></h5>
                        <?php $cnt++; }} ?>
                                         </div>

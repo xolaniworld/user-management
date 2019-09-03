@@ -7,12 +7,25 @@ use PDO;
 abstract class AbstractGateway
 {
     protected $pdo;
-    protected $table;
+    protected $table = null;
     protected $fields;
 
     public function __construct(PDO $pdo)
     {
         $this->pdo = $pdo;
+    }
+
+    public function selectAll()
+    {
+        if ($this->table === null) {
+            throw new \Exception('$table required');
+        }
+        $sql = "SELECT * from {$this->table};";
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+        $result=$query->fetch(PDO::FETCH_OBJ);
+
+        return $result;
     }
 
     protected function insert(array $data)
@@ -27,11 +40,11 @@ abstract class AbstractGateway
         $values = implode(', ', $values);
 
         if ($this->table === null) {
-            throw new Exception('table required');
+            throw new \Exception('table required');
         }
 
         $sth = $this->pdo->prepare("insert into {$this->table}({$fields}) values({$values})");
 
-        $sth->execute($data);
+        return $sth->execute($data);
     }
 }

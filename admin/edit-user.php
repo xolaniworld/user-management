@@ -1,16 +1,24 @@
 <?php
 include __DIR__ . '/../bootstrap.php';
 
-if (strlen($_SESSION['alogin']) == 0) {
+if (strlen($_SESSION['alogin']) === 0) {
     header('location:index.php');
 } else {
+    if(isset($_GET['edit'])) {
+        $editid = $_GET['edit'];
+    }
+
     $usersGateway = new \Application\UsersGateway($dbh);
     $request = new \Application\Request();
-    $filesystem = new \Application\Filesystem();
+    $filesystem = new \Application\Filesystem(IMAGES_DIR);
     $usersTransactions = new \Application\Users\UsersTransactions($usersGateway, $request, $filesystem);
-    $msg = $usersTransactions->edit();
-    ?>
-    <!doctype html>
+
+    if(isset($_POST['submit'])) {
+        $usersTransactions->submitEdit();
+        $msg = "Information Updated Successfully";
+    }
+?>
+<!doctype html>
     <html lang="en" class="no-js">
 
     <head>
@@ -64,8 +72,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 
     <body>
     <?php
-    $editid = $request->getQuery('edit');
-    $result = $usersGateway->findById($editid);
+    $result = $usersTransactions->findByUserId($_GET['edit']);
     $cnt = 1;
     ?>
     <?php include('includes/header.php'); ?>
@@ -80,12 +87,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                             <div class="col-md-12">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">Edit Info</div>
-                                    <?php if ($error) { ?>
-                                        <div class="errorWrap"><strong>ERROR</strong>
-                                        :<?php echo htmlentities($error); ?> </div><?php } else if ($msg) { ?>
-                                        <div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?>
-                                        </div><?php } ?>
-
+                                    <?php include INCLUDES_DIR . 'alerts.php'; ?>
                                     <div class="panel-body">
                                         <form method="post" class="form-horizontal" enctype="multipart/form-data" name="imgform">
                                             <div class="form-group">
@@ -149,16 +151,11 @@ if (strlen($_SESSION['alogin']) == 0) {
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
-
     <!-- Loading Scripts -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap-select.min.js"></script>
@@ -179,4 +176,4 @@ if (strlen($_SESSION['alogin']) == 0) {
 
     </body>
     </html>
-<?php } ?>
+<?php }

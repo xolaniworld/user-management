@@ -16,6 +16,7 @@ class AdminGatewayTest extends \PHPUnit\Framework\TestCase
 
         $query = $this->prophet->prophesize('PDOStatement');
         $this->pdo->prepare(Argument::type('string'))->willReturn($query->reveal());
+
         $query->bindParam(Argument::type('string'), Argument::type('string'), Argument::type('int'))->willReturn('void');
         $query->execute()->willReturn(true);
         $query->rowCount()->willReturn(1);
@@ -36,13 +37,15 @@ class AdminGatewayTest extends \PHPUnit\Framework\TestCase
         $pdo = $this->prophet->prophesize('PDO');
 
         $gateway = new \Application\Admin\AdminGateway($pdo->reveal());
-
         $query = $this->prophet->prophesize('PDOStatement');
-        $this->pdo->prepare(Argument::type('string'))->willReturn($query->reveal());
+        $pdo->prepare(Argument::type('string'))->willReturn($query->reveal());
+
         $query->bindParam(':username', 'iamuser', Argument::type('int'))->willReturn('void');
         $query->bindParam(':newpassword', 'secret', Argument::type('int'))->willReturn('void');
+        $query->execute()->willReturn(true);
 
-        $gateway->updatePasswordByUsername('iamuser', 'secret');
+        //this must pass
+        $this->assertTrue($gateway->updatePasswordByUsername('iamuser', 'secret'));
     }
 
     public function tearDown(): void

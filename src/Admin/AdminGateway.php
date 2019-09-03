@@ -8,6 +8,8 @@ use Application\AbstractGateway;
 
 class AdminGateway extends AbstractGateway
 {
+    protected $table = 'admin';
+
     public function countByUsernameAndPassword(string $username, string $password):int
     {
         $sql = "SELECT UserName,Password FROM admin WHERE UserName=:username and Password=:password";
@@ -34,10 +36,10 @@ class AdminGateway extends AbstractGateway
         $chngpwd1 = $this->pdo->prepare($con);
         $chngpwd1->bindParam(':username', $username, PDO::PARAM_STR);
         $chngpwd1->bindParam(':newpassword', $newpassword, PDO::PARAM_STR);
-        $chngpwd1->execute();
+        return $chngpwd1->execute();
     }
 
-    public function updateUsernameAndEmail($name, $email)
+    public function updateAdminUsernameAndEmail($name, $email)
     {
         $sql="UPDATE admin SET username=(:name), email=(:email)";
         $query = $this->pdo->prepare($sql);

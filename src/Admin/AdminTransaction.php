@@ -2,15 +2,11 @@
 
 namespace Application\Admin;
 
-
 use Application\Admin\AdminGateway;
 
 class AdminTransaction
 {
-
     private $adminGateway;
-    private $error = '';
-    private $msg = '';
 
     public function __construct(AdminGateway $adminGateway)
     {
@@ -32,5 +28,15 @@ class AdminTransaction
             return true;
         }
         return false;
+    }
+
+    public function submitUpdateAdminUpdateUsernameAndPassword($name, $email)
+    {
+        $this->adminGateway->updateAdminUsernameAndEmail($name, $email);
+    }
+
+    public function getAll()
+    {
+        return $this->adminGateway->selectAll();
     }
 }

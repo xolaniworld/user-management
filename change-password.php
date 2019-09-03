@@ -1,5 +1,7 @@
 <?php
 
+use Application\Request;
+
 include __DIR__ . '/bootstrap.php';
 
 if (strlen($_SESSION['alogin']) == 0) {
@@ -7,12 +9,13 @@ if (strlen($_SESSION['alogin']) == 0) {
 } else {
 // Code for change password	
     if (isset($_POST['submit'])) {
-        $password = md5($_POST['password']);
-        $newpassword = md5($_POST['newpassword']);
-        $username = $_SESSION['alogin'];
         $usersGateway = new \Application\UsersGateway($dbh);
-        if ($usersGateway->countByUsernameAndPassword($username, $password) > 0) {
-            $usersGateway->updatePasswordByUsername($newpassword, $username);
+        $usersTransactions = new \Application\Users\UsersTransactions(
+                $usersGateway,
+                new Request(),
+                new \Application\Filesystem(IMAGES_DIR)
+        );
+        if ($usersTransactions->changePassword($_SESSION['alogin'], $_POST['password'], $_POST['newpassword'])) {
             $msg = "Your Password succesfully changed";
         } else {
             $error = "Your current password is not valid.";
@@ -177,4 +180,4 @@ return true;
 </body>
 
 </html>
-<?php } ?>
+<?php }
