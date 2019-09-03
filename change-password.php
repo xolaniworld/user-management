@@ -4,7 +4,7 @@ use Application\Request;
 
 include __DIR__ . '/bootstrap.php';
 
-if (strlen($_SESSION['alogin']) == 0) {
+if(\Application\Authentication::isLoggedIn()) {
     header('location:index.php');
 } else {
 // Code for change password	

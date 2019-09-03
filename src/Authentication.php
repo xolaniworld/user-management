@@ -5,7 +5,7 @@ namespace Application;
 
 class Authentication
 {
-    public static function adminIsLogin()
+    public static function isLoggedIn()
     {
         if (! isset($_SESSION['alogin'])) {
             return false;
