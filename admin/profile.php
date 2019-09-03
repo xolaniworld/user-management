@@ -1,6 +1,6 @@
 <?php
 include dirname(__DIR__) . '/bootstrap.php';
-if (strlen($_SESSION['alogin']) == 0) {
+if(\Application\Authentication::adminIsLogin()) {
     header('location:index.php');
 } else {
     $adminGateway = new \Application\Admin\AdminGateway($dbh);

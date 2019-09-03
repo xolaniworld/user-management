@@ -24,7 +24,6 @@ endif; ?>
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<?php  ?>
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
