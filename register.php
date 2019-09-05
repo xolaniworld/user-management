@@ -3,42 +3,19 @@
 include __DIR__ . '/bootstrap.php';
 
 if (isset($_POST['submit'])) {
-
-    $file = $_FILES['image']['name'];
-    $file_loc = $_FILES['image']['tmp_name'];
-    $folder = "images/";
-    $new_file_name = strtolower($file);
-    $final_file = str_replace(' ', '-', $new_file_name);
-
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $password = md5($_POST['password']);
-    $gender = $_POST['gender'];
-    $mobileno = $_POST['mobileno'];
-    $designation = $_POST['designation'];
-
-    if (move_uploaded_file($file_loc, $folder . $final_file)) {
-        $image = $final_file;
-    }
-    $notitype = 'Create Account';
-    $reciver = 'Admin';
-    $sender = $email;
-
     $notificationGateway = new \Application\NotificationGateway($dbh);
-    $notificationGateway->insertUserReciverType($sender, $reciver, $notitype);
-
     $usersGateway = new \Application\UsersGateway($dbh);
-    $success = $usersGateway->insertUser($name, $email, $password, $gender, $mobileno, $designation, $image, 1);
-    if ($success) {
-        echo "<script type='text/javascript'>alert('Registration Sucessfull!');</script>";
-        echo "<script type='text/javascript'> document.location = 'index.php'; </script>";
-    } else {
+    $registerTransaction = new \Application\RegisterTransaction($usersGateway, $notificationGateway, new \Application\Filesystem(IMAGES_DIR));
+    $success = $registerTransaction->submitRegister(new \Application\Request());
+
+    if ($success) { ?>
+        <script type='text/javascript'>alert('Registration Sucessfull!');</script>
+        <script type='text/javascript'> document.location = 'index.php'; </script>
+    <?php } else {
         $error = "Something went wrong. Please try again";
     }
-
 }
 ?>
-
 <!doctype html>
 <html lang="en" class="no-js">
 
@@ -95,7 +72,6 @@ if (isset($_POST['submit'])) {
                             <?= $error ?>
                         </div>
                         <?php endif ?>
-
                         <div class="hr-dashed"></div>
 						<div class="well row pt-2x pb-3x bk-light text-center">
                          <form method="post" class="form-horizontal" enctype="multipart/form-data" name="regform" onSubmit="return validate();">

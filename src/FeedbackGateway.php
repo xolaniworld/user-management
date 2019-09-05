@@ -12,7 +12,7 @@ class FeedbackGateway extends AbstractGateway
 
     public function insertSenderReciverTitleFeedbackAttachment($user, $reciver, $title, $description, $attachment)
     {
-        $this->insert([
+        return $this->insert([
             'sender' => $user,
             'reciver' => $reciver,
             'title' => $title,

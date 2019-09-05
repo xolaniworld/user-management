@@ -3,7 +3,7 @@ include dirname(__DIR__) . '/bootstrap.php';
 
 session_regenerate_id(true);
 
-if(\Application\Authentication::isLoggedIn()) {
+if(\Application\Authentication::isNotLoggedIn()) {
     header("Location: index.php");
 } else {
     echo "#, Name, Email, Gender, Phone, Designation \n";

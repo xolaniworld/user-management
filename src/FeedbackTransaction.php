@@ -4,7 +4,7 @@
 namespace Application;
 
 
-class FeedbckTransation
+class FeedbackTransaction
 {
     private $feedbackGateway;
     private $feedback;
@@ -15,7 +15,7 @@ class FeedbckTransation
         $this->feedbackGateway = $feedbackGateway;
     }
 
-    public function finAdmin()
+    public function findAdmin()
     {
         $reciver = 'Admin';
         list($this->feedback, $this->total) = $this->feedbackGateway->findByReciver($reciver);

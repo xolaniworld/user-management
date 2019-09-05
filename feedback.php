@@ -1,96 +1,26 @@
 <?php
 include __DIR__ . '/bootstrap.php';
 
-if(\Application\Authentication::isLoggedIn()) {
-header('location:index.php');
-}
-else{
-	
-if(isset($_POST['submit']))
-  {	
-	$file = $_FILES['attachment']['name'];
-	$file_loc = $_FILES['attachment']['tmp_name'];
-	$folder="attachment/";
-	$new_file_name = strtolower($file);
-	$final_file=str_replace(' ','-',$new_file_name);
-	
-	$title=$_POST['title'];
-    $description=$_POST['description'];
-	$user=$_SESSION['alogin'];
-	$reciver= 'Admin';
-    $notitype='Send Feedback';
-    $attachment=' ';
+if(\Application\Authentication::isNotLoggedIn()) {
+    header('location:index.php');
+    exit;
+} else {
+    if(isset($_POST['submit'])) {
+	    $notificationGateway = new \Application\NotificationGateway($dbh);
+	    $feedbackGateway = new \Application\FeedbackGateway($dbh);
+	    $frontendFeedbackTransaction = new \Application\FrontendFeedbackTransaction($feedbackGateway, $notificationGateway, new \Application\Filesystem(ATTACHMENT_DIR));
+	    $frontendFeedbackTransaction->submitFeedback($_POST['title'], $_POST['description'], $_SESSION['alogin'], $_FILES['attachment']);
+	    $msg = "Feedback Send";
+    }
 
-	if(move_uploaded_file($file_loc,$folder.$final_file))
-		{
-			$attachment=$final_file;
-		}
-	$notireciver = 'Admin';
-	$notificationGateway = new \Application\NotificationGateway($dbh);
-	$notificationGateway->insertUserReciverType($user, $notireciver, $notitype);
-
-	$feedbackGateway = new \Application\FeedbackGateway($dbh);
-	$feedbackGateway->insertSenderReciverTitleFeedbackAttachment($user, $reciver, $title, $description, $attachment);
-	$msg="Feedback Send";
-}    
+    $headerTitle = 'Feedback';
 ?>
-
-<!doctype html>
-<html lang="en" class="no-js">
-
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<meta name="theme-color" content="#3e454c">
-	
-	<title>Edit Profile</title>
-
-	<!-- Font awesome -->
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<!-- Sandstone Bootstrap CSS -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<!-- Bootstrap Datatables -->
-	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
-	<!-- Bootstrap social button library -->
-	<link rel="stylesheet" href="css/bootstrap-social.css">
-	<!-- Bootstrap select -->
-	<link rel="stylesheet" href="css/bootstrap-select.css">
-	<!-- Bootstrap file input -->
-	<link rel="stylesheet" href="css/fileinput.min.css">
-	<!-- Awesome Bootstrap checkbox -->
-	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
-	<!-- Admin Stye -->
-	<link rel="stylesheet" href="css/style.css">
-
-	<script type= "text/javascript" src="../vendor/countries.js"></script>
-	<style>
-	.errorWrap {
-    padding: 10px;
-    margin: 0 0 20px 0;
-	background: #dd3d36;
-	color:#fff;
-    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-}
-.succWrap{
-    padding: 10px;
-    margin: 0 0 20px 0;
-	background: #5cb85c;
-	color:#fff;
-    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-}
-		</style>
-</head>
-<body>
 <?php
 $usersGateway = new \Application\UsersGateway($dbh);
 $result = $usersGateway->findAll();
 		$cnt=1;	
 ?>
+	<?php include('includes/html_header.php');?>
 	<?php include('includes/header.php');?>
 	<div class="ts-main-content">
 	<?php include('includes/leftbar.php');?>
@@ -104,9 +34,7 @@ $result = $usersGateway->findAll();
                             <h2>Give us Feedback</h2>
 								<div class="panel panel-default">
 									<div class="panel-heading">Edit Info</div>
-<?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } 
-				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
-
+                                    <?php include INCLUDES_DIR . 'alerts.php'?>
 <div class="panel-body">
 <form method="post" class="form-horizontal" enctype="multipart/form-data">
 

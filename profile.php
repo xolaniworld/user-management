@@ -2,77 +2,24 @@
 
 include __DIR__ . '/bootstrap.php';
 
-if(strlen($_SESSION['alogin']) === 0) {
+if(\Application\Authentication::isNotLoggedIn()) {
 header('location:index.php');
 } else {
+    $userGateway = new \Application\UsersGateway($dbh);
+    $usersTransaction = new \Application\Users\UsersTransactions($userGateway, new \Application\Request(), new \Application\Filesystem(IMAGES_DIR));
     if(isset($_POST['submit'])) {
-	    $userGateway = new \Application\UsersGateway($dbh);
-        $usersTransaction = new \Application\Users\UsersTransactions($userGateway, new \Application\Request(), new \Application\Filesystem(IMAGES_DIR));
         $usersTransaction->submitEditFrontEnd();
 	    $msg = "Information Updated Successfully";
     }
+
+    $headerTitle = 'Edit Profile';
 ?>
-
-<!doctype html>
-<html lang="en" class="no-js">
-
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<meta name="theme-color" content="#3e454c">
-	
-	<title>Edit Profile</title>
-
-	<!-- Font awesome -->
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<!-- Sandstone Bootstrap CSS -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<!-- Bootstrap Datatables -->
-	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
-	<!-- Bootstrap social button library -->
-	<link rel="stylesheet" href="css/bootstrap-social.css">
-	<!-- Bootstrap select -->
-	<link rel="stylesheet" href="css/bootstrap-select.css">
-	<!-- Bootstrap file input -->
-	<link rel="stylesheet" href="css/fileinput.min.css">
-	<!-- Awesome Bootstrap checkbox -->
-	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
-	<!-- Admin Stye -->
-	<link rel="stylesheet" href="css/style.css">
-
-	<script type= "text/javascript" src="../vendor/countries.js"></script>
-	<style>
-	.errorWrap {
-    padding: 10px;
-    margin: 0 0 20px 0;
-	background: #dd3d36;
-	color:#fff;
-    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-}
-.succWrap{
-    padding: 10px;
-    margin: 0 0 20px 0;
-	background: #5cb85c;
-	color:#fff;
-    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-}
-		</style>
-
-
-</head>
-
-<body>
 <?php
     $email = $_SESSION['alogin'];
-    $usersGateway = new \Application\UsersGateway($dbh);
-    $result = $usersGateway->findByEmail($email);
+    $result =$usersTransaction->findByEmail($email);
     $cnt=1;
 ?>
+	<?php include('includes/html_header.php');?>
 	<?php include('includes/header.php');?>
 	<div class="ts-main-content">
 	<?php include('includes/leftbar.php');?>
@@ -84,9 +31,7 @@ header('location:index.php');
 							<div class="col-md-12">
 								<div class="panel panel-default">
 									<div class="panel-heading"><?php echo htmlentities($_SESSION['alogin']); ?></div>
-<?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } 
-				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
-
+                                    <?php include INCLUDES_DIR . 'alerts.php'; ?>
 									<div class="panel-body">
 <form method="post" class="form-horizontal" enctype="multipart/form-data">
 
@@ -117,7 +62,7 @@ header('location:index.php');
 <div class="form-group">
 	<label class="col-sm-2 control-label">Mobile<span style="color:red">*</span></label>
 	<div class="col-sm-4">
-	<input type="text" name="mobile" class="form-control" required value="<?php echo htmlentities($result->mobile);?>">
+	<input type="text" name="mobileno" class="form-control" required value="<?php echo htmlentities($result->mobile);?>">
 	</div>
 
 	<label class="col-sm-2 control-label">Designation<span style="color:red">*</span></label>
@@ -125,7 +70,7 @@ header('location:index.php');
 	<input type="text" name="designation" class="form-control" required value="<?php echo htmlentities($result->designation);?>">
 	</div>
 </div>
-<input type="hidden" name="editid" class="form-control" required value="<?php echo htmlentities($result->id);?>">
+<input type="hidden" name="idedit" class="form-control" required value="<?php echo htmlentities($result->id);?>">
 
 <div class="form-group">
 	<div class="col-sm-8 col-sm-offset-2">
@@ -163,4 +108,4 @@ header('location:index.php');
 	</script>
 </body>
 </html>
-<?php } ?>
+<?php }

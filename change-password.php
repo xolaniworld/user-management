@@ -4,7 +4,7 @@ use Application\Request;
 
 include __DIR__ . '/bootstrap.php';
 
-if(\Application\Authentication::isLoggedIn()) {
+if(\Application\Authentication::isNotLoggedIn()) {
     header('location:index.php');
 } else {
 // Code for change password	
@@ -21,72 +21,11 @@ if(\Application\Authentication::isLoggedIn()) {
             $error = "Your current password is not valid.";
         }
     }
+
+    $headerMeta = '<meta name="theme-color" content="#3e454c">';
+    $headerTitle = 'User Change Password';
 ?>
-
-<!doctype html>
-<html lang="en" class="no-js">
-
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<meta name="theme-color" content="#3e454c">
-
-	<title>User Change Password</title>
-
-	<!-- Font awesome -->
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<!-- Sandstone Bootstrap CSS -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<!-- Bootstrap Datatables -->
-	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
-	<!-- Bootstrap social button library -->
-	<link rel="stylesheet" href="css/bootstrap-social.css">
-	<!-- Bootstrap select -->
-	<link rel="stylesheet" href="css/bootstrap-select.css">
-	<!-- Bootstrap file input -->
-	<link rel="stylesheet" href="css/fileinput.min.css">
-	<!-- Awesome Bootstrap checkbox -->
-	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
-	<!-- Admin Stye -->
-	<link rel="stylesheet" href="css/style.css">
-<script type="text/javascript">
-function valid()
-{
-if(document.chngpwd.newpassword.value!= document.chngpwd.confirmpassword.value)
-{
-alert("New Password and Confirm Password Field do not match  !!");
-document.chngpwd.confirmpassword.focus();
-return false;
-}
-return true;
-}
-</script>
-  <style>
-.errorWrap {
-    padding: 10px;
-    margin: 0 0 20px 0;
-	background: #dd3d36;
-	color:#fff;
-    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-}
-.succWrap{
-    padding: 10px;
-    margin: 0 0 20px 0;
-	background: #5cb85c;
-	color:#fff;
-    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-}
-		</style>
-
-
-</head>
-
-<body>
+	<?php include('includes/html_header.php');?>
 	<?php include('includes/header.php');?>
 	<div class="ts-main-content">
 	<?php include('includes/leftbar.php');?>
@@ -104,10 +43,7 @@ return true;
 									<div class="panel-heading">Form fields</div>
 									<div class="panel-body">
 										<form method="post" name="chngpwd" class="form-horizontal" onSubmit="return valid();">
-
-
-  	        	  <?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php }
-				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
+                                            <?php include INCLUDES_DIR . 'alerts.php'?>
 											<div class="form-group">
 												<label class="col-sm-4 control-label">Current Password</label>
 												<div class="col-sm-8">

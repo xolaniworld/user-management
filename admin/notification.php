@@ -4,7 +4,7 @@ include __DIR__ . '/../bootstrap.php';
 $session = new \Application\Session();
 $request = new \Application\Request();
 
-if (\Application\Authentication::isLoggedIn()) {
+if (\Application\Authentication::isNotLoggedIn()) {
     header('location:index.php');
 } else {
     $adminGateway = new \Application\Admin\AdminGateway($dbh);

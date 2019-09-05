@@ -42,6 +42,11 @@ class UsersTransactions
         return $this->usersGateway->findById($id);
     }
 
+    public function findByEmail($email)
+    {
+        return $result = $this->usersGateway->findByEmail($email);
+    }
+
     public function submitEditFrontEnd()
     {
         $this->updateUser(false);
@@ -51,20 +56,20 @@ class UsersTransactions
     {
         $name = $this->request->getPost('name');
         $email = $this->request->getPost('email');
-        $gender = $this->request->getPost('gender');
         $mobileno = $this->request->getPost('mobileno');
         $designation = $this->request->getPost('designation');
         $idedit = $this->request->getPost('idedit');
         $imageFiles = $this->request->getFile('image');
 
         if ($adminUser) {
+            $gender = $this->request->getPost('gender');
             $image = $this->filesystem->upload($imageFiles);
             return $this->usersGateway->updateByIdWithGender($name, $email, $gender, $mobileno, $designation, $image, $idedit);
         } else {
+
             $image = $this->filesystem->upload($imageFiles);
             return $this->usersGateway->updateById($name, $email, $mobileno, $designation, $image, $idedit);
         }
-
     }
 
     public function deleteUserById()

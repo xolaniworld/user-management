@@ -1,42 +1,20 @@
 <?php
 include __DIR__ . '/bootstrap.php';
 
-if (isset($_POST['login'])) {
-    $status = '1';
-    $email = $_POST['username'];
-    $password = md5($_POST['password']);
+if (isset($_POST['login'])) :
     $usersGateway = new \Application\UsersGateway($dbh);
-    if ($usersGateway->countByEmailPasswordAndStatus($email, $password, $status) > 0) {
-        $_SESSION['alogin'] = $_POST['username'];
-        echo "<script type='text/javascript'> document.location = 'profile.php'; </script>";
-    } else {
-        echo "<script>alert('Invalid Details Or Account Not Confirmed');</script>";
-    }
-}
+    $loginTransaction = new \Application\LoginTransaction($usersGateway);
+    $loginTransaction->submitLogin($_POST['username'], $_POST['password']);
+    if ($loginTransaction->submitLogin($_POST['username'], $_POST['password'])) :
+        $_SESSION['alogin'] = $_POST['username']; ?>
+        <script type='text/javascript'> document.location = 'profile.php'; </script>
+    <?php  else : ?>
+        <script> alert('Invalid Details Or Account Not Confirmed');</script>
+    <?php
+    endif;
+endif;
 ?>
-<!doctype html>
-<html lang="en" class="no-js">
-
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-	<meta name="description" content="">
-	<meta name="author" content="">
-
-	
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
-	<link rel="stylesheet" href="css/bootstrap-social.css">
-	<link rel="stylesheet" href="css/bootstrap-select.css">
-	<link rel="stylesheet" href="css/fileinput.min.css">
-	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
-	<link rel="stylesheet" href="css/style.css">
-
-</head>
-
-<body>
+<?php include('includes/html_header.php'); ?>
 	<div class="login-page bk-img">
 		<div class="form-content">
 			<div class="container">

@@ -2,7 +2,7 @@
 
 include __DIR__ . '/bootstrap.php';
 
-if (strlen($_SESSION['alogin']) == 0) {
+if(\Application\Authentication::isNotLoggedIn()) {
     header('location:index.php');
 } else {
 ?>

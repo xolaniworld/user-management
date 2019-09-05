@@ -8,6 +8,7 @@ define('DB_NAME', '2520448_armentum');
 define('ROOT_DIR', dirname(__DIR__));
 define('IMAGES_DIR', ROOT_DIR . '/images/');
 define('INCLUDES_DIR', ROOT_DIR . '/includes/');
+define('ATTACHMENT_DIR', ROOT_DIR . '/attachment/');
 
 // Establish database connection.
 try {

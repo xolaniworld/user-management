@@ -5,10 +5,10 @@ namespace Application;
 
 class Authentication
 {
-    public static function isLoggedIn()
+    public static function isNotLoggedIn()
     {
-        if (! isset($_SESSION['alogin'])) {
-            return false;
+        if (! array_key_exists('alogin', $_SESSION)) {
+            return true;
         }
 
         return strlen($_SESSION['alogin']) === 0;

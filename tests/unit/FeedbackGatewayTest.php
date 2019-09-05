@@ -14,7 +14,7 @@ class FeedbackGateway extends \PHPUnit\Framework\TestCase
         $this->insertTestUser();
     }
 
-    public function testInsertSenderReciverTitleFeedbackAttachment()
+    public function test_insertSenderReciverTitleFeedbackAttachment()
     {
         $this->gateway->insertSenderReciverTitleFeedbackAttachment('user-1', 'reciver-1', 'title-1', 'description-1', 'attachment-1');
         $id = $this->pdo->lastInsertId();
@@ -30,12 +30,12 @@ class FeedbackGateway extends \PHPUnit\Framework\TestCase
         $this->delete($id);
     }
 
-    public function testCountByReciver()
+    public function test_countByReciver()
     {
         $this->assertGreaterThan(0,      $this->gateway->countByReciver('reciver'));
     }
 
-    public function testFindByReciver()
+    public function test_findByReciver()
     {
         list($results, $count) = $this->gateway->findByReciver('reciver');
         $this->assertIsArray($results);

@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . '/../bootstrap.php';
 
-if(\Application\Authentication::isLoggedIn()) {
+if(\Application\Authentication::isNotLoggedIn()) {
     header('location:index.php');
 } else {
     $userGateway = new \Application\UsersGateway($dbh);
@@ -113,8 +113,8 @@ if(\Application\Authentication::isLoggedIn()) {
 <?php 
 $reciver = 'Admin';
 $feedbackGateway = new \Application\FeedbackGateway($dbh);
-$feedbackTransaction = new \Application\FeedbckTransation($feedbackGateway);
-$feedbackTransaction->finAdmin();
+$feedbackTransaction = new \Application\FeedbackTransaction($feedbackGateway);
+$feedbackTransaction->findAdmin();
 $results = $feedbackTransaction->getFeedback();
 $count = $feedbackTransaction->getTotal();
 $cnt=1;

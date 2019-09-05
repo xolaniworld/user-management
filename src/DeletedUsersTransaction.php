@@ -15,6 +15,6 @@ class DeletedUsersTransaction
 
     public function findAllDeletedUsers()
     {
-       return  $this->deletedUserGateway->findAll();
+       return $this->deletedUserGateway->findAll();
     }
 }
