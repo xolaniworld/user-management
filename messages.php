@@ -9,17 +9,13 @@ if(\Application\Authentication::isNotLoggedIn()) {
     ?>
     <?php include('includes/html_header.php'); ?>
 	<?php include('includes/header.php');?>
-
 	<div class="ts-main-content">
 		<?php include('includes/leftbar.php');?>
 		<div class="content-wrapper">
 			<div class="container-fluid">
-
 				<div class="row">
 					<div class="col-md-12">
-
 						<h2 class="page-title">Messages</h2>
-
 						<!-- Zero Configuration Table -->
 						<div class="panel panel-default">
 							<div class="panel-heading">List Users</div>
@@ -33,7 +29,6 @@ if(\Application\Authentication::isNotLoggedIn()) {
 												<th>Message</th>
 										</tr>
 									</thead>
-									
 									<tbody>
 
 <?php 

@@ -7,13 +7,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="theme-color" content="#3e454c">
-    <?php if (isset($headerMeta)): ?>
-        <?= $headerMeta ?>
-    <?php endif; ?>
+    <?=$this->section('headermeta')?>
 
-    <?php if (isset($headerTitle)): ?>
-        <title><?= $headerTitle ?></title>
-    <?php endif; ?>
+    <title><?= $this->e($title) ?></title>
 
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -24,7 +20,23 @@
     <link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <script type= "text/javascript" src="../vendor/countries.js"></script>
+    <script type="text/javascript" src="../vendor/countries.js"></script>
     <script src="/js/script.js"></script>
 </head>
 <body>
+<?=$this->section('accountactions')?>
+
+<?= $this->section('content') ?>
+<!-- Loading Scripts -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap-select.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.dataTables.min.js"></script>
+<script src="js/dataTables.bootstrap.min.js"></script>
+<script src="js/Chart.min.js"></script>
+<script src="js/fileinput.js"></script>
+<script src="js/chartData.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+

@@ -13,6 +13,11 @@ if (isset($_POST['login'])) :
     <?php
     endif;
 endif;
+
+// Render a template
+echo $templates->render('home');
+
+/*
 ?>
 <?php include('includes/html_header.php'); ?>
 	<div class="login-page bk-img">
@@ -56,3 +61,4 @@ endif;
 </body>
 
 </html>
+*/
