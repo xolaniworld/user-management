@@ -7,7 +7,7 @@
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading"><?= $this->e($alogin) ?></div>
-            <?= $this->insert('partials/alerts') ?>
+            <?= $this->insert('partials/alerts', ['msg' => $msg]) ?>
             <div class="panel-body">
                 <form method="post" class="form-horizontal" enctype="multipart/form-data">
 

@@ -21,6 +21,7 @@ header('location:index.php');
         'result' => $result,
         'email' => $email,
         'alogin' => $email,
-        'cnt' => $cnt
+        'cnt' => $cnt,
+        'msg' => $msg,
     ]);
  }
