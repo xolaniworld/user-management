@@ -7,7 +7,9 @@ include __DIR__ . '/bootstrap.php';
 if(\Application\Authentication::isNotLoggedIn()) {
     header('location:index.php');
 } else {
-// Code for change password	
+    $msg = null;
+    $error = null;
+    // Code for change password
     if (isset($_POST['submit'])) {
         $usersGateway = new \Application\UsersGateway($dbh);
         $usersTransactions = new \Application\Users\UsersTransactions(
@@ -22,11 +24,10 @@ if(\Application\Authentication::isNotLoggedIn()) {
         }
     }
 
-    $headerMeta = '<meta name="theme-color" content="#3e454c">';
-    $headerTitle = 'User Change Password';
-
     // Render a template
     echo $templates->render('change_password', [
         'alogin' => $_SESSION['alogin'],
+        'msg' => $msg,
+        'error' => $error
     ]);
 }

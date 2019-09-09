@@ -10,7 +10,7 @@
             <div class="panel-heading">Form fields</div>
             <div class="panel-body">
                 <form method="post" name="chngpwd" class="form-horizontal" onSubmit="return valid();">
-                    <?= $this->insert('partials/alerts') ?>
+                    <?= $this->insert('partials/alerts', ['msg' => $msg, 'error' => $error]) ?>
                     <div class="form-group">
                         <label class="col-sm-4 control-label">Current Password</label>
                         <div class="col-sm-8">
