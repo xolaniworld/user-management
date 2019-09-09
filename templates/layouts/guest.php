@@ -37,6 +37,7 @@
 <script src="js/fileinput.js"></script>
 <script src="js/chartData.js"></script>
 <script src="js/main.js"></script>
+<?=$this->section('before_body_close')?>
 </body>
 </html>
 

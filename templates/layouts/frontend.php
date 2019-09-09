@@ -1,4 +1,4 @@
-<?php $this->layout('layouts/guest', ['title' => 'User Profile']) ?>
+<?php $this->layout('layouts/guest', ['title' => $title]) ?>
 
 <div class="brand clearfix">
     <h4 class="pull-left text-white text-uppercase" style="margin:20px 0px 0px 20px">

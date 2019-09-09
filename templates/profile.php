@@ -57,3 +57,12 @@
         </div>
     </div>
 </div>
+<?php $this->push('before_body_close') ?>
+<script type="text/javascript">
+    $(document).ready(function () {
+        setTimeout(function() {
+            $('.succWrap').slideUp("slow");
+        }, 3000);
+    });
+</script>
+<?php $this->end() ?>
