@@ -18,6 +18,15 @@ header('location:index.php');
     $email = $_SESSION['alogin'];
     $result =$usersTransaction->findByEmail($email);
     $cnt=1;
+
+    // Render a template
+    echo $templates->render('profile', [
+        'result' => $result,
+        'email' => $email,
+        'alogin' => $email,
+        'cnt' => 1
+    ]);
+    /*
 ?>
 	<?php include('includes/html_header.php');?>
 	<?php include('includes/header.php');?>
@@ -108,4 +117,4 @@ header('location:index.php');
 	</script>
 </body>
 </html>
-<?php }
+<?php*/ }
