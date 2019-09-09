@@ -10,9 +10,6 @@ if(\Application\Authentication::isNotLoggedIn()) {
     $notificationGateway = new \Application\NotificationGateway($dbh);
     $notificationTransaction = new \Application\NotificationTransaction($notificationGateway);
     $notificationTransaction->findNotificationsByReciver($reciver);
-//    $results = $notificationTransaction->getNotications();
-//    $count = $notificationTransaction->getTotal();
-//    $cnt=1;
 
     // Render a template
     echo $templates->render('notification', [

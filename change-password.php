@@ -17,6 +17,7 @@ if(\Application\Authentication::isNotLoggedIn()) {
                 new Request(),
                 new \Application\Filesystem(IMAGES_DIR)
         );
+
         if ($usersTransactions->changePassword($_SESSION['alogin'], $_POST['password'], $_POST['newpassword'])) {
             $msg = "Your Password succesfully changed";
         } else {
