@@ -5,6 +5,23 @@ include __DIR__ . '/bootstrap.php';
 if(\Application\Authentication::isNotLoggedIn()) {
     header('location:index.php');
 } else {
+
+    $reciver = $_SESSION['alogin'];
+    $notificationGateway = new \Application\NotificationGateway($dbh);
+    $notificationTransaction = new \Application\NotificationTransaction($notificationGateway);
+    $notificationTransaction->findNotificationsByReciver($reciver);
+//    $results = $notificationTransaction->getNotications();
+//    $count = $notificationTransaction->getTotal();
+//    $cnt=1;
+
+    // Render a template
+    echo $templates->render('notification', [
+        'alogin' => $reciver,
+        'results' => $notificationTransaction->getNotications(),
+        'count' => $notificationTransaction->getTotal(),
+        'cnt' => 1
+    ]);
+    /*
 ?>
 
 <!doctype html>
@@ -76,8 +93,11 @@ if(\Application\Authentication::isNotLoggedIn()) {
 									   <div class="panel-body">
 <?php 
 $reciver = $_SESSION['alogin'];
-$notifucationGateway = new \Application\NotificationGateway($dbh);
-list($results, $count) = $notifucationGateway->findByNotiReciver($reciver);
+$notificationGateway = new \Application\NotificationGateway($dbh);
+$notificationTransaction = new \Application\NotificationTransaction($notificationGateway);
+$notificationTransaction->findNotificationsByReciver($reciver);
+$results = $notificationTransaction->getNotications();
+$count = $notificationTransaction->getTotal();
 $cnt=1;
 if($count > 0)
 {
@@ -114,4 +134,4 @@ foreach($results as $result)
 	</script>
 </body>
 </html>
-<?php }
+<?php */ }

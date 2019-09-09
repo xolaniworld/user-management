@@ -2,19 +2,20 @@
 
 include __DIR__ . '/bootstrap.php';
 
-if(\Application\Authentication::isNotLoggedIn()) {
-header('location:index.php');
+if (\Application\Authentication::isNotLoggedIn()) {
+    header('location:index.php');
 } else {
     $userGateway = new \Application\UsersGateway($dbh);
     $usersTransaction = new \Application\Users\UsersTransactions($userGateway, new \Application\Request(), new \Application\Filesystem(IMAGES_DIR));
-    if(isset($_POST['submit'])) {
+    $msg = null;
+    if (isset($_POST['submit'])) {
         $usersTransaction->submitEditFrontEnd();
-	    $msg = "Information Updated Successfully";
+        $msg = "Information Updated Successfully";
     }
 
     $email = $_SESSION['alogin'];
-    $result =$usersTransaction->findByEmail($email);
-    $cnt=1;
+    $result = $usersTransaction->findByEmail($email);
+    $cnt = 1;
 
     // Render a template
     echo $templates->render('profile', [
@@ -24,4 +25,4 @@ header('location:index.php');
         'cnt' => $cnt,
         'msg' => $msg,
     ]);
- }
+}
