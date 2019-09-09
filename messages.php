@@ -4,8 +4,19 @@ include __DIR__ . '/bootstrap.php';
 if(\Application\Authentication::isNotLoggedIn()) {
     header('location:index.php');
 } else {
-
     $headerTitle = 'Messages';
+    $reciver = $_SESSION['alogin'];
+    $feedbackGateway = new \Application\FeedbackGateway($dbh);
+    list($results, $count) = $feedbackGateway->findByReciver($reciver);
+    $cnt=1;
+
+    // Render a template
+    echo $templates->render('messages', [
+        'alogin' => $reciver,
+        'results' => $results,
+        'count' => $count
+    ]);
+    /*
     ?>
     <?php include('includes/html_header.php'); ?>
 	<?php include('includes/header.php');?>
@@ -20,6 +31,7 @@ if(\Application\Authentication::isNotLoggedIn()) {
 						<div class="panel panel-default">
 							<div class="panel-heading">List Users</div>
 							<div class="panel-body">
+                                <?= $this->section('')?>
                                 <?php include INCLUDES_DIR . 'alerts_mgshow.php'; ?>
 								<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 									<thead>
@@ -36,10 +48,8 @@ $reciver = $_SESSION['alogin'];
 $feedbackGateway = new \Application\FeedbackGateway($dbh);
 list($results, $count) = $feedbackGateway->findByReciver($reciver);
 $cnt=1;
-if($count > 0)
-{
-foreach($results as $result)
-{				?>	
+if($count > 0) {
+foreach($results as $result) { ?>
 										<tr>
 											<td><?php echo htmlentities($cnt);?></td>
                                             <td><?php echo htmlentities($result->sender);?></td>
@@ -76,4 +86,4 @@ foreach($results as $result)
 		</script>
 </body>
 </html>
-<?php }
+<?php */ }
