@@ -7,10 +7,12 @@ class Authentication
 {
     public static function isNotLoggedIn()
     {
-        if (! array_key_exists('alogin', $_SESSION)) {
+        $session = get_session();
+
+        if (! $session->has('alogin')) {
             return true;
         }
 
-        return strlen($_SESSION['alogin']) === 0;
+        return strlen($session->get('alogin')) === 0;
     }
 }

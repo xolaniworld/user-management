@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\HttpFoundation\Session\Session;
+
 function get_database() {
     static $dbh;
 
@@ -14,4 +16,14 @@ function get_database() {
     } catch (PDOException $e) {
         exit("Error: " . $e->getMessage());
     }
+}
+
+function get_session()
+{
+    static $session;
+    if ($session === null) {
+        $session = new Session();
+        $session->start();
+    }
+    return $session;
 }
