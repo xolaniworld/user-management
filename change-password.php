@@ -25,10 +25,7 @@ if(\Application\Authentication::isNotLoggedIn()) {
         }
     }
 
+    $alogin = $_SESSION['alogin'];
     // Render a template
-    echo $templates->render('change_password', [
-        'alogin' => $_SESSION['alogin'],
-        'msg' => $msg,
-        'error' => $error
-    ]);
+    echo $templates->render('change_password', compact('alogin','msg', 'error'));
 }

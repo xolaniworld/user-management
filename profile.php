@@ -18,11 +18,5 @@ if (\Application\Authentication::isNotLoggedIn()) {
     $cnt = 1;
 
     // Render a template
-    echo $templates->render('profile', [
-        'result' => $result,
-        'email' => $email,
-        'alogin' => $email,
-        'cnt' => $cnt,
-        'msg' => $msg,
-    ]);
+    echo $templates->render('profile', compact('result','email', 'alogin', 'cnt', 'msg'));
 }

@@ -5,8 +5,8 @@ include __DIR__ . '/bootstrap.php';
 $error = null;
 
 if (isset($_POST['submit'])) {
-    $notificationGateway = new \Application\NotificationGateway($dbh);
-    $usersGateway = new \Application\UsersGateway($dbh);
+    $notificationGateway = new \Application\NotificationGateway(get_database());
+    $usersGateway = new \Application\UsersGateway(get_database());
     $registerTransaction = new \Application\RegisterTransaction($usersGateway, $notificationGateway, new \Application\Filesystem(IMAGES_DIR));
     $success = $registerTransaction->submitRegister(new \Application\Request());
 
@@ -19,6 +19,4 @@ if (isset($_POST['submit'])) {
 }
 
 // Render a template
-echo $templates->render('register', [
-    'error' => $error
-]);
+echo $templates->render('register', compact('error'));
