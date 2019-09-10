@@ -28,7 +28,7 @@ if (\Application\Authentication::isNotLoggedIn()) {
         $msg = "Changes Sucessfully";
     }
 
-    $feedbackGateway = new \Application\FeedbackGateway($dbh);
+    $feedbackGateway = new \Application\FeedbackGateway(get_database());
     $feedbackTransaction = new \Application\FeedbackTransaction($feedbackGateway);
     $feedbackTransaction->findAdmin();
     $results = $feedbackTransaction->getFeedback();

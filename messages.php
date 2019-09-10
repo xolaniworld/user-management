@@ -5,7 +5,7 @@ if(\Application\Authentication::isNotLoggedIn()) {
     header('location:index.php');
 } else {
     $reciver = $_SESSION['alogin'];
-    $feedbackGateway = new \Application\FeedbackGateway($dbh);
+    $feedbackGateway = new \Application\FeedbackGateway(get_database());
     list($results, $count) = $feedbackGateway->findByReciver($reciver);
     $cnt=1;
 

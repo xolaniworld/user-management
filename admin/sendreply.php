@@ -12,8 +12,8 @@ if(\Application\Authentication::isNotLoggedIn()) {
     if (isset($_POST['submit'])) {
         $reciver = $_POST['email'];
         $message = $_POST['message'];
-        $notificationGateway = new \Application\NotificationGateway($dbh);
-        $feedbackGateway = new \Application\FeedbackGateway($dbh);
+        $notificationGateway = new \Application\NotificationGateway(get_database());
+        $feedbackGateway = new \Application\FeedbackGateway(get_database());
         $sendReplyTransaction = new \Application\SendReplyTransaction(
             $notificationGateway,
             $feedbackGateway

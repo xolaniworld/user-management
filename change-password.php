@@ -11,7 +11,7 @@ if(\Application\Authentication::isNotLoggedIn()) {
     $error = null;
     // Code for change password
     if (isset($_POST['submit'])) {
-        $usersGateway = new \Application\UsersGateway($dbh);
+        $usersGateway = new \Application\UsersGateway(get_database());
         $usersTransactions = new \Application\Users\UsersTransactions(
                 $usersGateway,
                 new Request(),

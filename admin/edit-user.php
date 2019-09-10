@@ -9,7 +9,7 @@ if(\Application\Authentication::isNotLoggedIn()) {
         $editid = $_GET['edit'];
     }
 
-    $usersGateway = new \Application\UsersGateway($dbh);
+    $usersGateway = new \Application\UsersGateway(get_database());
     $request = new \Application\Request();
     $filesystem = new \Application\Filesystem(IMAGES_DIR);
     $usersTransactions = new \Application\Users\UsersTransactions($usersGateway, $request, $filesystem);

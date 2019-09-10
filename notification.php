@@ -7,7 +7,7 @@ if(\Application\Authentication::isNotLoggedIn()) {
 } else {
 
     $reciver = $_SESSION['alogin'];
-    $notificationGateway = new \Application\NotificationGateway($dbh);
+    $notificationGateway = new \Application\NotificationGateway(get_database());
     $notificationTransaction = new \Application\NotificationTransaction($notificationGateway);
     $notificationTransaction->findNotificationsByReciver($reciver);
 

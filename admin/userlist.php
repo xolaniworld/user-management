@@ -5,8 +5,8 @@ if(\Application\Authentication::isNotLoggedIn()) {
     header('location:index.php');
 } else {
     $userListTransaction = new \Application\UserListTransaction(
-        new \Application\UsersGateway($dbh),
-        new \Application\DeletedUserGateway($dbh)
+        new \Application\UsersGateway(get_database()),
+        new \Application\DeletedUserGateway(get_database())
     );
 
     if (isset($_GET['del']) && isset($_GET['name'])) {

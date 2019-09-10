@@ -7,15 +7,15 @@ if(\Application\Authentication::isNotLoggedIn()) {
 } else {
     $msg = null;
     if(isset($_POST['submit'])) {
-	    $notificationGateway = new \Application\NotificationGateway($dbh);
-	    $feedbackGateway = new \Application\FeedbackGateway($dbh);
+	    $notificationGateway = new \Application\NotificationGateway(get_database());
+	    $feedbackGateway = new \Application\FeedbackGateway(get_database());
 	    $frontendFeedbackTransaction = new \Application\FrontendFeedbackTransaction($feedbackGateway, $notificationGateway, new \Application\Filesystem(ATTACHMENT_DIR));
 	    $frontendFeedbackTransaction->submitFeedback($_POST['title'], $_POST['description'], $_SESSION['alogin'], $_FILES['attachment']);
 	    $msg = "Feedback Send";
     }
 
     $headerTitle = 'Feedback';
-    $usersGateway = new \Application\UsersGateway($dbh);
+    $usersGateway = new \Application\UsersGateway(get_database());
     $result = $usersGateway->findAll();
     $cnt=1;
 

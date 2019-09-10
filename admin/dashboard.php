@@ -6,20 +6,14 @@ if (\Application\Authentication::isNotLoggedIn()) {
 } else {
 
     $dashboardTransaction = new \Application\Admin\DashboardTransaction(
-        new \Application\UsersGateway($dbh),
-        new \Application\FeedbackGateway($dbh),
-        new \Application\NotificationGateway($dbh),
-        new \Application\DeletedUserGateway($dbh)
+        new \Application\UsersGateway(get_database()),
+        new \Application\FeedbackGateway(get_database()),
+        new \Application\NotificationGateway(get_database()),
+        new \Application\DeletedUserGateway(get_database())
     );
 
     list($bg, $regbd, $regbd2, $query) = $dashboardTransaction->dashboard();
 
 // Render a template
-    echo $templates->render('dashboard', [
-        'alogin' => $_SESSION['alogin'],
-        'bg' => $bg,
-        'regbd' => $regbd,
-        'regbd2' => $regbd2,
-        'query' => $query
-    ]);
+    echo $templates->render('dashboard', compact('bg','regbd', 'regbd2', 'query'));
 }

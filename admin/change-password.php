@@ -5,7 +5,7 @@ if(\Application\Authentication::isNotLoggedIn()) {
     header('location:index.php');
 } else {
     if(isset($_POST['submit'])) {
-        $adminTransactions = new \Application\Admin\AdminTransaction(new \Application\Admin\AdminGateway($dbh));
+        $adminTransactions = new \Application\Admin\AdminTransaction(new \Application\Admin\AdminGateway(get_database()));
         if ($adminTransactions->submitChangePassword($_SESSION['alogin'], $_POST['password'], $_POST['newpassword'])) {
             $msg = "Your Password succesfully changed";
         } else {

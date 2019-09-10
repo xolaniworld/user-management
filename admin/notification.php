@@ -7,7 +7,7 @@ $request = new \Application\Request();
 if (\Application\Authentication::isNotLoggedIn()) {
     header('location:index.php');
 } else {
-    $adminGateway = new \Application\Admin\AdminGateway($dbh);
+    $adminGateway = new \Application\Admin\AdminGateway(get_database());
     $adminTransaction = new \Application\Admin\AdminTransaction($adminGateway);
     
 if($request->postIsset('submit')) {

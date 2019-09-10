@@ -7,7 +7,7 @@ $session = new \Application\Session();
 if ($request->getRequestMethod() === 'POST') :
     $username = $request->getPost('username');
     $password = $request->getPost('password');
-    $transaction = new \Application\Admin\AdminTransaction(new \Application\Admin\AdminGateway($dbh));
+    $transaction = new \Application\Admin\AdminTransaction(new \Application\Admin\AdminGateway(get_database()));
     if ($transaction->submitLogin($username, $password)):
         $session->set('alogin', $username); ?>
         <script type='text/javascript'> document.location = 'dashboard.php'; </script>

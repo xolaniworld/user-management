@@ -2,7 +2,7 @@
 include __DIR__ . '/bootstrap.php';
 
 if (isset($_POST['login'])) :
-    $usersGateway = new \Application\UsersGateway($dbh);
+    $usersGateway = new \Application\UsersGateway(get_database());
     $loginTransaction = new \Application\LoginTransaction($usersGateway);
     $loginTransaction->submitLogin($_POST['username'], $_POST['password']);
     if ($loginTransaction->submitLogin($_POST['username'], $_POST['password'])) :
