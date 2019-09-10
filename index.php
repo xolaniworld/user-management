@@ -10,8 +10,10 @@ $symfonyRequest = Request::createFromGlobals();
 $psr17Factory = new Psr17Factory();
 $psrHttpFactory = new PsrHttpFactory($psr17Factory, $psr17Factory, $psr17Factory, $psr17Factory);
 $psrRequest = $psrHttpFactory->createRequest($symfonyRequest);
+
 $usersGateway = new \Application\UsersGateway(get_database());
 $transaction = new \Application\LoginTransaction($usersGateway);
 $plates = new Application\PlatesTemplate(TEMPLATES_DIR);
+
 $controller = new \Application\Controllers\MainController($psrRequest, $transaction, $plates);
-$controller->home(get_session());
+$controller->home(\Application\Session::getSession());

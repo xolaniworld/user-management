@@ -17,13 +17,3 @@ function get_database() {
         exit("Error: " . $e->getMessage());
     }
 }
-
-function get_session()
-{
-    static $session;
-    if ($session === null) {
-        $session = new Session();
-        $session->start();
-    }
-    return $session;
-}

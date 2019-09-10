@@ -3,9 +3,12 @@
 
 namespace Application;
 
+use Symfony\Component\HttpFoundation\Session\Session as SymfonySession;
 
 class Session
 {
+    private static $session;
+
     public static function start()
     {
         session_start();
@@ -41,8 +44,21 @@ class Session
         unset($_SESSION[$name]);
     }
 
-    public function destroy()
+    public static function destroy()
     {
-        session_destroy(); // destroy session
+        static::getSession()->invalidate();
+    }
+
+    public static function getSession()
+    {
+        if (static::$session === null) {
+            static::$session = new SymfonySession();
+        }
+
+        if (! static::$session->isStarted()) {
+            static::$session->start();
+        }
+
+        return static::$session;
     }
 }

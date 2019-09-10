@@ -1,7 +1,6 @@
 <?php
 include __DIR__ . '/bootstrap.php';
 
-$_SESSION = array();
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
     setcookie(session_name(), '', time() - 60*60,
@@ -9,7 +8,6 @@ if (ini_get("session.use_cookies")) {
         $params["secure"], $params["httponly"]
     );
 }
-unset($_SESSION['login']);
-session_destroy(); // destroy session
+\Application\Session::destroy();
 header("location:index.php");
 
