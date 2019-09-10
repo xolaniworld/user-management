@@ -14,6 +14,6 @@ if (\Application\Authentication::isNotLoggedIn()) {
 
     list($bg, $regbd, $regbd2, $query) = $dashboardTransaction->dashboard();
 
-// Render a template
+    // Render a template
     echo $templates->render('dashboard', compact('bg','regbd', 'regbd2', 'query'));
 }

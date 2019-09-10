@@ -10,10 +10,5 @@ if(\Application\Authentication::isNotLoggedIn()) {
     $cnt = 1;
 
     // Render a template
-    echo $templates->render('deleteduser', [
-//        'alogin' => $_SESSION['alogin'],
-        'results' => $results,
-        'count' => $count,
-        'cnt' => $cnt
-    ]);
+    echo $templates->render('deleteduser', compact('results', 'count', 'cnt'));
 }

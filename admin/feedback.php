@@ -4,7 +4,7 @@ include __DIR__ . '/../bootstrap.php';
 if (\Application\Authentication::isNotLoggedIn()) {
     header('location:index.php');
 } else {
-    $userGateway = new \Application\UsersGateway($dbh);
+    $userGateway = new \Application\UsersGateway(get_database());
     $request = new \Application\Request();
     $filesystem = new \Application\Filesystem(IMAGES_DIR);
     $usersTransaction = new Application\Users\UsersTransactions($userGateway, $request, $filesystem);

@@ -9,7 +9,7 @@ if(\Application\Authentication::isNotLoggedIn()) {
     echo "#, Name, Email, Gender, Phone, Designation \n";
 
     $filename = "Users list";
-    $usersGateway = new \Application\UsersGateway($dbh);
+    $usersGateway = new \Application\UsersGateway(get_database());
     list($results, $count) = $usersGateway->findAllUsers();
     $cnt = 1;
     if ($count > 0) {

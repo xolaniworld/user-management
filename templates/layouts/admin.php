@@ -26,6 +26,16 @@
     <link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
     <!-- Admin Stye -->
     <link rel="stylesheet" href="css/style.css">
+    <script>
+        function valid() {
+            if (document.chngpwd.newpassword.value != document.chngpwd.confirmpassword.value) {
+                alert("New Password and Confirm Password Field do not match  !!");
+                document.chngpwd.confirmpassword.focus();
+                return false;
+            }
+            return true;
+        }
+    </script>
     <style>
         .errorWrap {
             padding: 10px;

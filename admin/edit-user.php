@@ -5,6 +5,8 @@ if(\Application\Authentication::isNotLoggedIn()) {
     header('location:index.php');
 } else {
     $editid = null;
+    $msg = null;
+
     if(isset($_GET['edit'])) {
         $editid = $_GET['edit'];
     }
@@ -19,10 +21,8 @@ if(\Application\Authentication::isNotLoggedIn()) {
         $msg = "Information Updated Successfully";
     }
 
+    $result = $usersTransactions->findByUserId($_GET['edit']);
+
     // Render a template
-    echo $templates->render('edit-user', [
-        'result' => $usersTransactions->findByUserId($_GET['edit']),
-        'editid' => $editid,
-        'cnt' => 1
-    ]);
+    echo $templates->render('edit-user', compact('result','editid', 'cnt'));
 }
