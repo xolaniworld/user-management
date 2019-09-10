@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="theme-color" content="#3e454c">
-    <?=$this->section('headermeta')?>
+    <?= $this->section('headermeta') ?>
 
     <title><?= $this->e($title) ?></title>
 
@@ -24,7 +24,7 @@
     <script src="/js/script.js"></script>
 </head>
 <body>
-<?=$this->section('accountactions')?>
+<?= $this->section('accountactions') ?>
 
 <?= $this->section('content') ?>
 <!-- Loading Scripts -->
@@ -37,7 +37,7 @@
 <script src="js/fileinput.js"></script>
 <script src="js/chartData.js"></script>
 <script src="js/main.js"></script>
-<?=$this->section('before_body_close')?>
+<?= $this->section('before_body_close') ?>
 </body>
 </html>
 
