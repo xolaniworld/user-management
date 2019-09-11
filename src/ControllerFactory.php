@@ -20,6 +20,14 @@ class ControllerFactory
     private $session;
     private $request;
 
+    public function makeMainController()
+    {
+        $usersGateway = new \Application\UsersGateway($this->getDatabase());
+        $transaction = new \Application\LoginTransaction($usersGateway);
+
+        return new \Application\Controllers\MainController($this->getRequest(), $transaction, $this->getRenderer(), $this->getSession());
+    }
+
     public function makeUserController()
     {
         $userGateway = new \Application\UsersGateway($this->getDatabase());

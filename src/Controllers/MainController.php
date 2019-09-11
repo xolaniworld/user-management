@@ -14,15 +14,17 @@ class MainController
     private $request;
     private $transaction;
     private $renderer;
+    private $session;
 
-    public function __construct(ServerRequestInterface $request, LoginTransaction $transaction, RendererInterface $renderer)
+    public function __construct(ServerRequestInterface $request, LoginTransaction $transaction, RendererInterface $renderer, Session $session)
     {
         $this->request = $request;
         $this->transaction = $transaction;
         $this->renderer = $renderer;
+        $this->session = $session;
     }
 
-    public function home(Session $session)
+    public function home()
     {
         $redirect = null;
 
@@ -33,7 +35,7 @@ class MainController
             $redirect = false;
 
             if ($this->transaction->submitLogin($post['username'], $post['password'])) {
-                $session->set('alogin', $post['username']);
+                $this->session->set('alogin', $post['username']);
                 $redirect = true;
             }
         }
