@@ -5,8 +5,7 @@ namespace Application\Controllers;
 
 
 use Application\LoginTransaction;
-use Application\Request;
-use Application\TemplateInterface;
+use Application\RendererInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -14,13 +13,13 @@ class MainController
 {
     private $request;
     private $transaction;
-    private $template;
+    private $renderer;
 
-    public function __construct(ServerRequestInterface $request, LoginTransaction $transaction, TemplateInterface $template)
+    public function __construct(ServerRequestInterface $request, LoginTransaction $transaction, RendererInterface $renderer)
     {
         $this->request = $request;
         $this->transaction = $transaction;
-        $this->template = $template;
+        $this->renderer = $renderer;
     }
 
     public function home(Session $session)
@@ -39,7 +38,7 @@ class MainController
             }
         }
 
-        // Render a template
-        echo $this->template->render('home', compact('redirect'));
+        // Render a renderer
+        echo $this->renderer->render('home', compact('redirect'));
     }
 }

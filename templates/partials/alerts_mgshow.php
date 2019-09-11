@@ -1,5 +1,5 @@
 <?php if (isset($error)) : ?>
-    <div class="errorWrap" id="msgshow"><?php echo htmlentities($error); ?> </div>
+    <div class="errorWrap" id="msgshow"><?= $this->e($error); ?> </div>
 <?php elseif (isset($msg)) : ?>
-    <div class="succWrap" id="msgshow"><?php echo htmlentities($msg); ?> </div>
+    <div class="succWrap" id="msgshow"><?= $this->e($msg); ?> </div>
 <?php endif;

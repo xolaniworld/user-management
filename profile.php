@@ -21,6 +21,6 @@ if (\Application\Authentication::isNotLoggedIn()) {
     $usersTransaction = new \Application\Users\UsersTransactions($userGateway, new \Application\Request(), new \Application\Filesystem(IMAGES_DIR));
     $plates = new Application\PlatesTemplate(TEMPLATES_DIR);
 
-    $controller = new \Application\Controllers\UsersController($psrRequest, $usersTransaction, $plates);
-    $controller->profile(\Application\Session::getSession());
+    $controller = new \Application\Controllers\UsersController($psrRequest, $usersTransaction, $plates, \Application\Session::getSession());
+    $controller->profile();
 }

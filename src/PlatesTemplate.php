@@ -6,7 +6,7 @@ namespace Application;
 
 use League\Plates\Engine;
 
-class PlatesTemplate implements TemplateInterface
+class PlatesTemplate implements RendererInterface
 {
     private $renderer;
 

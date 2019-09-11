@@ -2,7 +2,7 @@
 namespace Application;
 
 
-interface TemplateInterface
+interface RendererInterface
 {
     public function render($template, array $data = []);
 }
