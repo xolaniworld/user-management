@@ -3,6 +3,10 @@
 
 namespace Application;
 
+use Application\Admin\AdminGateway;
+use Application\Admin\AdminTransaction;
+use Application\Controllers\Admin\AdminController;
+use Application\Controllers\Admin\UserListController;
 use Application\Controllers\FeedbackController;
 use Application\Filesystem;
 use Application\PlatesTemplate;
@@ -20,11 +24,16 @@ class ControllerFactory
     private $session;
     private $request;
 
+    public function makeAdminController()
+    {
+        $t = new AdminTransaction(new AdminGateway($this->getDatabase()));
+        return new AdminController($t, $this->getRequest(), $this->getSession(), $this->getRenderer());
+    }
+
     public function makeMainController()
     {
         $usersGateway = new \Application\UsersGateway($this->getDatabase());
         $transaction = new \Application\LoginTransaction($usersGateway);
-
         return new \Application\Controllers\MainController($this->getRequest(), $transaction, $this->getRenderer(), $this->getSession());
     }
 
@@ -60,6 +69,18 @@ class ControllerFactory
             $this->getRenderer(),
             $this->getRequest(),
             $this->getSession()
+        );
+    }
+
+    public function makeUserListController()
+    {
+        return new UserListController(
+            new UserListTransaction(
+                new UsersGateway($this->getDatabase()),
+                new DeletedUserGateway($this->getDatabase())
+            ),
+            $this->getRenderer(),
+            $this->getRequest()
         );
     }
 

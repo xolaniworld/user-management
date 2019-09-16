@@ -6,9 +6,6 @@ if(\Application\Authentication::isNotLoggedIn()) {
 } else {
     $deletedUserGateway = new \Application\DeletedUserGateway(get_database());
     $transaction = new \Application\DeletedUsersTransaction($deletedUserGateway);
-    list($results, $count) = $transaction->findAllDeletedUsers();
-    $cnt = 1;
-
-    // Render a template
-    echo $templates->render('deleteduser', compact('results', 'count', 'cnt'));
+    $controller = new \Application\Controllers\Admin\DeletedUsersController($transaction, new \Application\PlatesTemplate(TEMPLATES_DIR));
+    $controller->all();
 }

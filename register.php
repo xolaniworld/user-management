@@ -7,8 +7,8 @@ $error = null;
 if (isset($_POST['submit'])) {
     $notificationGateway = new \Application\NotificationGateway(get_database());
     $usersGateway = new \Application\UsersGateway(get_database());
-    $registerTransaction = new \Application\RegisterTransaction($usersGateway, $notificationGateway, new \Application\Filesystem(IMAGES_DIR));
-    $success = $registerTransaction->submitRegister(new \Application\Request());
+    $registerTransaction = new \Application\RegisterTransaction($usersGateway, $notificationGateway, new \Application\Filesystem(IMAGES_DIR), new \Application\Request());
+    $success = $registerTransaction->submitRegister();
 
     if ($success) { ?>
         <script type='text/javascript'>alert('Registration Sucessfull!');</script>

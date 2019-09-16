@@ -1,5 +1,9 @@
 <?php $this->layout('layouts/guest', ['title' => 'Admin Login']) ?>
-
+<?php if ($redirect === true): ?>
+    <script type='text/javascript'> document.location = 'dashboard.php'; </script>
+<?php elseif($redirect === false) : ?>
+    <script> alert('Invalid Details');</script>
+<?php endif; ?>
 <div class="login-page bk-img" style="background-image: url(img/background.jpg);">
     <div class="form-content">
         <div class="container">

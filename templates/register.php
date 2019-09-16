@@ -1,4 +1,8 @@
 <?php $this->layout('layouts/guest', ['title' => 'Register']) ?>
+<?php if ($redirect === true): ?>
+    <script type='text/javascript'>alert('Registration Sucessfull!');</script>
+    <script type='text/javascript'> document.location = 'index.php'; </script>
+<?php endif; ?>
     <div class="login-page bk-img">
         <div class="form-content">
             <div class="container">

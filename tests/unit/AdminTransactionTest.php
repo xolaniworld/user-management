@@ -15,7 +15,6 @@ class AdminTransactionTest extends \PHPUnit\Framework\TestCase
         $this->transaction = new Application\Admin\AdminTransaction($this->gateway->reveal(), $request->reveal());
     }
 
-
     public function test_submitLogin()
     {
         $this->gateway->countByUsernameAndPassword('username', md5('wrong-password'))->willReturn(0);
@@ -31,6 +30,9 @@ class AdminTransactionTest extends \PHPUnit\Framework\TestCase
         );
     }
 
+    /**
+     *
+     */
     public function test_submitChangePassword()
     {
         //user is found returns 1
@@ -49,7 +51,6 @@ class AdminTransactionTest extends \PHPUnit\Framework\TestCase
             $this->transaction->submitChangePassword('username', 'password', 'password2')
         );
     }
-
 
     protected function tearDown():void
     {

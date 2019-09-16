@@ -9,23 +9,25 @@ class RegisterTransaction
     private $usersGateway;
     private $notificationGateway;
     private $filesystem;
+    private $request;
 
-    public function __construct(UsersGateway $usersGateway, NotificationGateway $notificationGateway, Filesystem $filesystem)
+    public function __construct(UsersGateway $usersGateway, NotificationGateway $notificationGateway, Filesystem $filesystem, Request $request)
     {
         $this->usersGateway = $usersGateway;
         $this->notificationGateway = $notificationGateway;
         $this->filesystem = $filesystem;
+        $this->request = $request;
     }
 
-    public function submitRegister(Request $request)
+    public function submitRegister()
     {
-        $name = $request->getPost('name');
-        $email = $request->getPost('email');
-        $password = md5($request->getPost('password'));
-        $gender = $request->getPost('gender');
-        $mobileno = $request->getPost('mobileno');
-        $designation = $request->getPost('designation');
-        $image = $this->filesystem->upload($request->getFile('image'));
+        $name = $this->request->getPost('name');
+        $email = $this->request->getPost('email');
+        $password = md5($this->request->getPost('password'));
+        $gender = $this->request->getPost('gender');
+        $mobileno = $this->request->getPost('mobileno');
+        $designation = $this->request->getPost('designation');
+        $image = $this->filesystem->upload($this->request->getFile('image'));
 
         $notitype = 'Create Account';
         $reciver = 'Admin';

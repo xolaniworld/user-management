@@ -3,7 +3,6 @@
 
 namespace Application\Controllers;
 
-use Application\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Application\PlatesTemplate;
 use Application\Users\UsersTransactions;
@@ -58,4 +57,25 @@ class UsersController
         echo $this->template->render('change_password', compact('alogin','msg', 'error'));
     }
 
+    public function edit()
+    {
+        $editid = null;
+        $msg = null;
+        $get = $this->request->getQueryParams();
+
+        if(isset($get['edit'])) {
+            $editid = $get['edit'];
+        }
+
+
+        if($this->request->getMethod() === 'POST') {
+            $this->transaction->submitEdit();
+            $msg = "Information Updated Successfully";
+        }
+
+        $result = $this->transaction->findByUserId($editid);
+
+        // Render a template
+        echo $this->template->render('edit-user', compact('result','editid', 'cnt', 'msg'));
+    }
 }

@@ -12,8 +12,7 @@ if (\Application\Authentication::isNotLoggedIn()) {
         new \Application\DeletedUserGateway(get_database())
     );
 
-    list($bg, $regbd, $regbd2, $query) = $dashboardTransaction->dashboard();
+    $controller = new \Application\Controllers\Admin\DashboardController($dashboardTransaction, new \Application\PlatesTemplate(TEMPLATES_DIR));
 
-    // Render a template
-    echo $templates->render('dashboard', compact('bg','regbd', 'regbd2', 'query'));
+    $controller->dashboard();
 }
