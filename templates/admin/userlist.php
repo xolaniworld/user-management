@@ -30,23 +30,22 @@
             if ($rowCount > 0) {
                 foreach ($results as $result) { ?>
                     <tr>
-                        <td><?php echo htmlentities((string)$cnt); ?></td>
+                        <td><?= $this->e((string)$cnt); ?></td>
                         <td>
-                            <img src="../images/<?php echo htmlentities($result->image); ?>" style="width:50px; border-radius:50%;"/>
+                            <img src="../images/<?= $this->e($result->image); ?>" style="width:50px; border-radius:50%;"/>
                         </td>
-                        <td><?php echo htmlentities($result->name); ?></td>
-                        <td><?php echo htmlentities($result->email); ?></td>
-                        <td><?php echo htmlentities($result->gender); ?></td>
-                        <td><?php echo htmlentities($result->mobile); ?></td>
-                        <td><?php echo htmlentities($result->designation); ?>
+                        <td><?= $this->e($result->name); ?></td>
+                        <td><?= $this->e($result->email); ?></td>
+                        <td><?= $this->e($result->gender); ?></td>
+                        <td><?= $this->e($result->mobile); ?></td>
+                        <td><?= $this->e($result->designation); ?>
                         <td>
 
-                            <?php if ($result->status == 1) {
-                                ?>
-                                <a href="userlist.php?confirm=<?php echo htmlentities($result->id); ?>" onclick="return confirm('Do you really want to Un-Confirm the Account')">Confirmed
+                            <?php if ($result->status == 1) {?>
+                                <a href="userlist.php?confirm=<?= $this->e($result->id); ?>" onclick="return confirm('Do you really want to Un-Confirm the Account')">Confirmed
                                     <i class="fa fa-check-circle"></i></a>
                             <?php } else { ?>
-                                <a href="userlist.php?unconfirm=<?php echo htmlentities($result->id); ?>" onclick="return confirm('Do you really want to Confirm the Account')">Un-Confirmed
+                                <a href="userlist.php?unconfirm=<?= $this->e($result->id); ?>" onclick="return confirm('Do you really want to Confirm the Account')">Un-Confirmed
                                     <i class="fa fa-times-circle"></i></a>
                             <?php } ?>
                         </td>
@@ -55,7 +54,7 @@
                         <td>
                             <a href="edit-user.php?edit=<?php echo $result->id; ?>" onclick="return confirm('Do you want to Edit');">&nbsp;
                                 <i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
-                            <a href="userlist.php?del=<?php echo $result->id; ?>&name=<?php echo htmlentities($result->email); ?>" onclick="return confirm('Do you want to Delete');"><i class="fa fa-trash" style="color:red"></i></a>&nbsp;&nbsp;
+                            <a href="userlist.php?del=<?php echo $result->id; ?>&name=<?= $this->e($result->email); ?>" onclick="return confirm('Do you want to Delete');"><i class="fa fa-trash" style="color:red"></i></a>&nbsp;&nbsp;
                         </td>
                     </tr>
                     <?php $cnt = $cnt + 1;

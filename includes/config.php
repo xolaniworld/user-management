@@ -6,9 +6,11 @@ define('DB_PASS', 'dbuser');
 define('DB_NAME', '2520448_armentum');
 
 define('ROOT_DIR', dirname(__DIR__));
-define('IMAGES_DIR', ROOT_DIR . '/images/');
 define('INCLUDES_DIR', ROOT_DIR . '/includes/');
-define('ATTACHMENT_DIR', ROOT_DIR . '/attachment/');
+define('STORAGE_DIR', ROOT_DIR . '/storage/');
+define('PUBLIC_DIR', ROOT_DIR . '/public/');
+define('IMAGES_DIR', PUBLIC_DIR . '/images/');
+define('ATTACHMENT_DIR', PUBLIC_DIR . '/attachment/');
 define('TEMPLATES_DIR', ROOT_DIR . '/templates/');
 
 include INCLUDES_DIR . 'functions.php';
