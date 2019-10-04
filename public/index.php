@@ -5,10 +5,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
-include __DIR__ . '/bootstrap.php';
-
-//$controllerFactory = new \Application\ControllerFactory();
-//$controllerFactory->makeMainController()->home();
+include dirname(__DIR__) . '/bootstrap.php';
 
 $app = new \Application\Application();
 
