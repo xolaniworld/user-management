@@ -3,10 +3,11 @@
 
 namespace Application\Controllers\Admin;
 
+use Application\Controllers\AbstractController;
 use Application\DeletedUsersTransaction;
 use Application\RendererInterface;
 
-class DeletedUsersController
+class DeletedUsersController extends AbstractController
 {
     private $transaction;
     private $renderer;
@@ -19,10 +20,12 @@ class DeletedUsersController
 
     public function all()
     {
+        $this->authenticated();
+
         list($results, $count) = $this->transaction->findAllDeletedUsers();
         $cnt = 1;
 
         // Render a template
-        echo $this->renderer->render('deleteduser', compact('results', 'count', 'cnt'));
+        return $this->renderer->render('deleteduser', compact('results', 'count', 'cnt'));
     }
 }

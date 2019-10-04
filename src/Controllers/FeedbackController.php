@@ -4,12 +4,13 @@
 namespace Application\Controllers;
 
 
+use Application\Auth;
 use Application\FrontendFeedbackTransaction;
 use Application\RendererInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class FeedbackController
+class FeedbackController extends AbstractController
 {
     private $transaction;
     private $session;
@@ -26,6 +27,8 @@ class FeedbackController
 
     public function frontend()
     {
+        $this->authenticated();
+
         $msg = null;
         $alogin = $this->session->get('alogin');
 
@@ -39,7 +42,7 @@ class FeedbackController
         $cnt = 1;
 
         // Render a template
-        echo $this->renderer->render('feedback', [
+        return $this->renderer->render('feedback', [
             'alogin' => $alogin,
             'msg' => $msg,
             'cnt' => $cnt,
@@ -49,10 +52,17 @@ class FeedbackController
 
     public function messages()
     {
+        $this->authenticated();
+
         $alogin = $this->session->get('alogin');
         list($results, $count) = $this->transaction->getAllByReciver($alogin);
         $cnt = 1;
         // Render a template
-        echo $this->renderer->render('messages', compact('alogin', 'results', 'count', 'cnt'));
+        return $this->renderer->render('messages', compact('alogin', 'results', 'count', 'cnt'));
+    }
+
+    public function feedback()
+    {
+
     }
 }

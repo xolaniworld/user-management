@@ -5,9 +5,10 @@ namespace Application\Controllers\Admin;
 
 
 use Application\Admin\DashboardTransaction;
+use Application\Controllers\AbstractController;
 use Application\RendererInterface;
 
-class DashboardController
+class DashboardController extends AbstractController
 {
     private $transaction;
     private $renderer;
@@ -20,9 +21,11 @@ class DashboardController
 
     public function dashboard()
     {
+        $this->authenticated();
+
         list($bg, $regbd, $regbd2, $query) = $this->transaction->dashboard();
 
         // Render a template
-        echo $this->renderer->render('dashboard', compact('bg','regbd', 'regbd2', 'query'));
+        return $this->renderer->render('dashboard', compact('bg','regbd', 'regbd2', 'query'));
     }
 }

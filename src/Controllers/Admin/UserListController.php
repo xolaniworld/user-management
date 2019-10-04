@@ -1,11 +1,12 @@
 <?php
 namespace Application\Controllers\Admin;
 
+use Application\Controllers\AbstractController;
 use Application\RendererInterface;
 use Application\UserListTransaction;
 use Psr\Http\Message\ServerRequestInterface;
 
-class UserListController
+class UserListController extends AbstractController
 {
     private $transaction;
     private $request;
@@ -20,6 +21,8 @@ class UserListController
 
     public function all()
     {
+        $this->authenticated();
+
         $get = $this->request->getQueryParams();
 
         if (isset($get['del']) && isset($get['name'])) {
@@ -41,6 +44,6 @@ class UserListController
 
         list($results, $rowCount) = $this->transaction->findAllUsers();
 
-        echo $this->renderer->render('admin/userlist', compact('results', 'rowCount', 'msg'));
+        return $this->renderer->render('admin/userlist', compact('results', 'rowCount', 'msg'));
     }
 }

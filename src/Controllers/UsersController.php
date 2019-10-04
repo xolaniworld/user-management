@@ -3,12 +3,13 @@
 
 namespace Application\Controllers;
 
+use Application\Auth;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Application\PlatesTemplate;
 use Application\Users\UsersTransactions;
 use Psr\Http\Message\ServerRequestInterface;
 
-class UsersController
+class UsersController extends AbstractController
 {
     private $request;
     private $transaction;
@@ -25,6 +26,8 @@ class UsersController
 
     public function profile()
     {
+        $this->authenticated();
+
         $msg = null;
         if ($this->request->getMethod() === 'POST') {
             $this->transaction->submitEditFrontEnd();
@@ -35,11 +38,13 @@ class UsersController
         $result = $this->transaction->findByEmail($alogin);
         $cnt = 1;
 
-        echo $this->template->render('profile', compact('result','email', 'alogin', 'cnt', 'msg'));
+        return $this->template->render('profile', compact('result','email', 'alogin', 'cnt', 'msg'));
     }
 
     public function changePassword()
     {
+        $this->authenticated();
+
         $msg = null;
         $error = null;
         $alogin = $this->session->get('alogin');
@@ -54,7 +59,7 @@ class UsersController
             }
         }
 
-        echo $this->template->render('change_password', compact('alogin','msg', 'error'));
+        return $this->template->render('change_password', compact('alogin','msg', 'error'));
     }
 
     public function edit()

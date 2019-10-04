@@ -11,21 +11,21 @@
     <title><?= $this->e($title) ?></title>
 
     <!-- Font awesome -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!-- Sandstone Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <!-- Bootstrap Datatables -->
-    <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="/css/dataTables.bootstrap.min.css">
     <!-- Bootstrap social button library -->
-    <link rel="stylesheet" href="css/bootstrap-social.css">
+    <link rel="stylesheet" href="/css/bootstrap-social.css">
     <!-- Bootstrap select -->
-    <link rel="stylesheet" href="css/bootstrap-select.css">
+    <link rel="stylesheet" href="/css/bootstrap-select.css">
     <!-- Bootstrap file input -->
-    <link rel="stylesheet" href="css/fileinput.min.css">
+    <link rel="stylesheet" href="/css/fileinput.min.css">
     <!-- Awesome Bootstrap checkbox -->
-    <link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
+    <link rel="stylesheet" href="/css/awesome-bootstrap-checkbox.css">
     <!-- Admin Stye -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <script>
         function valid() {
             if (document.chngpwd.newpassword.value != document.chngpwd.confirmpassword.value) {
@@ -63,10 +63,10 @@
     <ul class="ts-profile-nav">
 
         <li class="ts-account">
-            <a href="#"><img src="img/ts-avatar.jpg" class="ts-avatar hidden-side" alt=""> Account <i class="fa fa-angle-down hidden-side"></i></a>
+            <a href="#"><img src="/img/ts-avatar.jpg" class="ts-avatar hidden-side" alt=""> Account <i class="fa fa-angle-down hidden-side"></i></a>
             <ul>
-                <li><a href="change-password.php">Change Password</a></li>
-                <li><a href="logout.php">Logout</a></li>
+                <li><a href="change-password">Change Password</a></li>
+                <li><a href="logout">Logout</a></li>
             </ul>
         </li>
     </ul>
@@ -76,19 +76,19 @@
         <ul class="ts-sidebar-menu">
 
             <li class="ts-label">Main</li>
-            <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <li><a href="/admin/dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
 
-            <li><a href="userlist.php"><i class="fa fa-users"></i> Userlist</a>
+            <li><a href="/admin/userlist"><i class="fa fa-users"></i> Userlist</a>
             </li>
-            <li><a href="profile.php"><i class="fa fa-user"></i> &nbsp;Profile</a>
+            <li><a href="/admin/profile"><i class="fa fa-user"></i> &nbsp;Profile</a>
             </li>
-            <li><a href="feedback.php"><i class="fa fa-envelope"></i> &nbsp;Feedback</a>
+            <li><a href="/admin/feedback"><i class="fa fa-envelope"></i> &nbsp;Feedback</a>
             </li>
-            <li><a href="notification.php"><i class="fa fa-bell"></i> &nbsp;Notification <sup style="color:red">*</sup></a>
+            <li><a href="/admin/notification"><i class="fa fa-bell"></i> &nbsp;Notification <sup style="color:red">*</sup></a>
             </li>
-            <li><a href="deleteduser.php"><i class="fa fa-user-times"></i> &nbsp;Deleted Users</a>
+            <li><a href="/admin/deleteduser"><i class="fa fa-user-times"></i> &nbsp;Deleted Users</a>
             </li>
-            <li><a href="download.php"><i class="fa fa-download"></i> &nbsp;Download Users-List</a>
+            <li><a href="/admin/download"><i class="fa fa-download"></i> &nbsp;Download Users-List</a>
             </li>
         </ul>
         <p class="text-center" style="color:#ffffff; margin-top: 100px;">© Ajay</p>
@@ -105,15 +105,15 @@
     </div>
 </div>
 <!-- Loading Scripts -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap-select.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.dataTables.min.js"></script>
-<script src="js/dataTables.bootstrap.min.js"></script>
-<script src="js/Chart.min.js"></script>
-<script src="js/fileinput.js"></script>
-<script src="js/chartData.js"></script>
-<script src="js/main.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap-select.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.dataTables.min.js"></script>
+<script src="/js/dataTables.bootstrap.min.js"></script>
+<script src="/js/Chart.min.js"></script>
+<script src="/js/fileinput.js"></script>
+<script src="/js/chartData.js"></script>
+<script src="/js/main.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         setTimeout(function () {

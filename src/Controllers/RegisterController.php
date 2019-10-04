@@ -36,6 +36,6 @@ class RegisterController
         }
 
         // Render a template
-        echo $this->renderer->render('register', compact('error', 'redirect'));
+        return $this->renderer->render('register', compact('error', 'redirect'));
     }
 }

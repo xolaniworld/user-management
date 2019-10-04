@@ -1,8 +1,8 @@
 ﻿<?php
 // DB credentials.
 define('DB_HOST', 'localhost');
-define('DB_USER', 'dbuser');
-define('DB_PASS', 'dbuser');
+define('DB_USER', 'root');
+define('DB_PASS', '');
 define('DB_NAME', '2520448_armentum');
 
 define('ROOT_DIR', dirname(__DIR__));

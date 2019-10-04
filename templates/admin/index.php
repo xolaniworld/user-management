@@ -1,6 +1,6 @@
 <?php $this->layout('layouts/guest', ['title' => 'Admin Login']) ?>
 <?php if ($redirect === true): ?>
-    <script type='text/javascript'> document.location = 'dashboard.php'; </script>
+    <script type='text/javascript'> document.location = '/admin/dashboard'; </script>
 <?php elseif($redirect === false) : ?>
     <script> alert('Invalid Details');</script>
 <?php endif; ?>

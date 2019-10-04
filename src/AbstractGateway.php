@@ -20,7 +20,7 @@ abstract class AbstractGateway
         if ($this->table === null) {
             throw new \Exception('$table required');
         }
-        $sql = "SELECT * from {$this->table};";
+        $sql = "select * from {$this->table};";
         $query = $this->pdo->prepare($sql);
         $query->execute();
         $result=$query->fetch(PDO::FETCH_OBJ);

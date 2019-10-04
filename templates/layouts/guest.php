@@ -11,14 +11,14 @@
 
     <title><?= $this->e($title) ?></title>
 
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-social.css">
-    <link rel="stylesheet" href="css/bootstrap-select.css">
-    <link rel="stylesheet" href="css/fileinput.min.css">
-    <link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-social.css">
+    <link rel="stylesheet" href="/css/bootstrap-select.css">
+    <link rel="stylesheet" href="/css/fileinput.min.css">
+    <link rel="stylesheet" href="/css/awesome-bootstrap-checkbox.css">
+    <link rel="stylesheet" href="/css/style.css">
 
     <script type="text/javascript" src="../vendor/countries.js"></script>
     <script src="/js/script.js"></script>

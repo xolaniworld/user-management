@@ -5,16 +5,14 @@ namespace Application;
 
 use Application\Admin\AdminGateway;
 use Application\Admin\AdminTransaction;
+use Application\Admin\DashboardTransaction;
 use Application\Controllers\Admin\AdminController;
+use Application\Controllers\Admin\DashboardController;
 use Application\Controllers\Admin\UserListController;
 use Application\Controllers\FeedbackController;
-use Application\Filesystem;
-use Application\PlatesTemplate;
+use Application\Controllers\RegisterController;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
-use Application\Session;
-use Symfony\Component\HttpFoundation\Request;
-use Application\UsersGateway;
 use Application\Controllers\NotificationController;
 
 class ControllerFactory
@@ -72,6 +70,17 @@ class ControllerFactory
         );
     }
 
+    public function makeAdminFeedbackController()
+    {
+        $userGateway = new \Application\UsersGateway($this->getDatabase());
+        $request = new \Application\Request();
+        $filesystem = new \Application\Filesystem(IMAGES_DIR);
+        $usersTransaction = new \Application\Users\UsersTransactions($userGateway, $request, $filesystem);
+        $feedbackGateway = new \Application\FeedbackGateway(get_database());
+        $feedbackTransaction = new \Application\FeedbackTransaction($feedbackGateway);
+        return new \Application\Controllers\Admin\FeedbackController($usersTransaction, $feedbackTransaction, $this->getRequest(), $this->getRenderer());
+    }
+
     public function makeUserListController()
     {
         return new UserListController(
@@ -81,6 +90,42 @@ class ControllerFactory
             ),
             $this->getRenderer(),
             $this->getRequest()
+        );
+    }
+
+    public function makeRegisterController()
+    {
+        return new RegisterController(
+            new RegisterTransaction(
+                new UsersGateway($this->getDatabase()),
+                new NotificationGateway($this->getDatabase()),
+                new Filesystem(IMAGES_DIR),
+                new \Application\Request()
+            ),
+            $this->getRenderer(),
+            $this->getRequest()
+        );
+    }
+
+    public function makeDashboardController()
+    {
+        return new DashboardController(
+            new DashboardTransaction(
+                new UsersGateway($this->getDatabase()),
+                new FeedbackGateway($this->getDatabase()),
+                new NotificationGateway($this->getDatabase()),
+                new DeletedUserGateway($this->getDatabase())
+            ),
+            $this->getRenderer()
+        );
+    }
+
+    public function makeAdminNotificationController()
+    {
+        return new Controllers\Admin\NotificationController(
+            new NotificationTransaction(new NotificationGateway($this->getDatabase())),
+            new AdminTransaction( new AdminGateway($this->getDatabase())),
+            $this->getRenderer(), $this->getRequest()
         );
     }
 

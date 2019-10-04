@@ -3,12 +3,13 @@
 
 namespace Application\Controllers\Admin;
 
+use Application\Controllers\AbstractController;
 use Application\NotificationTransaction;
 use Application\Admin\AdminTransaction;
 use Application\RendererInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class NotificationController
+class NotificationController extends AbstractController
 {
     private $notificationTransaction;
     private $adminTransaction;
@@ -25,6 +26,8 @@ class NotificationController
 
     public function notification()
     {
+        $this->authenticated();
+
         if ($this->request->getMethod() === 'POST') {
             $input = $this->request->getParsedBody();
             $this->adminTransaction->submitUpdateAdminUpdateUsernameAndPassword(
@@ -38,6 +41,6 @@ class NotificationController
         $count = $this->notificationTransaction->getTotal();
         $cnt = 1;
 
-        echo $this->renderer->render('admin/notification', compact('results', 'count', 'cnt'));
+        return $this->renderer->render('admin/notification', compact('results', 'count', 'cnt'));
     }
 }

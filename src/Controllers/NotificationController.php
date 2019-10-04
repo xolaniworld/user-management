@@ -2,11 +2,12 @@
 
 namespace Application\Controllers;
 
+use Application\Auth;
 use Application\NotificationTransaction;
 use Application\RendererInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class NotificationController
+class NotificationController extends AbstractController
 {
     private $transaction;
     private $renderer;
@@ -21,12 +22,14 @@ class NotificationController
 
     public function notification()
     {
+        $this->authenticated();
+
         $reciver = $this->session->get('alogin');
 
         $this->transaction->findNotificationsByReciver($reciver);
 
         // Render a template
-        echo $this->renderer->render('notification', [
+        return $this->renderer->render('notification', [
             'alogin' => $reciver,
             'results' => $this->transaction->getNotications(),
             'count' => $this->transaction->getTotal(),

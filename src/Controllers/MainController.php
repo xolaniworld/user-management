@@ -41,6 +41,6 @@ class MainController
         }
 
         // Render a renderer
-        echo $this->renderer->render('home', compact('redirect'));
+        return $this->renderer->render('home', compact('redirect'));
     }
 }

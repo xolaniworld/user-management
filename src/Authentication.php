@@ -7,7 +7,7 @@ class Authentication
 {
     public static function isNotLoggedIn()
     {
-        $session =\Application\Session::getSession();
+        $session = Session::getSession();
 
         if (! $session->has('alogin')) {
             return true;

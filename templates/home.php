@@ -16,7 +16,7 @@
                                 <button class="btn btn-primary btn-block" name="login" type="submit">LOGIN</button>
                             </form>
                             <br>
-                            <p>Don't Have an Account? <a href="register.php" >Signup</a></p>
+                            <p>Don't Have an Account? <a href="/register" >Signup</a></p>
                         </div>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
 <?php $this->push('before_body_close') ?>
     <?php if ($redirect !== null) :?>
         <?php if ($redirect === true) :?>
-            <script type='text/javascript'> document.location = 'profile.php'; </script>
+            <script type='text/javascript'> document.location = 'profile'; </script>
         <?php else: ?>
             <script> alert('Invalid Details Or Account Not Confirmed');</script>
         <?php endif; ?>

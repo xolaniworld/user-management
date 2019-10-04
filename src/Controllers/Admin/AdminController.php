@@ -5,11 +5,12 @@ namespace Application\Controllers\Admin;
 
 
 use Application\Admin\AdminTransaction;
+use Application\Controllers\AbstractController;
 use Application\RendererInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class AdminController
+class AdminController extends AbstractController
 {
     private $transaction;
     private $request;
@@ -35,11 +36,13 @@ class AdminController
         }
 
         // Render a template
-        echo $this->renderer->render('admin/index', compact('redirect'));
+        return $this->renderer->render('admin/index', compact('redirect'));
     }
 
     public function changePassword()
     {
+        $this->authenticated();
+
         $msg = null;
         $error = null;
 
@@ -52,11 +55,13 @@ class AdminController
             }
         }
 
-        echo $this->renderer->render('admin/change-password', compact('msg', 'error'));
+        return $this->renderer->render('admin/change-password', compact('msg', 'error'));
     }
 
     public function profile()
     {
+        $this->authenticated();
+
         $msg = null;
         if ($this->request->getMethod() === 'POST') {
             $input = $this->request->getParsedBody();
@@ -68,6 +73,6 @@ class AdminController
         $result = $this->transaction->getAll();
         $cnt = 1;
 
-        echo $this->renderer->render('admin/profile', compact('result', 'cnt', 'name', 'email', 'msg'));
+        return $this->renderer->render('admin/profile', compact('result', 'cnt', 'name', 'email', 'msg'));
     }
 }

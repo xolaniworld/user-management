@@ -3,12 +3,13 @@
 
 namespace Application\Controllers\Admin;
 
+use Application\Controllers\AbstractController;
 use Application\Users\UsersTransactions;
 use Application\FeedbackTransaction;
 use Application\RendererInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class FeedbackController
+class FeedbackController extends AbstractController
 {
     private $usersTransaction;
     private $feedbackTransaction;
@@ -25,6 +26,8 @@ class FeedbackController
 
     public function feedback()
     {
+        $this->authenticated();
+
         $msg = null;
         $get = $this->request->getQueryParams();
 
@@ -50,6 +53,6 @@ class FeedbackController
         $count = $this->feedbackTransaction->getTotal();
         $cnt = 1;
 
-        echo $this->renderer->render('admin/feedback', compact('msg', 'results', 'count', 'cnt'));
+        return $this->renderer->render('admin/feedback', compact('msg', 'results', 'count', 'cnt'));
     }
 }

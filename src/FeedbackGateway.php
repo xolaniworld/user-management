@@ -23,7 +23,7 @@ class FeedbackGateway extends AbstractGateway
 
     public function countByReciver($reciver)
     {
-        $sql1 = "SELECT id from feedback where reciver = (:reciver)";
+        $sql1 = "select id from feedback where reciver = (:reciver)";
         $query1 = $this->pdo->prepare($sql1);;
         $query1->bindParam(':reciver', $reciver, PDO::PARAM_STR);
         $query1->execute();
@@ -33,7 +33,7 @@ class FeedbackGateway extends AbstractGateway
 
     public function findByReciver($reciver)
     {
-        $sql = "SELECT * from  feedback where reciver = (:reciver)";
+        $sql = "select * from  feedback where reciver = (:reciver)";
         $query = $this->pdo->prepare($sql);
         $query->bindParam(':reciver', $reciver, PDO::PARAM_STR);
         $query->execute();

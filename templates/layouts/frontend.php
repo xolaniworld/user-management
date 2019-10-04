@@ -10,7 +10,7 @@
             <a href="#"><img src="/img/ts-avatar.jpg" class="ts-avatar hidden-side" alt=""> Account
                 <i class="fa fa-angle-down hidden-side"></i></a>
             <ul>
-                <li><a href="change-password.php">Change Password</a></li>
+                <li><a href="/change-password">Change Password</a></li>
                 <li><a href="logout.php">Logout</a></li>
             </ul>
         </li>
@@ -21,13 +21,13 @@
     <nav class="ts-sidebar">
         <ul class="ts-sidebar-menu">
             <li class="ts-label">Main</li>
-            <li><a href="profile.php"><i class="fa fa-user"></i> &nbsp;Profile</a>
+            <li><a href="/profile"><i class="fa fa-user"></i> &nbsp;Profile</a>
             </li>
-            <li><a href="feedback.php"><i class="fa fa-envelope"></i> &nbsp;Feedback</a>
+            <li><a href="/feedback"><i class="fa fa-envelope"></i> &nbsp;Feedback</a>
             </li>
-            <li><a href="notification.php"><i class="fa fa-bell"></i> &nbsp;Notification<sup style="color:red">*</sup></a>
+            <li><a href="/notification"><i class="fa fa-bell"></i> &nbsp;Notification<sup style="color:red">*</sup></a>
             </li>
-            <li><a href="messages.php"><i class="fa fa-envelope"></i> &nbsp;Messages</a>
+            <li><a href="/messages"><i class="fa fa-envelope"></i> &nbsp;Messages</a>
             </li>
         </ul>
         <p class="text-center" style="color:#ffffff; margin-top: 100px;">© Ajay</p>
