@@ -1,10 +1,10 @@
 ﻿<?php 
 // DB credentials.
-define('DB_HOST','localhost');
-define('DB_USER','qamata');
-define('DB_PASS','secrect');
-define('DB_NAME','usermngmtsys_db');
-define('DB_PORT','30666');
+define('DB_HOST','usermngmtsys_container');
+define('DB_USER','MYSQL_USER');
+define('DB_PASS','MYSQL_PASSWORD');
+define('DB_NAME','MYSQL_DATABASE');
+
 // Establish database connection.
 try
 {
