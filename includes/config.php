@@ -1,9 +1,10 @@
 ﻿<?php 
 // DB credentials.
-define('DB_HOST','fdb15.eohost.com');
-define('DB_USER','2520448_armentum');
-define('DB_PASS','963852asd');
-define('DB_NAME','2520448_armentum');
+define('DB_HOST','localhost');
+define('DB_USER','qamata');
+define('DB_PASS','secrect');
+define('DB_NAME','usermngmtsys_db');
+define('DB_PORT','30666');
 // Establish database connection.
 try
 {
