@@ -4,7 +4,7 @@ services:
   webapp:
     build:
       context: .
-      dockerfile: ./Dockerfile.development
+      dockerfile: docker/Dockerfile.development
     ports:
       - "8000:80"
     volumes:
