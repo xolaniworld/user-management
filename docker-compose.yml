@@ -9,13 +9,12 @@ services:
       - "8000:80"
     volumes:
       - ./:/var/www
-    links:
-      - db
-  db:
+      - ./docker/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    depends_on:
+      - mysqldb
+  mysqldb:
     image: mysql
-    container_name: usermngmtsys_container
-    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
-    # (this is just an example, not intended to be a production configuration)
+    container_name: mysqldb
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     volumes:
