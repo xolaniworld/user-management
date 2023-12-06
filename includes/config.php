@@ -1,13 +1,5 @@
-﻿<?php 
-// DB credentials.
-//define('DB_HOST','192.168.16.2');
-define('DB_HOST','mysqldb');
-define('DB_USER','useradmin');
-define('DB_PASS','S3cr3t');
-define('DB_NAME','thedatabase');
-
-
-//var_dump(DB_HOST, DB_USER, DB_PASS, DB_NAME); exit;
+﻿<?php
+require __DIR__ . '/db.php';
 
 // Establish database connection.
 try
