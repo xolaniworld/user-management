@@ -6,18 +6,15 @@ if(isset($_POST['login']))
     $admin = new \UserManagement\Admin\AdminRepository($dbh);
     $userLogin = $admin->userLogin($_POST['username'], $_POST['password']);
     $results= $admin->getResults();
-if($userLogin)
-{
-$_SESSION['alogin']=$_POST['username'];
-echo "<script type='text/javascript'> document.location = 'dashboard.php'; </script>";
-} else{
-  
-  echo "<script>alert('Invalid Details');</script>";
 
+    if($userLogin)
+    {
+        $_SESSION['alogin']=$_POST['username'];
+        echo "<script type='text/javascript'> document.location = 'dashboard.php'; </script>";
+    } else{
+      echo "<script>alert('Invalid Details');</script>";
+    }
 }
-
-}
-
 ?>
 <!doctype html>
 <html lang="en" class="no-js">
