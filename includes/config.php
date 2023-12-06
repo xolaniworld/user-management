@@ -4,7 +4,7 @@
 define('DB_HOST','mysqldb');
 define('DB_USER','useradmin');
 define('DB_PASS','S3cr3t');
-define('DB_NAME','thdatabase');
+define('DB_NAME','thedatabase');
 
 
 //var_dump(DB_HOST, DB_USER, DB_PASS, DB_NAME); exit;

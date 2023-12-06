@@ -24,7 +24,7 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
-      MYSQL_DATABASE: thdatabase
+      MYSQL_DATABASE: thedatabase
       MYSQL_USER: useradmin
       MYSQL_PASSWORD: S3cr3t
 volumes:
