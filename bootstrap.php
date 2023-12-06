@@ -1,5 +1,5 @@
 <?php
 session_start();
 error_reporting(-1);
-include('includes/config.php');
-
+require __DIR__ . '/composer_vendor/autoload.php';
+require __DIR__ . '/includes/config.php';

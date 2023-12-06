@@ -1,6 +1,6 @@
 <?php
-session_start();
-include('includes/config.php');
+require __DIR__ . '/../bootstrap.php';
+
 if(isset($_POST['login']))
 {
 $email=$_POST['username'];
