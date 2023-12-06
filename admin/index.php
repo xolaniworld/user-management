@@ -1,17 +1,12 @@
 <?php
-require __DIR__ . '/../bootstrap.php';
+$dbh = require __DIR__ . '/../bootstrap.php';
 
 if(isset($_POST['login']))
 {
-$email=$_POST['username'];
-$password=md5($_POST['password']);
-$sql ="SELECT UserName,Password FROM admin WHERE UserName=:email and Password=:password";
-$query= $dbh -> prepare($sql);
-$query-> bindParam(':email', $email, PDO::PARAM_STR);
-$query-> bindParam(':password', $password, PDO::PARAM_STR);
-$query-> execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-if($query->rowCount() > 0)
+    $admin = new \UserManagement\Admin\AdminRepository($dbh);
+    $userLogin = $admin->userLogin($_POST['username'], $_POST['password']);
+    $results= $admin->getResults();
+if($userLogin)
 {
 $_SESSION['alogin']=$_POST['username'];
 echo "<script type='text/javascript'> document.location = 'dashboard.php'; </script>";
