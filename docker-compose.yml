@@ -4,7 +4,7 @@ services:
   webapp:
     build:
       context: .
-      dockerfile: docker/Dockerfile.development
+      dockerfile: docker/Dockerfile
     ports:
       - "8000:80"
     volumes:
@@ -21,11 +21,11 @@ services:
       - db_volume:/var/lib/mysql
       - ./docker/database.sql:/docker-entrypoint-initdb.d/database.sql
     ports:
-      - "9906:3306"
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
-      MYSQL_DATABASE: MYSQL_DATABASE
-      MYSQL_USER: MYSQL_USER
-      MYSQL_PASSWORD: MYSQL_PASSWORD
+      MYSQL_DATABASE: thdatabase
+      MYSQL_USER: useradmin
+      MYSQL_PASSWORD: S3cr3t
 volumes:
   db_volume:

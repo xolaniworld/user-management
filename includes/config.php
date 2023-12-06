@@ -2,9 +2,9 @@
 // DB credentials.
 //define('DB_HOST','192.168.16.2');
 define('DB_HOST','mysqldb');
-define('DB_USER','MYSQL_USER');
-define('DB_PASS','MYSQL_PASSWORD');
-define('DB_NAME','MYSQL_DATABASE');
+define('DB_USER','useradmin');
+define('DB_PASS','S3cr3t');
+define('DB_NAME','thdatabase');
 
 
 //var_dump(DB_HOST, DB_USER, DB_PASS, DB_NAME); exit;
