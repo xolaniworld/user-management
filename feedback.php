@@ -1,7 +1,6 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
+$dbh = require __DIR__ . '/bootstrap.php';
+
 if(strlen($_SESSION['alogin'])==0)
 	{	
 header('location:index.php');
@@ -28,21 +27,12 @@ if(isset($_POST['submit']))
 			$attachment=$final_file;
 		}
 	$notireciver = 'Admin';
-    $sqlnoti="insert into notification (notiuser,notireciver,notitype) values (:notiuser,:notireciver,:notitype)";
-    $querynoti = $dbh->prepare($sqlnoti);
-	$querynoti-> bindParam(':notiuser', $user, PDO::PARAM_STR);
-	$querynoti-> bindParam(':notireciver', $notireciver, PDO::PARAM_STR);
-    $querynoti-> bindParam(':notitype', $notitype, PDO::PARAM_STR);
-    $querynoti->execute();
+    $notificationRepo = new \UserManagement\NotificationRepository($dbh);
+    $notificationRepo->insert($user, $notireciver, $notitype);
 
-	$sql="insert into feedback (sender, reciver, title,feedbackdata,attachment) values (:user,:reciver,:title,:description,:attachment)";
-	$query = $dbh->prepare($sql);
-	$query-> bindParam(':user', $user, PDO::PARAM_STR);
-	$query-> bindParam(':reciver', $reciver, PDO::PARAM_STR);
-	$query-> bindParam(':title', $title, PDO::PARAM_STR);
-	$query-> bindParam(':description', $description, PDO::PARAM_STR);
-	$query-> bindParam(':attachment', $attachment, PDO::PARAM_STR);
-    $query->execute(); 
+    $feedbackRepo = new \UserManagement\FeedbackRepository($dbh);
+    $feedbackRepo->insert($user, $reciver, $title, $description, $attachment);
+
 	$msg="Feedback Send";
 }    
 ?>
@@ -121,8 +111,8 @@ if(isset($_POST['submit']))
                             <h2>Give us Feedback</h2>
 								<div class="panel panel-default">
 									<div class="panel-heading">Edit Info</div>
-<?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } 
-				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
+<?php if(isset($error)){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php }
+				else if(isset($msg)){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
 
 <div class="panel-body">
 <form method="post" class="form-horizontal" enctype="multipart/form-data">
