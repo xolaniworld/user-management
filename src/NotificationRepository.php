@@ -4,7 +4,7 @@ namespace UserManagement;
 use PDO;
 class NotificationRepository extends AbstractRepository
 {
-    public function add($sender, $reciver, $notitype)
+    public function insert($sender, $reciver, $notitype)
     {
         $sqlnoti="insert into notification (notiuser,notireciver,notitype) values (:notiuser,:notireciver,:notitype)";
         $querynoti = $this->dbh->prepare($sqlnoti);

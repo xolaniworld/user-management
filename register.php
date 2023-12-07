@@ -24,7 +24,7 @@ $notitype='Create Account';
 $reciver='Admin';
 $sender=$email;
 $notificationRepo = new \UserManagement\NotificationRepository($dbh);
-$notificationRepo->add($sender, $reciver, $notitype);
+$notificationRepo->insert($sender, $reciver, $notitype);
 
     $userRepo =  new \UserManagement\UsersRepository($dbh);
 
