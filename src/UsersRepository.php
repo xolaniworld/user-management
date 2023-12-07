@@ -4,6 +4,14 @@ namespace UserManagement;
 use PDO;
 class UsersRepository extends AbstractRepository
 {
+    public function getAll()
+    {
+        $sql = "SELECT * from users;";
+        $query = $this->dbh -> prepare($sql);
+        $query->execute();
+        $result=$query->fetch(PDO::FETCH_OBJ);
+        return $result;
+    }
     public function login($email, $password)
     {
         $password = md5($password);

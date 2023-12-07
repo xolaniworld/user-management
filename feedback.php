@@ -92,11 +92,9 @@ if(isset($_POST['submit']))
 
 <body>
 <?php
-		$sql = "SELECT * from users;";
-		$query = $dbh -> prepare($sql);
-		$query->execute();
-		$result=$query->fetch(PDO::FETCH_OBJ);
-		$cnt=1;	
+$userRepo = new \UserManagement\UsersRepository($dbh);
+$result = $userRepo->getAll();
+$cnt=1;
 ?>
 	<?php include('includes/header.php');?>
 	<div class="ts-main-content">
