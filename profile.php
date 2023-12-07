@@ -1,7 +1,6 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
+$dbh = require __DIR__ . '/bootstrap.php';
+
 if(strlen($_SESSION['alogin'])==0)
 	{	
 header('location:index.php');
@@ -27,16 +26,8 @@ if(isset($_POST['submit']))
 		{
 			$image=$final_file;
 		}
-
-	$sql="UPDATE users SET name=(:name), email=(:email), mobile=(:mobileno), designation=(:designation), Image=(:image) WHERE id=(:idedit)";
-	$query = $dbh->prepare($sql);
-	$query-> bindParam(':name', $name, PDO::PARAM_STR);
-	$query-> bindParam(':email', $email, PDO::PARAM_STR);
-	$query-> bindParam(':mobileno', $mobileno, PDO::PARAM_STR);
-	$query-> bindParam(':designation', $designation, PDO::PARAM_STR);
-	$query-> bindParam(':image', $image, PDO::PARAM_STR);
-	$query-> bindParam(':idedit', $idedit, PDO::PARAM_STR);
-	$query->execute();
+    $userRepo = new \UserManagement\UsersRepository($dbh);
+    $userRepo->update($name, $email, $mobileno, $designation, $image, $idedit);
 	$msg="Information Updated Successfully";
 }    
 ?>
