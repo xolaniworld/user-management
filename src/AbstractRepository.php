@@ -5,7 +5,7 @@ namespace UserManagement;
 class AbstractRepository
 {
     protected $dbh;
-    private $results;
+    protected $results;
     public function __construct($dbh)
     {
         $this->dbh = $dbh;
