@@ -1,11 +1,12 @@
 <?php
 
 namespace UserManagement;
-
+use PDO;
 class UsersRepository extends AbstractRepository
 {
     public function login($email, $password)
     {
+        $password = md5($password);
         $status='1';
         $sql ="SELECT email,password FROM users WHERE email=:email and password=:password and status=(:status)";
         $query= $this->dbh -> prepare($sql);
