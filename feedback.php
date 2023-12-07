@@ -93,7 +93,7 @@ if(isset($_POST['submit']))
 <body>
 <?php
 $userRepo = new \UserManagement\UsersRepository($dbh);
-$result = $userRepo->getAll();
+$result = $userRepo->selectAll();
 $cnt=1;
 ?>
 	<?php include('includes/header.php');?>
