@@ -1,8 +1,10 @@
 FROM php:7.4-apache
 
 RUN docker-php-ext-install pdo pdo_mysql
-RUN pecl install xdebug-3.1.6 \
+RUN apt-get update && apt-get dist-upgrade -y  \
+    && pecl install xdebug-3.1.6 \
     && docker-php-ext-enable xdebug
+
 COPY docker/000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY docker/start-apache.sh /usr/local/bin
 RUN a2enmod rewrite
