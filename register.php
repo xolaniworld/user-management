@@ -47,7 +47,7 @@ $notification = new \UserManagement\NotificationRepository($dbh);
 
     $userRepo =  new \UserManagement\UsersRepository($dbh);
 
-if($userRepo->add($name, $email, $password, $gender, $mobileno, $designation, $image))
+if($userRepo->insert($name, $email, $password, $gender, $mobileno, $designation, $image))
 {
 echo "<script type='text/javascript'>alert('Registration Sucessfull!');</script>";
 echo "<script type='text/javascript'> document.location = 'index.php'; </script>";
