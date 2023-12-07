@@ -23,27 +23,8 @@ if(move_uploaded_file($file_loc,$folder.$final_file))
 $notitype='Create Account';
 $reciver='Admin';
 $sender=$email;
-$notification = new \UserManagement\NotificationRepository($dbh);
-    $notification->add($sender, $reciver, $notitype);
-
-//$sqlnoti="insert into notification (notiuser,notireciver,notitype) values (:notiuser,:notireciver,:notitype)";
-//$querynoti = $dbh->prepare($sqlnoti);
-//$querynoti-> bindParam(':notiuser', $sender, PDO::PARAM_STR);
-//$querynoti-> bindParam(':notireciver',$reciver, PDO::PARAM_STR);
-//$querynoti-> bindParam(':notitype', $notitype, PDO::PARAM_STR);
-//$querynoti->execute();
-    
-//$sql ="INSERT INTO users(name,email, password, gender, mobile, designation, image) VALUES(:name, :email, :password, :gender, :mobileno, :designation, :image)";
-//$query= $dbh -> prepare($sql);
-//$query-> bindParam(':name', $name, PDO::PARAM_STR);
-//$query-> bindParam(':email', $email, PDO::PARAM_STR);
-//$query-> bindParam(':password', $password, PDO::PARAM_STR);
-//$query-> bindParam(':gender', $gender, PDO::PARAM_STR);
-//$query-> bindParam(':mobileno', $mobileno, PDO::PARAM_STR);
-//$query-> bindParam(':designation', $designation, PDO::PARAM_STR);
-//$query-> bindParam(':image', $image, PDO::PARAM_STR);
-//$query->execute();
-//$lastInsertId = $dbh->lastInsertId();
+$notificationRepo = new \UserManagement\NotificationRepository($dbh);
+$notificationRepo->add($sender, $reciver, $notitype);
 
     $userRepo =  new \UserManagement\UsersRepository($dbh);
 
