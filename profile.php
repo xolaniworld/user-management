@@ -22,10 +22,9 @@ if(isset($_POST['submit']))
 	$idedit=$_POST['editid'];
 	$image=$_POST['image'];
 
-	if(move_uploaded_file($file_loc,$folder.$final_file))
-		{
-			$image=$final_file;
-		}
+	if(move_uploaded_file($file_loc,$folder.$final_file)) {
+        $image=$final_file;
+    }
     $userRepo = new \UserManagement\UsersRepository($dbh);
     $userRepo->update($name, $email, $mobileno, $designation, $image, $idedit);
 	$msg="Information Updated Successfully";
