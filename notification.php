@@ -1,12 +1,9 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
-if(strlen($_SESSION['alogin'])==0)
-	{	
-header('location:index.php');
-}
-else{   
+$dbh = require __DIR__ . '/bootstrap.php';
+
+if(strlen($_SESSION['alogin'])==0) {
+ header('location:index.php');
+} else {
 ?>
 
 <!doctype html>
@@ -78,13 +75,11 @@ else{
 									   <div class="panel-body">
 <?php 
 $reciver = $_SESSION['alogin'];
-$sql = "SELECT * from  notification where notireciver = (:reciver) order by time DESC";
-$query = $dbh -> prepare($sql);
-$query-> bindParam(':reciver', $reciver, PDO::PARAM_STR);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
+$notifcationRepo = new \UserManagement\NotificationRepository($dbh);
+$morethanone = $notifcationRepo->selectAllByReceiver($reciver);
+$results = $notifcationRepo->getResults();
 $cnt=1;
-if($query->rowCount() > 0)
+if($morethanone)
 {
 foreach($results as $result)
 {				?>	
