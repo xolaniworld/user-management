@@ -26,8 +26,7 @@ $sender=$email;
 $notificationRepo = new \UserManagement\NotificationRepository($dbh);
 $notificationRepo->insert($sender, $reciver, $notitype);
 
-    $userRepo =  new \UserManagement\UsersRepository($dbh);
-
+$userRepo =  new \UserManagement\UsersRepository($dbh);
 if($userRepo->insert($name, $email, $password, $gender, $mobileno, $designation, $image))
 {
 echo "<script type='text/javascript'>alert('Registration Sucessfull!');</script>";
