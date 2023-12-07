@@ -4,7 +4,7 @@ namespace UserManagement;
 use PDO;
 class UsersRepository extends AbstractRepository
 {
-    public function getAll()
+    public function selectAll()
     {
         $sql = "SELECT * from users;";
         $query = $this->dbh -> prepare($sql);
