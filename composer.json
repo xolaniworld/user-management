@@ -7,5 +7,9 @@
     },
     "config": {
         "vendor-dir": "composer_vendor"
+    },
+    "require-dev": {
+        "codeception/codeception": "^4.2",
+        "symfony/var-dumper": "^6.4"
     }
 }
