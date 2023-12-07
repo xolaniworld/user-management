@@ -1,7 +1,6 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
+$dbh = require __DIR__ . '/bootstrap.php';
+
 if(strlen($_SESSION['alogin'])==0)
 	{	
 header('location:index.php');
@@ -79,8 +78,8 @@ else{
 						<div class="panel panel-default">
 							<div class="panel-heading">List Users</div>
 							<div class="panel-body">
-							<?php if($error){?><div class="errorWrap" id="msgshow"><?php echo htmlentities($error); ?> </div><?php } 
-				else if($msg){?><div class="succWrap" id="msgshow"><?php echo htmlentities($msg); ?> </div><?php }?>
+							<?php if(isset($error)){?><div class="errorWrap" id="msgshow"><?php echo htmlentities($error); ?> </div><?php }
+				else if(isset($msg)){?><div class="succWrap" id="msgshow"><?php echo htmlentities($msg); ?> </div><?php }?>
 								<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 									<thead>
 										<tr>
