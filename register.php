@@ -1,42 +1,36 @@
 <?php
 $dbh = require __DIR__ . '/bootstrap.php';
-if(isset($_POST['submit']))
-{
+if(isset($_POST['submit'])) {
 
-$file = $_FILES['image']['name'];
-$file_loc = $_FILES['image']['tmp_name'];
-$folder="images/"; 
-$new_file_name = strtolower($file);
-$final_file=str_replace(' ','-',$new_file_name);
+    $file = $_FILES['image']['name'];
+    $file_loc = $_FILES['image']['tmp_name'];
+    $folder="images/";
+    $new_file_name = strtolower($file);
+    $final_file=str_replace(' ','-',$new_file_name);
 
-$name=$_POST['name'];
-$email=$_POST['email'];
-$password=md5($_POST['password']);
-$gender=$_POST['gender'];
-$mobileno=$_POST['mobileno'];
-$designation=$_POST['designation'];
+    $name=$_POST['name'];
+    $email=$_POST['email'];
+    $password=md5($_POST['password']);
+    $gender=$_POST['gender'];
+    $mobileno=$_POST['mobileno'];
+    $designation=$_POST['designation'];
 
-if(move_uploaded_file($file_loc,$folder.$final_file))
-	{
-		$image=$final_file;
+    if(move_uploaded_file($file_loc,$folder.$final_file)) {
+        $image=$final_file;
     }
-$notitype='Create Account';
-$reciver='Admin';
-$sender=$email;
-$notificationRepo = new \UserManagement\NotificationRepository($dbh);
-$notificationRepo->insert($sender, $reciver, $notitype);
+    $notitype='Create Account';
+    $reciver='Admin';
+    $sender=$email;
+    $notificationRepo = new \UserManagement\NotificationRepository($dbh);
+    $notificationRepo->insert($sender, $reciver, $notitype);
 
-$userRepo =  new \UserManagement\UsersRepository($dbh);
-if($userRepo->insert($name, $email, $password, $gender, $mobileno, $designation, $image))
-{
-echo "<script type='text/javascript'>alert('Registration Sucessfull!');</script>";
-echo "<script type='text/javascript'> document.location = 'index.php'; </script>";
-}
-else 
-{
-$error="Something went wrong. Please try again";
-}
-
+    $userRepo =  new \UserManagement\UsersRepository($dbh);
+    if($userRepo->insert($name, $email, $password, $gender, $mobileno, $designation, $image)) {
+        echo "<script type='text/javascript'>alert('Registration Sucessfull!');</script>";
+        echo "<script type='text/javascript'> document.location = 'index.php'; </script>";
+    } else {
+        $error="Something went wrong. Please try again";
+    }
 }
 ?>
 
