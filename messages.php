@@ -93,13 +93,11 @@ else{
 
 <?php 
 $reciver = $_SESSION['alogin'];
-$sql = "SELECT * from  feedback where reciver = (:reciver)";
-$query = $dbh -> prepare($sql);
-$query-> bindParam(':reciver', $reciver, PDO::PARAM_STR);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
+$feedbackRepo = new \UserManagement\FeedbackRepository($dbh);
+$moreThanOne = $feedbackRepo->selectAllByReceiver($reciver);
+$results=$feedbackRepo->getResults();
 $cnt=1;
-if($query->rowCount() > 0)
+if($moreThanOne)
 {
 foreach($results as $result)
 {				?>	
