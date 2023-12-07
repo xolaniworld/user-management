@@ -12,6 +12,16 @@ class UsersRepository extends AbstractRepository
         $result=$query->fetch(PDO::FETCH_OBJ);
         return $result;
     }
+
+    public function selectByEmail($email)
+    {
+        $sql = "SELECT * from users where email = (:email);";
+        $query = $this->dbh -> prepare($sql);
+        $query-> bindParam(':email', $email, PDO::PARAM_STR);
+        $query->execute();
+        $this->results=$query->fetch(PDO::FETCH_OBJ);
+        return $this->results;
+    }
     public function login($email, $password)
     {
         $password = md5($password);

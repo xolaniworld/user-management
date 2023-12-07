@@ -86,12 +86,10 @@ if(isset($_POST['submit']))
 
 <body>
 <?php
+
 		$email = $_SESSION['alogin'];
-		$sql = "SELECT * from users where email = (:email);";
-		$query = $dbh -> prepare($sql);
-		$query-> bindParam(':email', $email, PDO::PARAM_STR);
-		$query->execute();
-		$result=$query->fetch(PDO::FETCH_OBJ);
+$userRepo = new \UserManagement\UsersRepository($dbh);
+$result = $userRepo->selectByEmail($email);
 		$cnt=1;	
 ?>
 	<?php include('includes/header.php');?>
@@ -105,8 +103,8 @@ if(isset($_POST['submit']))
 							<div class="col-md-12">
 								<div class="panel panel-default">
 									<div class="panel-heading"><?php echo htmlentities($_SESSION['alogin']); ?></div>
-<?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } 
-				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
+<?php if(isset($error)){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php }
+				else if(isset($msg)){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
 
 									<div class="panel-body">
 <form method="post" class="form-horizontal" enctype="multipart/form-data">
