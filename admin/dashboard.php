@@ -1,7 +1,6 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
+$dbh = require __DIR__ . '/../bootstrap.php';
+
 if(strlen($_SESSION['alogin'])==0)
 	{	
 header('location:index.php');
@@ -59,12 +58,10 @@ else{
 										<div class="panel panel-default">
 											<div class="panel-body bk-primary text-light">
 												<div class="stat-panel text-center">
-<?php 
-$sql ="SELECT id from users";
-$query = $dbh -> prepare($sql);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-$bg=$query->rowCount();
+<?php
+$userRepo = new \UserManagement\UsersRepository($dbh);
+$bg= $userRepo->count();
+$results = $userRepo->getResults();
 ?>
 													<div class="stat-panel-number h1 "><?php echo htmlentities($bg);?></div>
 													<div class="stat-panel-title text-uppercase">Total Users</div>
@@ -78,14 +75,11 @@ $bg=$query->rowCount();
 											<div class="panel-body bk-success text-light">
 												<div class="stat-panel text-center">
 
-<?php 
+<?php
 $reciver = 'Admin';
-$sql1 ="SELECT id from feedback where reciver = (:reciver)";
-$query1 = $dbh -> prepare($sql1);;
-$query1-> bindParam(':reciver', $reciver, PDO::PARAM_STR);
-$query1->execute();
-$results1=$query1->fetchAll(PDO::FETCH_OBJ);
-$regbd=$query1->rowCount();
+$feedbackRepo = new \UserManagement\FeedbackRepository($dbh);
+$regbd = $feedbackRepo->countByReciever($reciver);
+$results1=$feedbackRepo->getResults();
 ?>
 													<div class="stat-panel-number h1 "><?php echo htmlentities($regbd);?></div>
 													<div class="stat-panel-title text-uppercase">Feedback Messages</div>
@@ -100,14 +94,11 @@ $regbd=$query1->rowCount();
 											<div class="panel-body bk-danger text-light">
 												<div class="stat-panel text-center">
 
-<?php 
+<?php
 $reciver = 'Admin';
-$sql12 ="SELECT id from notification where notireciver = (:reciver)";
-$query12 = $dbh -> prepare($sql12);;
-$query12-> bindParam(':reciver', $reciver, PDO::PARAM_STR);
-$query12->execute();
-$results12=$query12->fetchAll(PDO::FETCH_OBJ);
-$regbd2=$query12->rowCount();
+$notificationRepo = new \UserManagement\NotificationRepository($dbh);
+$regbd2 = $notificationRepo->countByReceiver($reciver);
+$results12 = $notificationRepo->getResults();
 ?>
 													<div class="stat-panel-number h1 "><?php echo htmlentities($regbd2);?></div>
 													<div class="stat-panel-title text-uppercase">Notifications</div>
@@ -120,12 +111,10 @@ $regbd2=$query12->rowCount();
 										<div class="panel panel-default">
 											<div class="panel-body bk-info text-light">
 												<div class="stat-panel text-center">
-												<?php 
-$sql6 ="SELECT id from deleteduser ";
-$query6 = $dbh -> prepare($sql6);;
-$query6->execute();
-$results6=$query6->fetchAll(PDO::FETCH_OBJ);
-$query=$query6->rowCount();
+												<?php
+                                                $deletedUserRepo = new \UserManagement\DeletedUserRepository($dbh);
+                                                $query = $deletedUserRepo->count();
+                                                $results6 = $deletedUserRepo->getResults();
 ?>
 													<div class="stat-panel-number h1 "><?php echo htmlentities($query);?></div>
 													<div class="stat-panel-title text-uppercase">Deleted Users</div>

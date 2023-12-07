@@ -4,6 +4,15 @@ namespace UserManagement;
 use PDO;
 class FeedbackRepository extends AbstractRepository
 {
+    public function countByReciever($reciver)
+    {
+        $sql1 ="SELECT id from feedback where reciver = (:reciver)";
+        $query1 = $this->dbh -> prepare($sql1);;
+        $query1-> bindParam(':reciver', $reciver, PDO::PARAM_STR);
+        $query1->execute();
+        $this->results = $query1->fetchAll(PDO::FETCH_OBJ);
+        return $query1->rowCount();
+    }
     public function selectAllByReceiver($reciver)
     {
         $sql = "SELECT * from  feedback where reciver = (:reciver)";

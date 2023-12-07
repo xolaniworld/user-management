@@ -4,6 +4,14 @@ namespace UserManagement;
 use PDO;
 class UsersRepository extends AbstractRepository
 {
+    public function count()
+    {
+        $sql ="SELECT id from users";
+        $query = $this->dbh -> prepare($sql);
+        $query->execute();
+        $this->results=$query->fetchAll(PDO::FETCH_OBJ);
+        return $query->rowCount();
+    }
     public function selectAll()
     {
         $sql = "SELECT * from users;";
