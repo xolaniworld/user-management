@@ -12,4 +12,14 @@ class DeletedUserRepository extends AbstractRepository
         $this->results=$query6->fetchAll(PDO::FETCH_OBJ);
         return $query6->rowCount();
     }
+
+    public function selectAll()
+    {
+        $sql = "SELECT * from  deleteduser";
+        $query = $this->dbh -> prepare($sql);
+        $this->executed = $query->execute();
+        $this->results = $query->fetchAll(PDO::FETCH_OBJ);
+        $this->rowCount = $query->rowCount();
+        return $this;
+    }
 }
