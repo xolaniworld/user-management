@@ -11,15 +11,11 @@ if(isset($_GET['del']) && isset($_GET['name']))
 $id=$_GET['del'];
 $name=$_GET['name'];
 
-$sql = "delete from users WHERE id=:id";
-$query = $dbh->prepare($sql);
-$query -> bindParam(':id',$id, PDO::PARAM_STR);
-$query -> execute();
+$usersRepo = new \UserManagement\UsersRepository($dbh);
+$usersRepo->deleteById($id);
 
-$sql2 = "insert into deleteduser (email) values (:name)";
-$query2 = $dbh->prepare($sql2);
-$query2 -> bindParam(':name',$name, PDO::PARAM_STR);
-$query2 -> execute();
+$deletedUserRepo = new \UserManagement\DeletedUserRepository($dbh);
+$deletedUserRepo->insert($name);
 
 $msg="Data Deleted successfully";
 }
@@ -28,11 +24,8 @@ if(isset($_REQUEST['unconfirm']))
 	{
 	$aeid=intval($_GET['unconfirm']);
 	$memstatus=1;
-	$sql = "UPDATE users SET status=:status WHERE  id=:aeid";
-	$query = $dbh->prepare($sql);
-	$query -> bindParam(':status',$memstatus, PDO::PARAM_STR);
-	$query-> bindParam(':aeid',$aeid, PDO::PARAM_STR);
-	$query -> execute();
+        $usersRepo = new \UserManagement\UsersRepository($dbh);
+        $usersRepo->updateStatusByAeid($memstatus, $aeid);
 	$msg="Changes Sucessfully";
 	}
 
@@ -40,11 +33,8 @@ if(isset($_REQUEST['unconfirm']))
 	{
 	$aeid=intval($_GET['confirm']);
 	$memstatus=0;
-	$sql = "UPDATE users SET status=:status WHERE  id=:aeid";
-	$query = $dbh->prepare($sql);
-	$query -> bindParam(':status',$memstatus, PDO::PARAM_STR);
-	$query-> bindParam(':aeid',$aeid, PDO::PARAM_STR);
-	$query -> execute();
+        $usersRepo = new \UserManagement\UsersRepository($dbh);
+        $usersRepo->updateStatusByAeid($memstatus, $aeid);
 	$msg="Changes Sucessfully";
 	}
 

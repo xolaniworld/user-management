@@ -4,6 +4,13 @@ namespace UserManagement;
 use PDO;
 class DeletedUserRepository extends AbstractRepository
 {
+    public function insert($name)
+    {
+        $sql2 = "insert into deleteduser (email) values (:name)";
+        $query2 = $this->dbh->prepare($sql2);
+        $query2 -> bindParam(':name',$name, PDO::PARAM_STR);
+        $query2 -> execute();
+    }
     public function count()
     {
         $sql6 ="SELECT id from deleteduser ";

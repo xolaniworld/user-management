@@ -4,6 +4,13 @@ namespace UserManagement;
 use PDO;
 class UsersRepository extends AbstractRepository
 {
+    public function deleteById($id)
+    {
+        $sql = "delete from users WHERE id=:id";
+        $query = $this->dbh->prepare($sql);
+        $query -> bindParam(':id',$id, PDO::PARAM_STR);
+        $query -> execute();
+    }
     public function count()
     {
         $sql ="SELECT id from users";
@@ -71,6 +78,15 @@ class UsersRepository extends AbstractRepository
         $query-> bindParam(':image', $image, PDO::PARAM_STR);
         $query-> bindParam(':idedit', $idedit, PDO::PARAM_STR);
         $query->execute();
+    }
+
+    public function updateStatusByAeid($memstatus, $aeid)
+    {
+        $sql = "UPDATE users SET status=:status WHERE  id=:aeid";
+        $query = $this->dbh->prepare($sql);
+        $query -> bindParam(':status',$memstatus, PDO::PARAM_STR);
+        $query-> bindParam(':aeid',$aeid, PDO::PARAM_STR);
+        $query -> execute();
     }
 
 }
