@@ -20,15 +20,5 @@ class AdminRepository
         $query->bindParam(':usernameOrEmail', $usernameOrEmail, PDO::PARAM_STR);
         $query->execute();
         return $query->fetch(PDO::FETCH_OBJ);
-
-//        if ($result = ) {
-//            return password_verify($password, $result->password);
-//        }
-//        return false;
     }
-
-//    public function getResults()
-//    {
-//        return $this->results;
-//    }
 }
