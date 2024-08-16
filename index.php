@@ -29,14 +29,14 @@ if(isset($_POST['login']))
 	<meta name="author" content="">
 
 	
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
-	<link rel="stylesheet" href="css/bootstrap-social.css">
-	<link rel="stylesheet" href="css/bootstrap-select.css">
-	<link rel="stylesheet" href="css/fileinput.min.css">
-	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="public/css/font-awesome.min.css">
+	<link rel="stylesheet" href="public/css/bootstrap.min.css">
+	<link rel="stylesheet" href="public/css/dataTables.bootstrap.min.css">
+	<link rel="stylesheet" href="public/css/bootstrap-social.css">
+	<link rel="stylesheet" href="public/css/bootstrap-select.css">
+	<link rel="stylesheet" href="public/css/fileinput.min.css">
+	<link rel="stylesheet" href="public/css/awesome-bootstrap-checkbox.css">
+	<link rel="stylesheet" href="public/css/style.css">
 
 </head>
 
@@ -69,15 +69,15 @@ if(isset($_POST['login']))
 	</div>
 	
 	<!-- Loading Scripts -->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap-select.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.dataTables.min.js"></script>
-	<script src="js/dataTables.bootstrap.min.js"></script>
-	<script src="js/Chart.min.js"></script>
-	<script src="js/fileinput.js"></script>
-	<script src="js/chartData.js"></script>
-	<script src="js/main.js"></script>
+	<script src="public/js/jquery.min.js"></script>
+	<script src="public/js/bootstrap-select.min.js"></script>
+	<script src="public/js/bootstrap.min.js"></script>
+	<script src="public/js/jquery.dataTables.min.js"></script>
+	<script src="public/js/dataTables.bootstrap.min.js"></script>
+	<script src="public/js/Chart.min.js"></script>
+	<script src="public/js/fileinput.js"></script>
+	<script src="public/js/chartData.js"></script>
+	<script src="public/js/main.js"></script>
 
 </body>
 

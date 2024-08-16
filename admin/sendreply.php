@@ -67,7 +67,7 @@ else{
 	<!-- Admin Stye -->
 	<link rel="stylesheet" href="css/style.css">
 
-	<script type= "text/javascript" src="../vendor/countries.js"></script>
+	<script type= "text/javascript" src="../public/vendor/countries.js"></script>
 	<style>
 	.errorWrap {
     padding: 10px;
