@@ -1,3 +1,11 @@
+# User Management System 
+
+This user management system was originally written by [Ajay Randhawa
+](https://github.com/ajayrandhawa/) at https://github.com/ajayrandhawa/User-Management-PHP-MYSQL.
+
+This is my attempt to refactor the application and modernize it. I will fix many of its security flaws along the way.
+
+
 # User-Management-PHP-MYSQL
 
 PHP User Management System is a powerful PHP script that offers a secure user management system. The application is a great way to build your website, allowing your users to register an account and build restricted access to certain users. We offer great support and it’s very easy to install. It’s powered by MYSQL and PHP.

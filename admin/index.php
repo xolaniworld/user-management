@@ -1,5 +1,5 @@
 <?php
-$dbh = require __DIR__ . '/../bootstrap.php';
+$dbh = require dirname(__DIR__) . '/bootstrap.php';
 
 if(isset($_POST['login']) && $_POST['login'] === 'login') {
     $admin = new \UserManagement\Admin\AdminRepository($dbh);
