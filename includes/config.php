@@ -1,9 +1,14 @@
 ﻿<?php
-require __DIR__ . '/db.php';
+$dbPath = __DIR__ . '/db.php';
+
+if (! file_exists($dbPath)) {
+    exit($dbPath . ' - does not exist');
+}
+
+require $dbPath;
 
 // Establish database connection.
-try
-{
+try {
     $dbh = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME,DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
 } catch (PDOException $e) {
     exit("Error: " . $e->getMessage());
