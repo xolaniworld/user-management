@@ -12,5 +12,9 @@
     "require-dev": {
         "codeception/codeception": "^5.1",
         "symfony/var-dumper": "^6.4"
+    },
+    "scripts" : {
+        "phinx": "composer_vendor/bin/phinx",
+        "migrate": "@phinx migrate -e development"
     }
 }
