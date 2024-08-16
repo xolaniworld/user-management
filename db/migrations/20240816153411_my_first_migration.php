@@ -28,6 +28,12 @@ final class MyFirstMigration extends AbstractMigration
             ->addColumn('updated', 'datetime')
             ->create();
 
+        $table->insert([
+            'username' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => password_hash('secret', PASSWORD_DEFAULT)
+        ])->saveData();
+
         $table = $this->table('deleted_user');
         $table->addColumn('email', 'string', ['limit' => 250])
             ->addColumn('deleted_time', 'datetime')

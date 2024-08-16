@@ -4,13 +4,13 @@ $dbh = require __DIR__ . '/../bootstrap.php';
 if(isset($_POST['login']))
 {
     $admin = new \UserManagement\Admin\AdminRepository($dbh);
-    $userLogin = $admin->userLogin($_POST['username'], $_POST['password']);
+    $userLogin = $admin->userLogin($_POST['usernameOrEmail'], $_POST['password']);
     $results= $admin->getResults();
 
     if($userLogin)
     {
-        $_SESSION['alogin']=$_POST['username'];
-        echo "<script type='text/javascript'> document.location = 'dashboard.php'; </script>";
+        $_SESSION['alogin']=$_POST['usernameOrEmail'];
+        echo "<script type='text/javascript'> document.location = 'admin/dashboard.php'; </script>";
     } else{
       echo "<script>alert('Invalid Details');</script>";
     }
@@ -26,7 +26,6 @@ if(isset($_POST['login']))
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
@@ -48,8 +47,8 @@ if(isset($_POST['login']))
 							<div class="col-md-8 col-md-offset-2">
 								<form method="post">
 
-									<label for="" class="text-uppercase text-sm">Your Username </label>
-									<input type="text" placeholder="Username" name="username" class="form-control mb" required>
+									<label for="" class="text-uppercase text-sm">Your Username or Email</label>
+									<input type="text" placeholder="Username or Email" name="usernameOrEmail" class="form-control mb" required>
 
 									<label for="" class="text-uppercase text-sm">Password</label>
 									<input type="password" placeholder="Password" name="password" class="form-control mb" required>
