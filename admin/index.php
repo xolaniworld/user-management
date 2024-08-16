@@ -1,18 +1,19 @@
 <?php
 $dbh = require __DIR__ . '/../bootstrap.php';
 
-if(isset($_POST['login']))
-{
+if(isset($_POST['login']) && $_POST['login'] === 'login') {
     $admin = new \UserManagement\Admin\AdminRepository($dbh);
-    $userLogin = $admin->userLogin($_POST['usernameOrEmail'], $_POST['password']);
-    $results= $admin->getResults();
+    $admin = $admin->getAdminByUsernameOrEmail($_POST['usernameOrEmail']);
 
-    if($userLogin)
-    {
+    if ($admin === false) {
+        echo "<script>alert('Invalid Details');</script>";
+        exit;
+    }
+
+    if (password_verify($_POST['password'], $admin->password)) {
         $_SESSION['alogin']=$_POST['usernameOrEmail'];
-        echo "<script type='text/javascript'> document.location = 'admin/dashboard.php'; </script>";
-    } else{
-      echo "<script>alert('Invalid Details');</script>";
+        echo "<script type='text/javascript'> document.location = '/admin/dashboard.php'; </script>";
+        exit;
     }
 }
 ?>
@@ -52,7 +53,7 @@ if(isset($_POST['login']))
 
 									<label for="" class="text-uppercase text-sm">Password</label>
 									<input type="password" placeholder="Password" name="password" class="form-control mb" required>
-									<button class="btn btn-primary btn-block" name="login" type="submit">LOGIN</button>
+									<button class="btn btn-primary btn-block" name="login" value="login" type="submit">LOGIN</button>
 								</form>
 							</div>
 						</div>

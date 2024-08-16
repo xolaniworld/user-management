@@ -13,20 +13,22 @@ class AdminRepository
     {
         $this->dbh = $dbh;
     }
-    public function userLogin($usernameOrEmail, $password)
+    public function getAdminByUsernameOrEmail($usernameOrEmail)
     {
-        $sql = 'SELECT username, password FROM admin WHERE `username` =:usernameOrEmail or `email` = :usernameOrEmail';
+        $sql = 'SELECT username,password FROM admin WHERE `username` =:usernameOrEmail or `email` = :usernameOrEmail';
         $query = $this->dbh->prepare($sql);
         $query->bindParam(':usernameOrEmail', $usernameOrEmail, PDO::PARAM_STR);
         $query->execute();
-        if ($result = $query->fetch(PDO::FETCH_OBJ)) {
-            return password_verify($password, $result->password);
-        }
-        return false;
+        return $query->fetch(PDO::FETCH_OBJ);
+
+//        if ($result = ) {
+//            return password_verify($password, $result->password);
+//        }
+//        return false;
     }
 
-    public function getResults()
-    {
-        return $this->results;
-    }
+//    public function getResults()
+//    {
+//        return $this->results;
+//    }
 }
