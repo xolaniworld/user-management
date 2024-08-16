@@ -7,7 +7,7 @@ This is my attempt to refactor the application and modernize it. I will fix many
 
 ## Requirements
 
-- PHP8.1
+- PHP 8.1
 - Composer
 - MySQL
 

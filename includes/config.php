@@ -1,15 +1,15 @@
 ﻿<?php
-$dbPath = __DIR__ . '/db.php';
 
-if (! file_exists($dbPath)) {
-    exit($dbPath . ' - does not exist');
-}
-
-require $dbPath;
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
 
 // Establish database connection.
 try {
-    $dbh = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME,DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+    $dbh = new PDO("mysql:host=". $_ENV['DATABASE_HOST']
+        .";dbname=".$_ENV['DATABASE_NAME'],
+        $_ENV['DATABASE_USER'],
+        $_ENV['DATABASE_PASS'],
+        [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"]);
 } catch (PDOException $e) {
     exit("Error: " . $e->getMessage());
 }

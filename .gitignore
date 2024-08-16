@@ -2,3 +2,4 @@
 composer_vendor
 includes/db.php
 composer_vendor
+.env
