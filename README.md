@@ -5,6 +5,21 @@ This user management system was originally written by [Ajay Randhawa
 
 This is my attempt to refactor the application and modernize it. I will fix many of its security flaws along the way.
 
+## Requirements
+
+- PHP8.1
+- Composer
+- MySQL
+
+## Installation
+
+1. Run the command `composer install` to install all the dependencies of the application
+2. Copy the file `config/db.example.php` to `config/db.php`
+3. Change the details in `config/db.php` according to *your database details*
+4. Migrate the database by running the command `composer migrate` 
+5. Run the application with the command **php -S localhost:8000 -t ./** . You can change 
+the port number from **8000** to whatever port number you like
+6. Test the application in your browser by using *localhost:8000* in your browser. 
 
 # User-Management-PHP-MYSQL
 
