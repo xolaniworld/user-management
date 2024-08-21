@@ -1,2 +1,4 @@
 .idea/
 vendor/
+includes/db.php
+.env

@@ -1,9 +1,6 @@
 ﻿<?php
 // DB credentials.
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', '2520448_armentum');
+require __DIR__ . '/db.php';
 
 define('ROOT_DIR', dirname(__DIR__));
 define('INCLUDES_DIR', ROOT_DIR . '/includes/');
