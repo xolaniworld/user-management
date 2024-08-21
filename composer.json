@@ -1,20 +1,25 @@
 {
-    "require": {
-        "robmorgan/phinx": "^0.16.2",
-        "vlucas/phpdotenv": "^5.6"
-    },
-    "autoload": {
-        "psr-4": { "UserManagement\\" : "src/" }
-    },
-    "config": {
-        "vendor-dir": "composer_vendor"
-    },
-    "require-dev": {
-        "codeception/codeception": "^5.1",
-        "symfony/var-dumper": "^6.4"
-    },
-    "scripts" : {
-        "phinx": "composer_vendor/bin/phinx",
-        "migrate": "@phinx migrate -e development"
+  "autoload" : {
+    "psr-4" : {
+      "Application\\": "src"
     }
+  },
+  "require": {
+    "php": "^7.1",
+    "phpspec/prophecy": "^1.8",
+    "ext-pdo": "*",
+    "league/plates": "^3.3",
+    "psr/http-message": "^1.0",
+    "symfony/http-foundation": "^4.3",
+    "symfony/psr-http-message-bridge": "^1.2",
+    "nyholm/psr7": "^1.2",
+    "symfony/routing": "^4.3",
+    "symfony/http-kernel": "^4.3",
+    "symfony/config": "^4.3",
+    "phpunit/phpunit": "^5.5"
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^4.3",
+    "filp/whoops": "^2.4"
+  }
 }

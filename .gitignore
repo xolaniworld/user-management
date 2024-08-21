@@ -1,5 +1,4 @@
 .idea/
-composer_vendor
+vendor/
 includes/db.php
-composer_vendor
 .env
