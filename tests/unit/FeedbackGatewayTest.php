@@ -14,15 +14,15 @@ class FeedbackGateway extends \PHPUnit\Framework\TestCase
         $this->insertTestUser();
     }
 
-    public function test_insertSenderReciverTitleFeedbackAttachment()
+    public function test_insertSenderreceiverTitleFeedbackAttachment()
     {
-        $this->gateway->insertSenderReciverTitleFeedbackAttachment('user-1', 'reciver-1', 'title-1', 'description-1', 'attachment-1');
+        $this->gateway->insertSenderreceiverTitleFeedbackAttachment('user-1', 'receiver-1', 'title-1', 'description-1', 'attachment-1');
         $id = $this->pdo->lastInsertId();
-        $sth = $this->pdo->query('select sender, reciver, title,feedbackdata,attachment from feedback where id='.$id, PDO::FETCH_OBJ);
+        $sth = $this->pdo->query('select sender, receiver, title,feedbackdata,attachment from feedback where id='.$id, PDO::FETCH_OBJ);
         $obj = $sth->fetch();
 
         $this->assertEquals('user-1', $obj->sender);
-        $this->assertEquals('reciver-1', $obj->reciver);
+        $this->assertEquals('receiver-1', $obj->receiver);
         $this->assertEquals('title-1', $obj->title);
         $this->assertEquals('description-1', $obj->feedbackdata);
         $this->assertEquals('attachment-1', $obj->attachment);
@@ -30,27 +30,27 @@ class FeedbackGateway extends \PHPUnit\Framework\TestCase
         $this->delete($id);
     }
 
-    public function test_countByReciver()
+    public function test_countByreceiver()
     {
-        $this->assertGreaterThan(0,      $this->gateway->countByReciver('reciver'));
+        $this->assertGreaterThan(0,      $this->gateway->countByreceiver('receiver'));
     }
 
-    public function test_findByReciver()
+    public function test_findByreceiver()
     {
-        list($results, $count) = $this->gateway->findByReciver('reciver');
+        list($results, $count) = $this->gateway->findByreceiver('receiver');
         $this->assertIsArray($results);
         $this->assertGreaterThan(0, $count);
     }
 
-    public function testInsertByUserReciverDescription()
+    public function testInsertByUserreceiverDescription()
     {
-        $this->gateway->insertByUserReciverDescription('sender-2', 'reciver-2', 'message-2');
+        $this->gateway->insertByUserreceiverDescription('sender-2', 'receiver-2', 'message-2');
         $id = $this->pdo->lastInsertId();
-        $sth = $this->pdo->query('select sender, reciver, feedbackdata from feedback where id='.$id, PDO::FETCH_OBJ);
+        $sth = $this->pdo->query('select sender, receiver, feedbackdata from feedback where id='.$id, PDO::FETCH_OBJ);
         $obj = $sth->fetch();
 
         $this->assertEquals('sender-2', $obj->sender);
-        $this->assertEquals('reciver-2', $obj->reciver);
+        $this->assertEquals('receiver-2', $obj->receiver);
         $this->assertEquals('message-2', $obj->feedbackdata);
 
         $this->delete($id);
@@ -68,7 +68,7 @@ class FeedbackGateway extends \PHPUnit\Framework\TestCase
 
     private function insertTestUser()
     {
-        $sql = "insert into feedback (sender, reciver, title,feedbackdata,attachment) values ('user','reciver','title','description','attachment')";
+        $sql = "insert into feedback (sender, receiver, title,feedbackdata,attachment) values ('user','receiver','title','description','attachment')";
         $this->pdo->query($sql);
         $this->id = $this->pdo->lastInsertId();
     }

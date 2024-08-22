@@ -8,11 +8,11 @@ use PDO;
 
 class DeletedUserGateway extends AbstractGateway
 {
-    protected $table = 'deleteduser';
+    protected $table = 'deleted_user';
 
     public function countById()
     {
-        $sql6 = "select id from deleteduser ";
+        $sql6 = "select id from deleted_user ";
         $query6 = $this->pdo->prepare($sql6);;
         $query6->execute();
         $results6 = $query6->fetchAll(PDO::FETCH_OBJ);
@@ -28,7 +28,7 @@ class DeletedUserGateway extends AbstractGateway
 
     public function findAll()
     {
-        $sql = "SELECT * from  deleteduser";
+        $sql = "SELECT * from deleted_user";
         $query = $this->pdo -> prepare($sql);
         $query->execute();
         $results=$query->fetchAll(PDO::FETCH_OBJ);

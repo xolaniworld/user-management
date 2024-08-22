@@ -17,8 +17,8 @@ class FeedbackTransaction
 
     public function findAdmin()
     {
-        $reciver = 'Admin';
-        list($this->feedback, $this->total) = $this->feedbackGateway->findByReciver($reciver);
+        $receiver = 'Admin';
+        list($this->feedback, $this->total) = $this->feedbackGateway->findByreceiver($receiver);
     }
 
     public function getFeedback()

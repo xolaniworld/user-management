@@ -34,8 +34,8 @@ class DashboardTransactionTest extends \PHPUnit\Framework\TestCase
     public function test_dashboard()
     {
         $this->usersGateway->countIds()->willReturn(2);
-        $this->feedbackGateway->countByReciver(Argument::type('string'))->willReturn(4);
-        $this->notificationGateway->countByReciver(Argument::type('string'))->willReturn(6);
+        $this->feedbackGateway->countByreceiver(Argument::type('string'))->willReturn(4);
+        $this->notificationGateway->countByreceiver(Argument::type('string'))->willReturn(6);
         $this->deletedUserGateway->countById()->willReturn(8);
 
         list($bg, $regbd, $regbd2, $query) = $this->transaction->dashboard();

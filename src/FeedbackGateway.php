@@ -10,43 +10,43 @@ class FeedbackGateway extends AbstractGateway
 {
     protected $table = 'feedback';
 
-    public function insertSenderReciverTitleFeedbackAttachment($user, $reciver, $title, $description, $attachment)
+    public function insertSenderReceiverTitleFeedbackAttachment($user, $receiver, $title, $description, $attachment)
     {
         return $this->insert([
             'sender' => $user,
-            'reciver' => $reciver,
+            'receiver' => $receiver,
             'title' => $title,
-            'feedbackdata' => $description,
+            'feedback_data' => $description,
             'attachment' => $attachment,
         ]);
     }
 
-    public function countByReciver($reciver)
+    public function countByReceiver($receiver)
     {
-        $sql1 = "select id from feedback where reciver = (:reciver)";
+        $sql1 = "select id from feedback where receiver = (:receiver)";
         $query1 = $this->pdo->prepare($sql1);;
-        $query1->bindParam(':reciver', $reciver, PDO::PARAM_STR);
+        $query1->bindParam(':receiver', $receiver, PDO::PARAM_STR);
         $query1->execute();
         $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
         return $query1->rowCount();
     }
 
-    public function findByReciver($reciver)
+    public function findByReceiver($receiver)
     {
-        $sql = "select * from  feedback where reciver = (:reciver)";
+        $sql = "select * from feedback where receiver = (:receiver)";
         $query = $this->pdo->prepare($sql);
-        $query->bindParam(':reciver', $reciver, PDO::PARAM_STR);
+        $query->bindParam(':receiver', $receiver, PDO::PARAM_STR);
         $query->execute();
         $results = $query->fetchAll(PDO::FETCH_OBJ);
         return [$results, $query->rowCount()];
     }
 
-    public function insertByUserReciverDescription($sender, $reciver, $message)
+    public function insertByUserReceiverDescription($sender, $receiver, $message)
     {
         $this->insert([
             'sender' => $sender,
-            'reciver' => $reciver,
-            'feedbackdata' => $message,
+            'receiver' => $receiver,
+            'feedback_data' => $message,
             'attachment' => '',
             'title' => ''
         ]);

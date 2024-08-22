@@ -50,27 +50,27 @@ class UsersGateway extends AbstractGateway
         return $query->rowCount();
     }
 
-    public function updateById($name, $email, $mobileno, $designation, $image, $idedit)
+    public function updateById($name, $email, $mobile, $designation, $image, $idedit)
     {
-        $sql = "update users set name=(:name), email=(:email), mobile=(:mobileno), designation=(:designation), Image=(:image) where id=(:idedit)";
+        $sql = "update users set name=(:name), email=(:email), mobile=(:mobile), designation=(:designation), Image=(:image) where id=(:idedit)";
         $query = $this->pdo->prepare($sql);
         $query->bindParam(':name', $name, PDO::PARAM_STR);
         $query->bindParam(':email', $email, PDO::PARAM_STR);
-        $query->bindParam(':mobileno', $mobileno, PDO::PARAM_STR);
+        $query->bindParam(':mobile', $mobile, PDO::PARAM_STR);
         $query->bindParam(':designation', $designation, PDO::PARAM_STR);
         $query->bindParam(':image', $image, PDO::PARAM_STR);
         $query->bindParam(':idedit', $idedit, PDO::PARAM_STR);
         $query->execute();
     }
 
-    public function updateByIdWithGender($name, $email, $gender, $mobileno, $designation, $image, $idedit)
+    public function updateByIdWithGender($name, $email, $gender, $mobile, $designation, $image, $idedit)
     {
-        $sql = "update users set name=(:name), email=(:email), gender=(:gender), mobile=(:mobileno), designation=(:designation), Image=(:image) where id=(:idedit)";
+        $sql = "update users set name=(:name), email=(:email), gender=(:gender), mobile=(:mobile), designation=(:designation), Image=(:image) where id=(:idedit)";
         $query = $this->pdo->prepare($sql);
         $query->bindParam(':name', $name, PDO::PARAM_STR);
         $query->bindParam(':email', $email, PDO::PARAM_STR);
         $query->bindParam(':gender', $gender, PDO::PARAM_STR);
-        $query->bindParam(':mobileno', $mobileno, PDO::PARAM_STR);
+        $query->bindParam(':mobile', $mobile, PDO::PARAM_STR);
         $query->bindParam(':designation', $designation, PDO::PARAM_STR);
         $query->bindParam(':image', $image, PDO::PARAM_STR);
         $query->bindParam(':idedit', $idedit, PDO::PARAM_STR);
@@ -152,21 +152,21 @@ class UsersGateway extends AbstractGateway
      * @param $email
      * @param $password
      * @param $gender
-     * @param $mobileno
+     * @param $mobile
      * @param $designation
      * @param $image
      * @param $status
      * @return bool
      */
-    public function insertUser($name, $email, $password, $gender, $mobileno, $designation, $image, $status)
+    public function insertUser($name, $email, $password, $gender, $mobile, $designation, $image, $status)
     {
-        $sql = "insert into users(name,email, password, gender, mobile, designation, image, status) values(:name, :email, :password, :gender, :mobileno, :designation, :image, :status)";
+        $sql = "insert into users(name,email, password, gender, mobile, designation, image, status) values(:name, :email, :password, :gender, :mobile, :designation, :image, :status)";
         $query = $this->pdo->prepare($sql);
         $query->bindParam(':name', $name, PDO::PARAM_STR);
         $query->bindParam(':email', $email, PDO::PARAM_STR);
         $query->bindParam(':password', $password, PDO::PARAM_STR);
         $query->bindParam(':gender', $gender, PDO::PARAM_STR);
-        $query->bindParam(':mobileno', $mobileno, PDO::PARAM_STR);
+        $query->bindParam(':mobile', $mobile, PDO::PARAM_STR);
         $query->bindParam(':designation', $designation, PDO::PARAM_STR);
         $query->bindParam(':image', $image, PDO::PARAM_STR);
         $query->bindParam(':status', $status, PDO::PARAM_INT);

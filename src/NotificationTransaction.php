@@ -17,15 +17,15 @@ class NotificationTransaction
 
     public function findAdminNotifications()
     {
-        $reciver = 'Admin';
-        $this->findNotificationsByReciver($reciver);
+        $receiver = 'Admin';
+        $this->findNotificationsByreceiver($receiver);
 
         return $this;
     }
 
-    public function findNotificationsByReciver($reciver)
+    public function findNotificationsByreceiver($receiver)
     {
-        list($this->notifications , $this->total) = $this->notificationGateway->findByNotiReciver($reciver);
+        list($this->notifications , $this->total) = $this->notificationGateway->findByNotireceiver($receiver);
     }
 
     public function getNotications()

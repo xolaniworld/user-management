@@ -23,7 +23,8 @@ class Database
     public function getConnection()
     {
         if (static::$connection === null) {
-            static::$connection = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->database, $this->username, $this->password, [
+            static::$connection = new PDO("mysql:host=" . $this->host
+                . ";dbname=" . $this->database, $this->username, $this->password, [
                 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"
             ]);
         }

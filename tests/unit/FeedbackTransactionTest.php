@@ -12,7 +12,7 @@ class FeedbackTransactionTest extends \PHPUnit\Framework\TestCase
         $this->prophet = new \Prophecy\Prophet();
         $g = $this->prophet->prophesize(Application\FeedbackGateway::class);
         $this->transaction = new Application\FeedbackTransaction($g->reveal());
-        $g->findByReciver('Admin')->willReturn(['feedback', 'total']);
+        $g->findByreceiver('Admin')->willReturn(['feedback', 'total']);
     }
 
     public function test_findAdmin()

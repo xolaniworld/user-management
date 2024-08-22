@@ -10,7 +10,8 @@ class FrontendFeedbackTransaction
     private $filesystem;
     private $usersGateway;
 
-    public function __construct(FeedbackGateway $feedbackGateway, NotificationGateway $notificationGateway, UsersGateway $usersGateway, Filesystem $filesystem)
+    public function __construct(FeedbackGateway $feedbackGateway, NotificationGateway $notificationGateway,
+                                UsersGateway $usersGateway, Filesystem $filesystem)
     {
         $this->feedbackGateway = $feedbackGateway;
         $this->notificationGateway = $notificationGateway;
@@ -20,13 +21,13 @@ class FrontendFeedbackTransaction
 
     public function submitFeedback($title, $description, $user, $attachmentFile)
     {
-        $reciver= 'Admin';
+        $receiver= 'Admin';
         $notitype='Send Feedback';
 
         $attachment = $this->filesystem->upload($attachmentFile);
-        $notireciver = 'Admin';
-        $this->notificationGateway->insertUserReciverType($user, $notireciver, $notitype);
-        $this->feedbackGateway->insertSenderReciverTitleFeedbackAttachment($user, $reciver, $title, $description, $attachment);
+        $notiReceiver = 'Admin';
+        $this->notificationGateway->insertUserReceiverType($user, $notiReceiver, $notitype);
+        $this->feedbackGateway->insertSenderReceiverTitleFeedbackAttachment($user, $receiver, $title, $description, $attachment);
         return true;
   }
 
@@ -35,8 +36,8 @@ class FrontendFeedbackTransaction
       return $this->usersGateway->findAll();
   }
 
-  public function getAllByReciver($alogin)
+  public function getAllByReceiver($alogin)
   {
-      return $this->feedbackGateway->findByReciver($alogin);
+      return $this->feedbackGateway->findByReceiver($alogin);
   }
 }

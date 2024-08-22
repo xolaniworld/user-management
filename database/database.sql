@@ -63,7 +63,7 @@ CREATE TABLE `deleteduser` (
 CREATE TABLE `feedback` (
   `id` int(11) NOT NULL,
   `sender` varchar(50) NOT NULL,
-  `reciver` varchar(50) NOT NULL,
+  `receiver` varchar(50) NOT NULL,
   `title` varchar(100) NOT NULL,
   `feedbackdata` varchar(500) NOT NULL,
   `attachment` varchar(50) NOT NULL
@@ -78,7 +78,7 @@ CREATE TABLE `feedback` (
 CREATE TABLE `notification` (
   `id` int(11) NOT NULL,
   `notiuser` varchar(50) NOT NULL,
-  `notireciver` varchar(50) NOT NULL,
+  `notireceiver` varchar(50) NOT NULL,
   `notitype` varchar(50) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -24,13 +24,13 @@ class NotificationController extends AbstractController
     {
         $this->authenticated();
 
-        $reciver = $this->session->get('alogin');
+        $receiver = $this->session->get('alogin');
 
-        $this->transaction->findNotificationsByReciver($reciver);
+        $this->transaction->findNotificationsByreceiver($receiver);
 
         // Render a template
         return $this->renderer->render('notification', [
-            'alogin' => $reciver,
+            'alogin' => $receiver,
             'results' => $this->transaction->getNotications(),
             'count' => $this->transaction->getTotal(),
             'cnt' => 1

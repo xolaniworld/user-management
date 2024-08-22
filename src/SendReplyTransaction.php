@@ -17,12 +17,12 @@ class SendReplyTransaction
         $this->usersGateway = $usersGateway;
     }
 
-    public function notifyAdmin($reciver, $message)
+    public function notifyAdmin($receiver, $message)
     {
         $notitype = 'Send Message';
         $sender = 'Admin';
-        $this->notificationGateway->insertUserReciverType($sender, $reciver, $notitype);
-        $this->feedbackGateway->insertByUserReciverDescription($sender, $reciver, $message);
+        $this->notificationGateway->insertUserreceiverType($sender, $receiver, $notitype);
+        $this->feedbackGateway->insertByUserreceiverDescription($sender, $receiver, $message);
     }
 
     public function findAllUsers()

@@ -25,16 +25,16 @@ class RegisterTransaction
         $email = $this->request->getPost('email');
         $password = md5($this->request->getPost('password'));
         $gender = $this->request->getPost('gender');
-        $mobileno = $this->request->getPost('mobileno');
+        $mobile = $this->request->getPost('mobile');
         $designation = $this->request->getPost('designation');
         $image = $this->filesystem->upload($this->request->getFile('image'));
 
         $notitype = 'Create Account';
-        $reciver = 'Admin';
+        $receiver = 'Admin';
         $sender = $email;
         $status = 1;
 
-        $this->notificationGateway->insertUserReciverType($sender, $reciver, $notitype);
-        return $this->usersGateway->insertUser($name, $email, $password, $gender, $mobileno, $designation, $image, $status);
+        $this->notificationGateway->insertUserreceiverType($sender, $receiver, $notitype);
+        return $this->usersGateway->insertUser($name, $email, $password, $gender, $mobile, $designation, $image, $status);
     }
 }

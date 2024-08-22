@@ -24,9 +24,9 @@ class DashboardTransaction
     public function dashboard()
     {
         $bg = $this->usersGateway->countIds();
-        $reciver = 'Admin';
-        $regbd = $this->feedbackGateway->countByReciver($reciver);
-        $regbd2 = $this->notificationGateway->countByReciver($reciver);
+        $receiver = 'Admin';
+        $regbd = $this->feedbackGateway->countByreceiver($receiver);
+        $regbd2 = $this->notificationGateway->countByreceiver($receiver);
 
         $query = $this->deletedUserGateway->countById();
 

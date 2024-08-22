@@ -55,7 +55,7 @@ class FeedbackController extends AbstractController
         $this->authenticated();
 
         $alogin = $this->session->get('alogin');
-        list($results, $count) = $this->transaction->getAllByReciver($alogin);
+        list($results, $count) = $this->transaction->getAllByreceiver($alogin);
         $cnt = 1;
         // Render a template
         return $this->renderer->render('messages', compact('alogin', 'results', 'count', 'cnt'));
