@@ -2,4 +2,4 @@
 vendor/
 includes/db.php
 .env
-composer.phar:wq:
+composer.phar
