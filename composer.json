@@ -16,7 +16,13 @@
     "symfony/routing": "^4.3",
     "symfony/http-kernel": "^4.3",
     "symfony/config": "^4.3",
-    "doctrine/orm": "^2.19"
+    "doctrine/orm": "^2.19",
+    "doctrine/annotations": "^1.14",
+    "symfony/cache": "^4.4",
+    "vlucas/phpdotenv": "^5.5"
+  },
+  "scripts": {
+    "doctrine": "/usr/bin/php7.1 vendor/bin/doctrine"
   },
   "require-dev": {
     "symfony/var-dumper": "^4.3",

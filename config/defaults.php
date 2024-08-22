@@ -2,12 +2,12 @@
 // DB credentials.
 require __DIR__ . '/db.php';
 
-define('INCLUDES_DIR', ROOT_DIR . '/includes/');
-define('STORAGE_DIR', ROOT_DIR . '/storage/');
-define('PUBLIC_DIR', ROOT_DIR . '/public/');
-define('IMAGES_DIR', PUBLIC_DIR . '/images/');
-define('ATTACHMENT_DIR', PUBLIC_DIR . '/attachment/');
-define('TEMPLATES_DIR', ROOT_DIR . '/templates/');
+define('INCLUDES_DIR', ROOT_DIR . '/includes');
+define('STORAGE_DIR', ROOT_DIR . '/storage');
+define('PUBLIC_DIR', ROOT_DIR . '/public');
+define('IMAGES_DIR', PUBLIC_DIR . '/images');
+define('ATTACHMENT_DIR', PUBLIC_DIR . '/attachment');
+define('TEMPLATES_DIR', ROOT_DIR . '/templates');
 
 include __DIR__ . '/functions.php';
 
