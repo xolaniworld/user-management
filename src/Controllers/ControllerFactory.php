@@ -85,7 +85,7 @@ class ControllerFactory
         $usersTransaction = new \Application\Users\UsersTransactions($userGateway, $request, $filesystem);
         $feedbackGateway = new Gateways\FeedbackGateway(get_database());
         $feedbackTransaction = new Transactions\FeedbackTransaction($feedbackGateway);
-        return new \Application\Controllers\Admin\FeedbackController($usersTransaction, $feedbackTransaction, $this->getRequest(), $this->getRenderer());
+        return new Controllers\AdminFeedbackController($usersTransaction, $feedbackTransaction, $this->getRequest(), $this->getRenderer());
     }
 
     public function makeUserListController()
@@ -129,7 +129,7 @@ class ControllerFactory
 
     public function makeAdminNotificationController()
     {
-        return new Controllers\Admin\NotificationController(
+        return new Controllers\AdminNotificationController(
             new NotificationTransaction(new NotificationGateway($this->getDatabase())),
             new AdminTransaction( new AdminGateway($this->getDatabase())),
             $this->getRenderer(), $this->getRequest()

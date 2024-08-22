@@ -1,15 +1,14 @@
 <?php
 
 
-namespace Application\Controllers\Admin;
+namespace Application\Controllers;
 
-use Application\Controllers\AbstractController;
 use Application\RendererInterface;
 use Application\Transactions\FeedbackTransaction;
 use Application\Users\UsersTransactions;
 use Psr\Http\Message\ServerRequestInterface;
 
-class FeedbackController extends AbstractController
+class AdminFeedbackController extends AbstractController
 {
     private $usersTransaction;
     private $feedbackTransaction;

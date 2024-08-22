@@ -1,15 +1,14 @@
 <?php
 
 
-namespace Application\Controllers\Admin;
+namespace Application\Controllers;
 
-use Application\Controllers\AbstractController;
 use Application\RendererInterface;
 use Application\Repositories\AdminTransaction;
 use Application\Transactions\NotificationTransaction;
 use Psr\Http\Message\ServerRequestInterface;
 
-class NotificationController extends AbstractController
+class AdminNotificationController extends AbstractController
 {
     private $notificationTransaction;
     private $adminTransaction;
