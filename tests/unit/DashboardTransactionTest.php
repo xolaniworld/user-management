@@ -18,12 +18,12 @@ class DashboardTransactionTest extends \PHPUnit\Framework\TestCase
         $this->prophet = new \Prophecy\Prophet();
         $this->gateway = $this->prophet->prophesize('Application\AdminGateway');
 
-        $this->usersGateway = $this->prophet->prophesize('Application\UsersGateway');
-        $this->feedbackGateway = $this->prophet->prophesize('Application\FeedbackGateway');
-        $this->notificationGateway = $this->prophet->prophesize('Application\NotificationGateway');
-        $this->deletedUserGateway = $this->prophet->prophesize('Application\DeletedUserGateway');
+        $this->usersGateway = $this->prophet->prophesize('Application\Gateways\UsersGateway');
+        $this->feedbackGateway = $this->prophet->prophesize('Application\Gateways\FeedbackGateway');
+        $this->notificationGateway = $this->prophet->prophesize('Application\Gateways\NotificationGateway');
+        $this->deletedUserGateway = $this->prophet->prophesize('Application\Gateways\DeletedUserGateway');
 
-        $this->transaction = new \Application\Admin\DashboardTransaction(
+        $this->transaction = new \Application\Repositories\DashboardTransaction(
             $this->usersGateway->reveal(),
             $this->feedbackGateway->reveal(),
             $this->notificationGateway->reveal(),

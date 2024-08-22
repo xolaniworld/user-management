@@ -1,7 +1,8 @@
 <?php
 
-namespace UserManagement;
+namespace Application\Repositories;
 use PDO;
+
 class DeletedUserRepository extends AbstractRepository
 {
     public function insert($name)

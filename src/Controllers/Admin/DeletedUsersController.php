@@ -4,8 +4,8 @@
 namespace Application\Controllers\Admin;
 
 use Application\Controllers\AbstractController;
-use Application\DeletedUsersTransaction;
 use Application\RendererInterface;
+use Application\Transactions\DeletedUsersTransaction;
 
 class DeletedUsersController extends AbstractController
 {

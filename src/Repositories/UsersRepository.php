@@ -1,7 +1,8 @@
 <?php
 
-namespace UserManagement;
+namespace Application\Repositories;
 use PDO;
+
 class UsersRepository extends AbstractRepository
 {
     public function deleteById($id)

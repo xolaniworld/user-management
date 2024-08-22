@@ -9,10 +9,10 @@ class AdminTransactionTest extends \PHPUnit\Framework\TestCase
     public function setUp(): void
     {
         $this->prophet = new \Prophecy\Prophet();
-        $this->gateway = $this->prophet->prophesize('Application\Admin\AdminGateway');
+        $this->gateway = $this->prophet->prophesize('Application\Gateways\AdminGateway');
         $request = $this->prophet->prophesize('Application\Request');
 
-        $this->transaction = new Application\Admin\AdminTransaction($this->gateway->reveal(), $request->reveal());
+        $this->transaction = new \Application\Repositories\AdminTransaction($this->gateway->reveal(), $request->reveal());
     }
 
     public function test_submitLogin()

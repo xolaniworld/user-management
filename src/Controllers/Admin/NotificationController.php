@@ -4,9 +4,9 @@
 namespace Application\Controllers\Admin;
 
 use Application\Controllers\AbstractController;
-use Application\NotificationTransaction;
-use Application\Admin\AdminTransaction;
 use Application\RendererInterface;
+use Application\Repositories\AdminTransaction;
+use Application\Transactions\NotificationTransaction;
 use Psr\Http\Message\ServerRequestInterface;
 
 class NotificationController extends AbstractController

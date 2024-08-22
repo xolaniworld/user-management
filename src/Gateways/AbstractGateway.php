@@ -1,6 +1,6 @@
 <?php
 
-namespace Application;
+namespace Application\Gateways;
 
 use PDO;
 

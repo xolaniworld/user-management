@@ -1,8 +1,10 @@
 <?php
 
 
-namespace Application;
+namespace Application\Transactions;
 
+
+use Application\Gateways\NotificationGateway;
 
 class NotificationTransaction
 {

@@ -3,8 +3,8 @@
 namespace Application\Controllers;
 
 use Application\Auth;
-use Application\NotificationTransaction;
 use Application\RendererInterface;
+use Application\Transactions\NotificationTransaction;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class NotificationController extends AbstractController

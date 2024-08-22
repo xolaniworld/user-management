@@ -5,7 +5,7 @@ namespace Application\Controllers;
 
 
 use Application\RendererInterface;
-use Application\SendReplyTransaction;
+use Application\Transactions\SendReplyTransaction;
 use Psr\Http\Message\ServerRequestInterface;
 
 class SendReplyController

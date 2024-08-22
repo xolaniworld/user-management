@@ -1,7 +1,5 @@
 <?php
 
-use Application\FeedbackGateway;
-
 class FeedbackTransactionTest extends \PHPUnit\Framework\TestCase
 {
     private $prophet;
@@ -10,8 +8,8 @@ class FeedbackTransactionTest extends \PHPUnit\Framework\TestCase
     public function setUp(): void
     {
         $this->prophet = new \Prophecy\Prophet();
-        $g = $this->prophet->prophesize(Application\FeedbackGateway::class);
-        $this->transaction = new Application\FeedbackTransaction($g->reveal());
+        $g = $this->prophet->prophesize(\Application\Gateways\FeedbackGateway::class);
+        $this->transaction = new \Application\Transactions\FeedbackTransaction($g->reveal());
         $g->findByreceiver('Admin')->willReturn(['feedback', 'total']);
     }
 

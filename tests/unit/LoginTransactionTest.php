@@ -1,7 +1,5 @@
 <?php
 
-use Application\UsersGateway;
-
 class LoginTransactionTest extends \PHPUnit\Framework\TestCase
 {
     private $prophet;
@@ -11,8 +9,8 @@ class LoginTransactionTest extends \PHPUnit\Framework\TestCase
     public function setUp(): void
     {
         $this->prophet = new \Prophecy\Prophet();
-        $this->gateway = $this->prophet->prophesize(Application\UsersGateway::class);
-        $this->transaction = new Application\LoginTransaction( $this->gateway->reveal());
+        $this->gateway = $this->prophet->prophesize(\Application\Gateways\UsersGateway::class);
+        $this->transaction = new \Application\Transactions\LoginTransaction( $this->gateway->reveal());
     }
 
     public function test_submitLogin()

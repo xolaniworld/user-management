@@ -1,8 +1,12 @@
 <?php
 
 
-namespace Application;
+namespace Application\Transactions;
 
+
+use Application\Gateways\NotificationGateway;
+use Application\Gateways\UsersGateway;
+use Application\Request;
 
 class RegisterTransaction
 {

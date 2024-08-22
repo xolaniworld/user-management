@@ -4,9 +4,9 @@
 namespace Application\Controllers\Admin;
 
 
-use Application\Admin\DashboardTransaction;
 use Application\Controllers\AbstractController;
 use Application\RendererInterface;
+use Application\Repositories\DashboardTransaction;
 
 class DashboardController extends AbstractController
 {

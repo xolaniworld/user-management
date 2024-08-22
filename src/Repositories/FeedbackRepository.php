@@ -1,7 +1,8 @@
 <?php
 
-namespace UserManagement;
+namespace Application\Repositories;
 use PDO;
+
 class FeedbackRepository extends AbstractRepository
 {
     public function countByReceiver($receiver)

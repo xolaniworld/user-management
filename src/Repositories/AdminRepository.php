@@ -1,6 +1,6 @@
 <?php
 
-namespace UserManagement\Admin;
+namespace Application\Repositories;
 
 use PDO;
 

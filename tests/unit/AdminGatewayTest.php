@@ -1,4 +1,5 @@
 <?php
+
 use Prophecy\Argument;
 
 class AdminGatewayTest extends \PHPUnit\Framework\TestCase
@@ -12,7 +13,7 @@ class AdminGatewayTest extends \PHPUnit\Framework\TestCase
         $this->prophet = new \Prophecy\Prophet();
         $this->pdo = $this->prophet->prophesize('PDO');
 
-        $this->gateway = new \Application\Admin\AdminGateway($this->pdo->reveal());
+        $this->gateway = new \Application\Gateways\AdminGateway($this->pdo->reveal());
 
         $query = $this->prophet->prophesize('PDOStatement');
         $this->pdo->prepare(Argument::type('string'))->willReturn($query->reveal());
@@ -36,7 +37,7 @@ class AdminGatewayTest extends \PHPUnit\Framework\TestCase
     {
         $pdo = $this->prophet->prophesize('PDO');
 
-        $gateway = new \Application\Admin\AdminGateway($pdo->reveal());
+        $gateway = new \Application\Gateways\AdminGateway($pdo->reveal());
         $query = $this->prophet->prophesize('PDOStatement');
         $pdo->prepare(Argument::type('string'))->willReturn($query->reveal());
 

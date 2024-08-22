@@ -5,8 +5,8 @@ namespace Application\Controllers;
 
 
 use Application\Auth;
-use Application\FrontendFeedbackTransaction;
 use Application\RendererInterface;
+use Application\Transactions\FrontendFeedbackTransaction;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 

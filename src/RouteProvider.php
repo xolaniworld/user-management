@@ -1,5 +1,5 @@
 <?php
-use Symfony\Component\Routing\Route;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
@@ -153,8 +153,8 @@ return function (RoutingConfigurator $routes) use ($controllerFactory) {
     $routes->add('admin-deleteduser', '/admin/deleteduser')
         ->controller(
             function (Request $request) use ($controllerFactory) {
-                $deletedUserGateway = new \Application\DeletedUserGateway(get_database());
-                $transaction = new \Application\DeletedUsersTransaction($deletedUserGateway);
+                $deletedUserGateway = new \Application\Gateways\DeletedUserGateway(get_database());
+                $transaction = new \Application\Transactions\DeletedUsersTransaction($deletedUserGateway);
                 $controller = new \Application\Controllers\Admin\DeletedUsersController($transaction, new \Application\PlatesTemplate(TEMPLATES_DIR));
 
                 return new Response(
@@ -167,8 +167,8 @@ return function (RoutingConfigurator $routes) use ($controllerFactory) {
     $routes->add('admin-download', '/admin/download')
         ->controller(
             function (Request $request) use ($controllerFactory) {
-                $usersGateway = new \Application\UsersGateway(get_database());
-                $transaction = new \Application\DownloadTransaction($usersGateway);
+                $usersGateway = new \Application\Gateways\UsersGateway(get_database());
+                $transaction = new \Application\Transactions\DownloadTransaction($usersGateway);
                 $controller = new \Application\Controllers\Admin\DownloadController($transaction);
 
                 $controller->download();

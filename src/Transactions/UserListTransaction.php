@@ -1,7 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Application;
+namespace Application\Transactions;
 
+
+use Application\Gateways\DeletedUserGateway;
+use Application\Gateways\UsersGateway;
 
 class UserListTransaction
 {

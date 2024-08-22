@@ -2,7 +2,7 @@
 
 namespace Application\Models;
 
-use Application\Admin\AdminGateway;
+use Application\Gateways\AdminGateway;
 
 class Admin
 {

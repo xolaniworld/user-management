@@ -4,8 +4,8 @@
 namespace Application\Controllers;
 
 
-use Application\LoginTransaction;
 use Application\RendererInterface;
+use Application\Transactions\LoginTransaction;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 

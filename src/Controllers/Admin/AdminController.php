@@ -4,10 +4,10 @@
 namespace Application\Controllers\Admin;
 
 
-use Application\Admin\AdminTransaction;
 use Application\Controllers\AbstractController;
 use Application\Models\Admin;
 use Application\RendererInterface;
+use Application\Repositories\AdminTransaction;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 

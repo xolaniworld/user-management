@@ -4,7 +4,7 @@
 namespace Application\Controllers\Admin;
 
 
-use Application\DownloadTransaction;
+use Application\Transactions\DownloadTransaction;
 
 class DownloadController
 {

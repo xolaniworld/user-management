@@ -1,10 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Application\Admin;
+namespace Application\Gateways;
 
 
 use PDO;
-use Application\AbstractGateway;
 
 class AdminGateway extends AbstractGateway
 {

@@ -3,7 +3,7 @@ namespace Application\Controllers\Admin;
 
 use Application\Controllers\AbstractController;
 use Application\RendererInterface;
-use Application\UserListTransaction;
+use Application\Transactions\UserListTransaction;
 use Psr\Http\Message\ServerRequestInterface;
 
 class UserListController extends AbstractController

@@ -1,7 +1,7 @@
 <?php
 
 
-use Application\DeletedUserGateway;
+use Application\Gateways\DeletedUserGateway;
 
 class DeletedUsersTransactionTest extends \PHPUnit\Framework\TestCase
 {
@@ -12,7 +12,7 @@ class DeletedUsersTransactionTest extends \PHPUnit\Framework\TestCase
     {
         $this->prophet = new \Prophecy\Prophet();
         $g = $this->prophet->prophesize(DeletedUserGateway::class);
-        $this->transaction = new \Application\DeletedUsersTransaction($g->reveal());
+        $this->transaction = new \Application\Transactions\DeletedUsersTransaction($g->reveal());
         $g->findAll()->willReturn(['record1', 'record2']);
     }
 

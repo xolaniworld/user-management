@@ -4,8 +4,8 @@
 namespace Application\Controllers;
 
 
-use Application\RegisterTransaction;
 use Application\RendererInterface;
+use Application\Transactions\RegisterTransaction;
 use Psr\Http\Message\ServerRequestInterface;
 
 class RegisterController

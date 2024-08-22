@@ -1,6 +1,6 @@
 <?php
 
-namespace UserManagement;
+namespace Application\Repositories;
 
 use PHPUnit\Util\Exception;
 

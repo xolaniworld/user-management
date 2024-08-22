@@ -18,7 +18,7 @@ class UsersGatewayTest extends \PHPUnit\Framework\TestCase
     public function setUp(): void
     {
         $this->pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
-        $this->gateway = new \Application\UsersGateway($this->pdo);
+        $this->gateway = new \Application\Gateways\UsersGateway($this->pdo);
 
         $this->defaultDetails();
     }

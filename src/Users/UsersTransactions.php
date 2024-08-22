@@ -4,9 +4,9 @@
 namespace Application\Users;
 
 
-use Application\Filesystem;
+use Application\Gateways\UsersGateway;
 use Application\Request;
-use Application\UsersGateway;
+use Application\Transactions\Filesystem;
 
 class UsersTransactions
 {

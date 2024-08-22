@@ -1,10 +1,10 @@
 <?php
-namespace Application\Admin;
+namespace Application\Repositories;
 
-use Application\DeletedUserGateway;
-use Application\NotificationGateway;
-use Application\UsersGateway;
-use Application\FeedbackGateway;
+use Application\Gateways\DeletedUserGateway;
+use Application\Gateways\FeedbackGateway;
+use Application\Gateways\NotificationGateway;
+use Application\Gateways\UsersGateway;
 
 class DashboardTransaction
 {

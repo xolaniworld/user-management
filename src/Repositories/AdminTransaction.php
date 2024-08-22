@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Application\Admin;
+namespace Application\Repositories;
 
-use Application\Admin\AdminGateway;
+use Application\Gateways\AdminGateway;
 
 class AdminTransaction
 {

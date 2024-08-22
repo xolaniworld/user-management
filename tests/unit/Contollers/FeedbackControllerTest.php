@@ -1,11 +1,11 @@
 <?php
 
 
-use Application\FrontendFeedbackTransaction;
+use Application\Controllers\FeedbackController;
 use Application\RendererInterface;
+use Application\Transactions\FrontendFeedbackTransaction;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Application\Controllers\FeedbackController;
 
 class FeedbackControllerTest extends \PHPUnit\Framework\TestCase
 {
