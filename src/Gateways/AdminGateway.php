@@ -9,7 +9,7 @@ class AdminGateway extends AbstractGateway
 {
     protected $table = 'admin';
 
-    public function getPasswordHashByUsername(string $username)
+    public function getPasswordHashByUsername(string $username) : string | null
     {
         $sql = 'select password from admins where username = :username';
         $query = $this->pdo->prepare($sql);
