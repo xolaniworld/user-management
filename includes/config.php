@@ -2,7 +2,6 @@
 // DB credentials.
 require __DIR__ . '/db.php';
 
-define('ROOT_DIR', dirname(__DIR__));
 define('INCLUDES_DIR', ROOT_DIR . '/includes/');
 define('STORAGE_DIR', ROOT_DIR . '/storage/');
 define('PUBLIC_DIR', ROOT_DIR . '/public/');
