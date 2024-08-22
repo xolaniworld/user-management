@@ -4,9 +4,6 @@
 namespace Application\Controllers;
 
 use Application\Controllers;
-use Application\Controllers\Admin\AdminController;
-use Application\Controllers\Admin\DashboardController;
-use Application\Controllers\Admin\UserListController;
 use Application\Gateways;
 use Application\Gateways\AdminGateway;
 use Application\Gateways\DeletedUserGateway;

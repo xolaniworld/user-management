@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Application\Controllers\Admin;
+namespace Application\Controllers;
 
 
 use Application\Transactions\DownloadTransaction;

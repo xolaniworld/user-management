@@ -1,9 +1,8 @@
 <?php
 
 
-namespace Application\Controllers\Admin;
+namespace Application\Controllers;
 
-use Application\Controllers\AbstractController;
 use Application\RendererInterface;
 use Application\Transactions\DeletedUsersTransaction;
 

@@ -155,7 +155,7 @@ return function (RoutingConfigurator $routes) use ($controllerFactory) {
             function (Request $request) use ($controllerFactory) {
                 $deletedUserGateway = new \Application\Gateways\DeletedUserGateway(get_database());
                 $transaction = new \Application\Transactions\DeletedUsersTransaction($deletedUserGateway);
-                $controller = new \Application\Controllers\Admin\DeletedUsersController($transaction, new \Application\PlatesTemplate(TEMPLATES_DIR));
+                $controller = new \Application\Controllers\DeletedUsersController($transaction, new \Application\PlatesTemplate(TEMPLATES_DIR));
 
                 return new Response(
                     $controller->all()
@@ -169,7 +169,7 @@ return function (RoutingConfigurator $routes) use ($controllerFactory) {
             function (Request $request) use ($controllerFactory) {
                 $usersGateway = new \Application\Gateways\UsersGateway(get_database());
                 $transaction = new \Application\Transactions\DownloadTransaction($usersGateway);
-                $controller = new \Application\Controllers\Admin\DownloadController($transaction);
+                $controller = new \Application\Controllers\DownloadController($transaction);
 
                 $controller->download();
                 exit;
