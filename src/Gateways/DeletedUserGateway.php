@@ -12,7 +12,7 @@ class DeletedUserGateway extends AbstractGateway
 
     public function countById()
     {
-        $sql6 = "select id from deleted_user ";
+        $sql6 = "select id from deleted_users ";
         $query6 = $this->pdo->prepare($sql6);;
         $query6->execute();
         $results6 = $query6->fetchAll(PDO::FETCH_OBJ);
@@ -28,7 +28,7 @@ class DeletedUserGateway extends AbstractGateway
 
     public function findAll()
     {
-        $sql = "SELECT * from deleted_user";
+        $sql = "SELECT * from deleted_users";
         $query = $this->pdo -> prepare($sql);
         $query->execute();
         $results=$query->fetchAll(PDO::FETCH_OBJ);

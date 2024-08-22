@@ -11,7 +11,7 @@ class AdminGateway extends AbstractGateway
 
     public function getPasswordHashByUsername(string $username)
     {
-        $sql = 'select password from admin where username = :username';
+        $sql = 'select password from admins where username = :username';
         $query = $this->pdo->prepare($sql);
         $query->execute(['username' => $username]);
         if ($query->rowCount() > 0) {
@@ -24,7 +24,7 @@ class AdminGateway extends AbstractGateway
 
     public function countByUsernameAndPassword(string $username, string $password):int
     {
-        $sql = "select UserName,Password from admin where UserName=:username and Password=:password";
+        $sql = "select UserName,Password from admins where UserName=:username and Password=:password";
         $query = $this->pdo->prepare($sql);
         $query->bindParam(':username', $username, PDO::PARAM_STR);
         $query->bindParam(':password', $password, PDO::PARAM_STR);
@@ -34,7 +34,7 @@ class AdminGateway extends AbstractGateway
 
     public function countPasswordByPasswordAndUsername(string $username, string $password):int
     {
-        $sql = "select Password from admin where UserName=:username and Password=:password";
+        $sql = "select Password from admins where UserName=:username and Password=:password";
         $query = $this->pdo->prepare($sql);
         $query->bindParam(':username', $username, PDO::PARAM_STR);
         $query->bindParam(':password', $password, PDO::PARAM_STR);

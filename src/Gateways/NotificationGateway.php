@@ -7,7 +7,7 @@ class NotificationGateway extends AbstractGateway
 {
     public function insertUserReceiverType($user, $notification_receiver, $notification_type)
     {
-        $sqlnoti="insert into notification (notification_user,notification_receiver,notification_type) values (:notification_user,:notification_receiver,:notification_type)";
+        $sqlnoti="insert into notifications (notification_user,notification_receiver,notification_type) values (:notification_user,:notification_receiver,:notification_type)";
         $querynoti = $this->pdo->prepare($sqlnoti);
         $querynoti-> bindParam(':notification_user', $user, PDO::PARAM_STR);
         $querynoti-> bindParam(':notification_receiver', $notification_receiver, PDO::PARAM_STR);
@@ -17,7 +17,7 @@ class NotificationGateway extends AbstractGateway
 
     public function countByReceiver($receiver)
     {
-        $sql12 ="select id from notification where notification_receiver = (:receiver)";
+        $sql12 ="select id from notifications where notification_receiver = (:receiver)";
         $query12 = $this->pdo -> prepare($sql12);;
         $query12-> bindParam(':receiver', $receiver, PDO::PARAM_STR);
         $query12->execute();
@@ -29,7 +29,7 @@ class NotificationGateway extends AbstractGateway
 
     public function findByNotiReceiver($receiver)
     {
-        $sql = "select * from  notification where notification_receiver = (:receiver) order by time DESC";
+        $sql = "select * from notifications where notification_receiver = (:receiver) order by time DESC";
         $query = $this->pdo -> prepare($sql);
         $query-> bindParam(':receiver', $receiver, PDO::PARAM_STR);
         $query->execute();
