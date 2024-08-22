@@ -16,11 +16,11 @@
     "symfony/routing": "^4.3",
     "symfony/http-kernel": "^4.3",
     "symfony/config": "^4.3",
-    "phpunit/phpunit": "^5.5",
-    "robmorgan/phinx": "^0.11.7"
+    "doctrine/orm": "^2.19"
   },
   "require-dev": {
     "symfony/var-dumper": "^4.3",
-    "filp/whoops": "^2.4"
+    "filp/whoops": "^2.4",
+    "phpunit/phpunit": "^5.5"
   }
 }
