@@ -1,21 +1,22 @@
 <?php
 
 
-namespace Application;
+namespace Application\Controllers;
 
+use Application\Controllers;
 use Application\Controllers\Admin\AdminController;
 use Application\Controllers\Admin\DashboardController;
 use Application\Controllers\Admin\UserListController;
-use Application\Controllers\FeedbackController;
-use Application\Controllers\NotificationController;
-use Application\Controllers\RegisterController;
+use Application\Gateways;
 use Application\Gateways\AdminGateway;
 use Application\Gateways\DeletedUserGateway;
 use Application\Gateways\FeedbackGateway;
 use Application\Gateways\NotificationGateway;
 use Application\Gateways\UsersGateway;
+use Application\PlatesTemplate;
 use Application\Repositories\AdminTransaction;
 use Application\Repositories\DashboardTransaction;
+use Application\Transactions;
 use Application\Transactions\Filesystem;
 use Application\Transactions\FrontendFeedbackTransaction;
 use Application\Transactions\NotificationTransaction;

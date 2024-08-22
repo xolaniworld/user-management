@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Application;
+namespace Application\Controllers;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ControllerResolver as SymfonyControllerResolver;

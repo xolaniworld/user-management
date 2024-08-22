@@ -4,7 +4,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
-$controllerFactory = new \Application\ControllerFactory();
+$controllerFactory = new \Application\Controllers\ControllerFactory();
 
 return function (RoutingConfigurator $routes) use ($controllerFactory) {
 //    $routes->add('home', '/')
