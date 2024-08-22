@@ -16,6 +16,7 @@ class AdminController extends AbstractController
     private $request;
     private $session;
     private $renderer;
+    private $model;
 
     public function __construct(AdminTransaction $transaction, ServerRequestInterface $request, Session $session, RendererInterface $renderer)
     {
