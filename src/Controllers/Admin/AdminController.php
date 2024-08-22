@@ -6,6 +6,7 @@ namespace Application\Controllers\Admin;
 
 use Application\Admin\AdminTransaction;
 use Application\Controllers\AbstractController;
+use Application\Models\Admin;
 use Application\RendererInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -31,7 +32,8 @@ class AdminController extends AbstractController
 
         if ($this->request->getMethod() === 'POST') {
             $input = $this->request->getParsedBody();
-            $redirect = $this->transaction->submitLogin($input['username'], $input['password']);
+            $adminModel = new Admin();
+            $redirect = $adminModel->login($input['username'], $input['password']);
             $this->session->set('alogin', $input['username']);
         }
 
