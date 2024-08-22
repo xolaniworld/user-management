@@ -23,6 +23,7 @@ class UserListController extends AbstractController
         $this->authenticated();
 
         $get = $this->request->getQueryParams();
+        $msg = "";
 
         if (isset($get['del']) && isset($get['name'])) {
             $id = $get['del'];

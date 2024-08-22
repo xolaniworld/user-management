@@ -7,7 +7,7 @@ use PDO;
 
 class AdminGateway extends AbstractGateway
 {
-    protected $table = 'admin';
+    protected $table = 'admins';
 
     public function getPasswordHashByUsername(string $username) : string | null
     {

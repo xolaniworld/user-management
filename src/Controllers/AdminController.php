@@ -63,8 +63,8 @@ class AdminController extends AbstractController
     public function profile()
     {
         $this->authenticated();
+        $name = $email = $msg = '';
 
-        $msg = null;
         if ($this->request->getMethod() === 'POST') {
             $input = $this->request->getParsedBody();
 
