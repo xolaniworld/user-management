@@ -14,7 +14,7 @@
                                 <div class="stat-panel-title text-uppercase">Total Users</div>
                             </div>
                         </div>
-                        <a href="userlist.php" class="block-anchor panel-footer">Full Detail
+                        <a href="userlist" class="block-anchor panel-footer">Full Detail
                             <i class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                                 <div class="stat-panel-title text-uppercase">Feedback Messages</div>
                             </div>
                         </div>
-                        <a href="feedback.php" class="block-anchor panel-footer text-center">Full Detail &nbsp;
+                        <a href="feedback" class="block-anchor panel-footer text-center">Full Detail &nbsp;
                             <i class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                                 <div class="stat-panel-title text-uppercase">Notifications</div>
                             </div>
                         </div>
-                        <a href="notification.php" class="block-anchor panel-footer text-center">Full Detail &nbsp;
+                        <a href="notification" class="block-anchor panel-footer text-center">Full Detail &nbsp;
                             <i class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                                 <div class="stat-panel-title text-uppercase">Deleted Users</div>
                             </div>
                         </div>
-                        <a href="deleteduser.php" class="block-anchor panel-footer text-center">Full Detail &nbsp;
+                        <a href="deleteduser" class="block-anchor panel-footer text-center">Full Detail &nbsp;
                             <i class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
