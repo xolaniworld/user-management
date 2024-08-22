@@ -23,6 +23,7 @@ class AdminController extends AbstractController
         $this->request = $request;
         $this->session = $session;
         $this->renderer = $renderer;
+        $this->model = new Admin();
     }
 
     public function login()
@@ -31,8 +32,7 @@ class AdminController extends AbstractController
 
         if ($this->request->getMethod() === 'POST') {
             $input = $this->request->getParsedBody();
-            $adminModel = new Admin();
-            $redirect = $adminModel->login($input['username'], $input['password']);
+            $redirect = $this->model->login($input['username'], $input['password']);
             $this->session->set('alogin', $input['username']);
         }
 
