@@ -9,7 +9,7 @@ define('IMAGES_DIR', PUBLIC_DIR . '/images/');
 define('ATTACHMENT_DIR', PUBLIC_DIR . '/attachment/');
 define('TEMPLATES_DIR', ROOT_DIR . '/templates/');
 
-include INCLUDES_DIR . 'functions.php';
+include __DIR__ . '/functions.php';
 
 $whoops = new \Whoops\Run;
 $whoops->prependHandler(new \Whoops\Handler\PrettyPageHandler);
