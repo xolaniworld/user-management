@@ -5,7 +5,7 @@ namespace Application\Controllers;
 
 use Application\RendererInterface;
 use Application\Transactions\FeedbackTransaction;
-use Application\Users\UsersTransactions;
+use Application\Transactions\UsersTransactions;
 use Psr\Http\Message\ServerRequestInterface;
 
 class AdminFeedbackController extends AbstractController

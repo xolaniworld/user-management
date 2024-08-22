@@ -4,10 +4,10 @@
 namespace Application\Controllers;
 
 use Application\Auth;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Application\PlatesTemplate;
-use Application\Users\UsersTransactions;
+use Application\Transactions\UsersTransactions;
 use Psr\Http\Message\ServerRequestInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class UsersController extends AbstractController
 {

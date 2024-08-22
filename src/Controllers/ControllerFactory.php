@@ -45,7 +45,7 @@ class ControllerFactory
     public function makeUserController()
     {
         $userGateway = new Gateways\UsersGateway($this->getDatabase());
-        $usersTransaction = new \Application\Users\UsersTransactions($userGateway, new \Application\Request(), new Filesystem(IMAGES_DIR));
+        $usersTransaction = new Transactions\UsersTransactions($userGateway, new \Application\Request(), new Filesystem(IMAGES_DIR));
 
         return new \Application\Controllers\UsersController(
             $this->getRequest(),
@@ -82,7 +82,7 @@ class ControllerFactory
         $userGateway = new Gateways\UsersGateway($this->getDatabase());
         $request = new \Application\Request();
         $filesystem = new Transactions\Filesystem(IMAGES_DIR);
-        $usersTransaction = new \Application\Users\UsersTransactions($userGateway, $request, $filesystem);
+        $usersTransaction = new Transactions\UsersTransactions($userGateway, $request, $filesystem);
         $feedbackGateway = new Gateways\FeedbackGateway(get_database());
         $feedbackTransaction = new Transactions\FeedbackTransaction($feedbackGateway);
         return new Controllers\AdminFeedbackController($usersTransaction, $feedbackTransaction, $this->getRequest(), $this->getRenderer());
