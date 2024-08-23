@@ -5,11 +5,10 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 
 // Create a simple "default" Doctrine ORM configuration for Attributes
- $config = ORMSetup::createAnnotationMetadataConfiguration(
-    [dirname(__DIR__)."/src"],
-    true
- );
-
+$config = ORMSetup::createAttributeMetadataConfiguration(
+    paths: array(__DIR__."/src"),
+    isDevMode: true,
+);
 // configuring the database connection
 $connection = DriverManager::getConnection([
     'driver' => 'pdo_mysql',
