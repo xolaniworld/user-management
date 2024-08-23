@@ -5,6 +5,17 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 
 //*******************************************************************************************************
+// Constants
+//*******************************************************************************************************
+define('ROOT_DIR', __DIR__);
+define('INCLUDES_DIR', ROOT_DIR . '/includes');
+define('STORAGE_DIR', ROOT_DIR . '/storage');
+define('PUBLIC_DIR', ROOT_DIR . '/public');
+define('IMAGES_DIR', PUBLIC_DIR . '/images');
+define('ATTACHMENT_DIR', PUBLIC_DIR . '/attachment');
+define('TEMPLATES_DIR', ROOT_DIR . '/templates');
+
+//*******************************************************************************************************
 // Composer autoload
 //*******************************************************************************************************
 require_once __DIR__ . '/vendor/autoload.php';

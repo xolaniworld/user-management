@@ -11,9 +11,8 @@ class ControllerResolver extends SymfonyControllerResolver
     /**
      * {@inheritdoc}
      */
-    public function getController(Request $request)
+    public function getController(Request $request): callable|false
     {
-
         return parent::getController($request);
     }
 }
