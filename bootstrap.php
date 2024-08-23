@@ -7,13 +7,13 @@ use Doctrine\ORM\ORMSetup;
 //*******************************************************************************************************
 // Constants
 //*******************************************************************************************************
-define('ROOT_DIR', __DIR__);
-define('INCLUDES_DIR', ROOT_DIR . '/includes');
-define('STORAGE_DIR', ROOT_DIR . '/storage');
-define('PUBLIC_DIR', ROOT_DIR . '/public');
-define('IMAGES_DIR', PUBLIC_DIR . '/images');
-define('ATTACHMENT_DIR', PUBLIC_DIR . '/attachment');
-define('TEMPLATES_DIR', ROOT_DIR . '/templates');
+const ROOT_DIR = __DIR__;
+const INCLUDES_DIR = ROOT_DIR . '/includes';
+const STORAGE_DIR = ROOT_DIR . '/storage';
+const PUBLIC_DIR = ROOT_DIR . '/public';
+const IMAGES_DIR = PUBLIC_DIR . '/images';
+const ATTACHMENT_DIR = PUBLIC_DIR . '/attachment';
+const TEMPLATES_DIR = ROOT_DIR . '/templates';
 
 //*******************************************************************************************************
 // Composer autoload
