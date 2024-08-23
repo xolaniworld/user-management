@@ -157,7 +157,7 @@ class ControllerFactory
     private function getRenderer()
     {
         if ($this->renderer === null) {
-            $this->renderer = new PlatesTemplate(TEMPLATES_DIR);
+            $this->renderer = new PlatesTemplate(__DIR__ . '/../../templates');
         }
 
         return $this->renderer;

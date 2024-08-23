@@ -6,12 +6,12 @@ namespace Application\Entities;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
- #[ORM\Table(name: 'users')]
+#[ORM\Table(name: 'users')]
 class User
 {
     #[ORM\Id]
-     #[ORM\Column(type: 'integer')]
-     #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    #[ORM\GeneratedValue]
     private $id = null;
     #[ORM\Column(type: 'string')]
     private $name;

@@ -155,7 +155,10 @@ return function (RoutingConfigurator $routes) use ($controllerFactory) {
             function (Request $request) use ($controllerFactory) {
                 $deletedUserGateway = new \Application\Gateways\DeletedUserGateway(get_database());
                 $transaction = new \Application\Transactions\DeletedUsersTransaction($deletedUserGateway);
-                $controller = new \Application\Controllers\DeletedUsersController($transaction, new \Application\PlatesTemplate(TEMPLATES_DIR));
+                $controller = new \Application\Controllers\DeletedUsersController(
+                    $transaction,
+                    new \Application\PlatesTemplate(__DIR__ . '/../templates')
+                );
 
                 return new Response(
                     $controller->all()

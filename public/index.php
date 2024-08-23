@@ -2,9 +2,9 @@
 
 error_reporting(E_ALL);
 
-define('ROOT_DIR', dirname(__DIR__));
+require __DIR__ . '/../bootstrap.php';
 
-require_once ROOT_DIR . '/vendor/autoload.php';
+define('ROOT_DIR', dirname(__DIR__));
 
 include ROOT_DIR . '/config/defaults.php';
 
