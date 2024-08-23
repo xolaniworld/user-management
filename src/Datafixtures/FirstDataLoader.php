@@ -15,10 +15,11 @@ class FirstDataLoader implements FixtureInterface
         $admin = new Admin();
         $admin->setUsername('admin');
         $admin->setEmail('admin@email.com');
-        $admin->setPassword(password_hash('secret', PASSWORD_DEFAULT));
+        $admin->setPassword(password_hash('963852741', PASSWORD_DEFAULT));
         $admin->setCreated(new \DateTime('now'));
         $admin->setUpdated(new \DateTime('now'));
         $manager->persist($admin);
+
 
         $faker = \Faker\Factory::create();
         for($i = 0; $i < 20; $i++) {
@@ -29,13 +30,12 @@ class FirstDataLoader implements FixtureInterface
             $user->setPassword(password_hash('secret', PASSWORD_DEFAULT));
             $user->setGender(rand(1, 10) > 5 ? 'male' : 'female');
             $user->setMobile($faker->phoneNumber());
-            $user->setStatus('set-status1');
-            $user->setImage('/path/to/image.png');
+            $user->setStatus('1');
+            $user->setImage('https://avatar.iran.liara.run/public/27');
             $user->setCreated(new \DateTime('now'));
             $user->setUpdated(new \DateTime('now'));
             $manager->persist($user);
         }
-
         $manager->flush();
     }
 }

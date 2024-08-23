@@ -28,7 +28,7 @@ class UsersController extends AbstractController
     {
         $this->authenticated();
 
-        $msg = null;
+        $email = $alogin = $cnt = $msg = '';
         if ($this->request->getMethod() === 'POST') {
             $this->transaction->submitEditFrontEnd();
             $msg = "Information Updated Successfully";

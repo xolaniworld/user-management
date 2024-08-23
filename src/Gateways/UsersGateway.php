@@ -27,6 +27,22 @@ class UsersGateway extends AbstractGateway
         return $result;
     }
 
+    public function getPasswordHasByEmail(string $email, $status = '1')
+    {
+        $sql = 'select password from users where email=:email and status=(:status)';
+        $query = $this->pdo->prepare($sql);
+        $query->bindParam(':email', $email, PDO::PARAM_STR);
+        $query->bindParam(':status', $status, PDO::PARAM_STR);
+        $query->execute();
+
+        if ($query->rowCount() > 0) {
+            $result = $query->fetch(PDO::FETCH_OBJ);
+            return $result->password;
+        }
+
+        return null;
+    }
+
     public function countByEmailPasswordAndStatus($email, $password, $status)
     {
         $sql = "select email,password from users where email=:email and password=:password and status=(:status)";

@@ -32,7 +32,7 @@
                     <tr>
                         <td><?= $this->e((string)$cnt); ?></td>
                         <td>
-                            <img src="../images/<?= $this->e($result->image); ?>" style="width:50px; border-radius:50%;"/>
+                            <img src="<?= $this->e($result->image); ?>" style="width:50px; border-radius:50%;"/>
                         </td>
                         <td><?= $this->e($result->name); ?></td>
                         <td><?= $this->e($result->email); ?></td>
