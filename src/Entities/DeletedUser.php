@@ -1,5 +1,4 @@
-<?php
-// src/Product.php
+<?php declare(strict_types=1);
 
 namespace Application\Entities;
 

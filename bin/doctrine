@@ -4,20 +4,13 @@
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 
-require_once __DIR__ . '/../config/cli-config.php';
-
-// replace with path to your own project bootstrap file
-//require_once 'bootstrap.php';
-
-// replace with mechanism to retrieve EntityManager in your app
-//$entityManager = GetEntityManager();
+require __DIR__ . '/../bootstrap.php';
 
 $commands = [
-    // If you want to add your own custom console commands,
-    // you can do so here.
+    new \Application\Commands\LoadFixturesCommand()
 ];
 
 ConsoleRunner::run(
-    new SingleManagerProvider($entityManager),
+    new SingleManagerProvider($GLOBALS['entityManager']),
     $commands
 );

@@ -1,5 +1,4 @@
-<?php
-// src/Product.php
+<?php declare(strict_types=1);
 
 namespace Application\Entities;
 
@@ -111,4 +110,31 @@ class User
     {
         $this->status = $status;
     }
+
+    /**
+     * @param $created
+     * @return mixed
+     */
+    public function setCreated($created)
+    {
+        return $this->created = $created;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * @param mixed $updated
+     */
+    public function setUpdated($updated): void
+    {
+        $this->updated = $updated;
+    }
+
+
 }

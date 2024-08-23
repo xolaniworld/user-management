@@ -1,6 +1,8 @@
-<?php
-// src/Product.php
+<?php declare(strict_types=1);
 
+namespace Application\Entities;
+
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
@@ -10,22 +12,22 @@ class Admin
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]
     #[ORM\GeneratedValue]
-    private $id = null;
+    private int|null $id = null;
 
     #[ORM\Column(type: 'string')]
-    private $username;
+    private string $username;
 
     #[ORM\Column(type: 'string')]
-    private $email;
+    private string $email;
 
     #[ORM\Column(type: 'string')]
-    private $password;
+    private string $password;
 
     #[ORM\Column(type: 'datetime')]
-    private $created;
+    private DateTime $created;
 
     #[ORM\Column(type: 'datetime')]
-    private $updated;
+    private $updated = null;
 
     public function getId(): null
     {
@@ -83,7 +85,7 @@ class Admin
     /**
      * @param mixed $created
      */
-    public function setCreated($created): void
+    public function setCreated(DateTime $created): void
     {
         $this->created = $created;
     }
@@ -94,5 +96,13 @@ class Admin
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * @param mixed $created
+     */
+    public function setUpdated(DateTime $updated): void
+    {
+        $this->updated = $updated;
     }
 }
