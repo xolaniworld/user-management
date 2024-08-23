@@ -21,4 +21,57 @@ class DeletedUser
     private $created;
     #[ORM\Column(type: 'datetime')]
     private $updated;
+
+    public function getId(): null
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email): void
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDeletedTime()
+    {
+        return $this->deleted_time;
+    }
+
+    /**
+     * @param mixed $deleted_time
+     */
+    public function setDeletedTime($deleted_time): void
+    {
+        $this->deleted_time = $deleted_time;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
 }

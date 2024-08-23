@@ -33,4 +33,82 @@ class User
     private $created;
     #[ORM\Column(type: 'datetime')]
     private $updated;
+
+    public function getId()
+    {
+        return $this->id = null;
+    }
+    public function getName()
+    {
+        return $this->name;
+    }
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    public function getPassword()
+    {
+        return $this->password;
+    }
+    public function getGender()
+    {
+        return $this->gender;
+    }
+    public function getMobile()
+    {
+        return $this->mobile;
+    }
+    public function getDesignation()
+    {
+        return $this->designation;
+    }
+    public function getImage()
+    {
+        return $this->image;
+    }
+    public function getStatus()
+    {
+        return $this->status;
+    }
+    public function getCreated()
+    {
+        return $this->created;
+    }
+    public function getUdated()
+    {
+        return $this->updated;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+    }
+    public function setMobile($mobile)
+    {
+        $this->mobile = $mobile;
+    }
+    public function setDesignation($designation)
+    {
+        $this->designation = $designation;
+    }
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
 }
