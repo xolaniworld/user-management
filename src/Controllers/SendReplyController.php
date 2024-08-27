@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Application\Controllers;
+namespace App\Controllers;
 
 
-use Application\RendererInterface;
-use Application\Transactions\SendReplyTransaction;
+use App\RendererInterface;
+use App\Transactions\SendReplyTransaction;
 use Psr\Http\Message\ServerRequestInterface;
 
 class SendReplyController

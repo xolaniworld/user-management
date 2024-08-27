@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Application;
+namespace App;
 
 use Symfony\Component\HttpFoundation\Session\Session as SymfonySession;
 

@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Application\Controllers;
+namespace App\Controllers;
 
-use Application\RendererInterface;
-use Application\Transactions\FeedbackTransaction;
-use Application\Transactions\UsersTransactions;
+use App\RendererInterface;
+use App\Transactions\FeedbackTransaction;
+use App\Transactions\UsersTransactions;
 use Psr\Http\Message\ServerRequestInterface;
 
 class AdminFeedbackController extends AbstractController

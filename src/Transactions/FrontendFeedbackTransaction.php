@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Application\Transactions;
+namespace App\Transactions;
 
-use Application\Gateways\FeedbackGateway;
-use Application\Gateways\NotificationGateway;
-use Application\Gateways\UsersGateway;
+use App\Gateways\FeedbackGateway;
+use App\Gateways\NotificationGateway;
+use App\Gateways\UsersGateway;
 
 class FrontendFeedbackTransaction
 {

@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Application\Controllers;
+namespace App\Controllers;
 
 
-use Application\Transactions\DownloadTransaction;
+use App\Transactions\DownloadTransaction;
 
 class DownloadController
 {

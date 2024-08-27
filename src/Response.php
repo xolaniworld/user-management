@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Application;
+namespace App;
 
 
 class Response

@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Application\Controllers;
+namespace App\Controllers;
 
 
-use Application\RendererInterface;
-use Application\Transactions\LoginTransaction;
+use App\RendererInterface;
+use App\Transactions\LoginTransaction;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 

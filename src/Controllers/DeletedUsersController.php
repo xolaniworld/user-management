@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Application\Controllers;
+namespace App\Controllers;
 
-use Application\RendererInterface;
-use Application\Transactions\DeletedUsersTransaction;
+use App\RendererInterface;
+use App\Transactions\DeletedUsersTransaction;
 
 class DeletedUsersController extends AbstractController
 {

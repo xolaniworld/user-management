@@ -1,8 +1,8 @@
 <?php
-namespace Application\Controllers;
+namespace App\Controllers;
 
-use Application\RendererInterface;
-use Application\Transactions\UserListTransaction;
+use App\RendererInterface;
+use App\Transactions\UserListTransaction;
 use Psr\Http\Message\ServerRequestInterface;
 
 class UserListController extends AbstractController

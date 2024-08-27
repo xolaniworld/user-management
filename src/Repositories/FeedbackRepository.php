@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Repositories;
+namespace App\Repositories;
 use PDO;
 
 class FeedbackRepository extends AbstractRepository

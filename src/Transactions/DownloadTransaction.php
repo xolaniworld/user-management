@@ -1,9 +1,9 @@
 <?php
 
-namespace Application\Transactions;
+namespace App\Transactions;
 
 
-use Application\Gateways\UsersGateway;
+use App\Gateways\UsersGateway;
 
 class DownloadTransaction
 {

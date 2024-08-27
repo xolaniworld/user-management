@@ -1,5 +1,5 @@
 <?php
-namespace Application;
+namespace App;
 
 
 interface RendererInterface

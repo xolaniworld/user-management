@@ -1,6 +1,6 @@
 <?php
-namespace Application;
-use Application\Controllers\ControllerResolver;
+namespace App;
+use App\Controllers\ControllerResolver;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;

@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Application\Datafixtures;
+namespace App\Datafixtures;
 
-use Application\Entities\Admin;
-use Application\Entities\User;
+use App\Entities\Admin;
+use App\Entities\User;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 

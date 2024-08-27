@@ -4,7 +4,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
-$controllerFactory = new \Application\Controllers\ControllerFactory();
+$controllerFactory = new \App\Controllers\ControllerFactory();
 
 return function (RoutingConfigurator $routes) use ($controllerFactory) {
 
@@ -142,11 +142,11 @@ return function (RoutingConfigurator $routes) use ($controllerFactory) {
     $routes->add('admin-deleteduser', '/admin/deleteduser')
         ->controller(
             function (Request $request) use ($controllerFactory) {
-                $deletedUserGateway = new \Application\Gateways\DeletedUserGateway(get_database());
-                $transaction = new \Application\Transactions\DeletedUsersTransaction($deletedUserGateway);
-                $controller = new \Application\Controllers\DeletedUsersController(
+                $deletedUserGateway = new \App\Gateways\DeletedUserGateway(get_database());
+                $transaction = new \App\Transactions\DeletedUsersTransaction($deletedUserGateway);
+                $controller = new \App\Controllers\DeletedUsersController(
                     $transaction,
-                    new \Application\PlatesTemplate(__DIR__ . '/../templates')
+                    new \App\PlatesTemplate(__DIR__ . '/../templates')
                 );
 
                 return new Response(
@@ -159,9 +159,9 @@ return function (RoutingConfigurator $routes) use ($controllerFactory) {
     $routes->add('admin-download', '/admin/download')
         ->controller(
             function (Request $request) use ($controllerFactory) {
-                $usersGateway = new \Application\Gateways\UsersGateway(get_database());
-                $transaction = new \Application\Transactions\DownloadTransaction($usersGateway);
-                $controller = new \Application\Controllers\DownloadController($transaction);
+                $usersGateway = new \App\Gateways\UsersGateway(get_database());
+                $transaction = new \App\Transactions\DownloadTransaction($usersGateway);
+                $controller = new \App\Controllers\DownloadController($transaction);
 
                 $controller->download();
                 exit;
@@ -189,7 +189,7 @@ return function (RoutingConfigurator $routes) use ($controllerFactory) {
                         $params["secure"], $params["httponly"]
                     );
                 }
-                \Application\Session::destroy();
+                \App\Session::destroy();
                 header("location: /admin");
                 exit;
             }
@@ -206,7 +206,7 @@ return function (RoutingConfigurator $routes) use ($controllerFactory) {
                         $params["secure"], $params["httponly"]
                     );
                 }
-                \Application\Session::destroy();
+                \App\Session::destroy();
                 header("location: /");
                 exit;
             }

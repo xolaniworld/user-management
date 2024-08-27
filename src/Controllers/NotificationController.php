@@ -1,10 +1,10 @@
 <?php
 
-namespace Application\Controllers;
+namespace App\Controllers;
 
-use Application\Auth;
-use Application\RendererInterface;
-use Application\Transactions\NotificationTransaction;
+use App\Auth;
+use App\RendererInterface;
+use App\Transactions\NotificationTransaction;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class NotificationController extends AbstractController

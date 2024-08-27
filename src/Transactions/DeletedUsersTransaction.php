@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Application\Transactions;
+namespace App\Transactions;
 
 
-use Application\Gateways\DeletedUserGateway;
+use App\Gateways\DeletedUserGateway;
 
 class DeletedUsersTransaction
 {

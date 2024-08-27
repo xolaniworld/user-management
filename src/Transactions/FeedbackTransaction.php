@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Application\Transactions;
+namespace App\Transactions;
 
 
-use Application\Gateways\FeedbackGateway;
+use App\Gateways\FeedbackGateway;
 
 class FeedbackTransaction
 {

@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Application\Controllers;
+namespace App\Controllers;
 
 
-use Application\Models\Admin;
-use Application\RendererInterface;
-use Application\Repositories\AdminTransaction;
+use App\Model\Admin;
+use App\RendererInterface;
+use App\Repositories\AdminTransaction;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 

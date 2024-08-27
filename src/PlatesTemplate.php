@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Application;
+namespace App;
 
 
 use League\Plates\Engine;

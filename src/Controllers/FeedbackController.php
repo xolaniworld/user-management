@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Application\Controllers;
+namespace App\Controllers;
 
 
-use Application\Auth;
-use Application\RendererInterface;
-use Application\Transactions\FrontendFeedbackTransaction;
+use App\Auth;
+use App\RendererInterface;
+use App\Transactions\FrontendFeedbackTransaction;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 

@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Application\Controllers;
+namespace App\Controllers;
 
-use Application\Auth;
-use Application\PlatesTemplate;
-use Application\Transactions\UsersTransactions;
+use App\Auth;
+use App\PlatesTemplate;
+use App\Transactions\UsersTransactions;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Application\Commands;
+namespace App\Commands;
 
-use Application\Datafixtures\FirstDataLoader;
+use App\Datafixtures\FirstDataLoader;
 use Doctrine\Common\DataFixtures\Loader;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

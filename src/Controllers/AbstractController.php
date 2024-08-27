@@ -1,14 +1,14 @@
 <?php
 
 
-namespace Application\Controllers;
+namespace App\Controllers;
 
 
 class AbstractController
 {
     public function authenticated()
     {
-        if (\Application\Authentication::isNotLoggedIn()) {
+        if (\App\Authentication::isNotLoggedIn()) {
             header('location: /');
             exit;
         }

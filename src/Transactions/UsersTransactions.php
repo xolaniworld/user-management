@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Application\Transactions;
+namespace App\Transactions;
 
 
-use Application\Gateways\UsersGateway;
-use Application\Request;
+use App\Gateways\UsersGateway;
+use App\Request;
 
 class UsersTransactions
 {

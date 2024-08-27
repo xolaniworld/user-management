@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Application\Controllers;
+namespace App\Controllers;
 
 
-use Application\RendererInterface;
-use Application\Repositories\DashboardTransaction;
+use App\RendererInterface;
+use App\Repositories\DashboardTransaction;
 
 class DashboardController extends AbstractController
 {

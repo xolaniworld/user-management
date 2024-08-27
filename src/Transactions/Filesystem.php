@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Transactions;
+namespace App\Transactions;
 
 class Filesystem
 {

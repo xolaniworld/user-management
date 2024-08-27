@@ -1,11 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Application\Entities;
+namespace App\Entities;
 
+use App\Model\AdminRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: AdminRepository::class)]
 #[ORM\Table(name: 'admins')]
 class Admin
 {
@@ -21,18 +22,23 @@ class Admin
     private string $email;
 
     #[ORM\Column(type: 'string')]
-    private string $password;
+    private string $password_hash;
 
     #[ORM\Column(type: 'datetime')]
-    private DateTime $created;
+    private DateTime $created_at;
 
     #[ORM\Column(type: 'datetime')]
-    private $updated = null;
+    private $updated_at = null;
 
     public function getId(): null
     {
         return $this->id;
     }
+
+//    public function authenticate(string $password): bool
+//    {
+//        return password_verify($this->password, $this)
+//    }
 
     /**
      * @return mixed
@@ -69,18 +75,18 @@ class Admin
     /**
      * @return mixed
      */
-    public function getPassword()
+    public function getPasswordHash()
     {
-        return $this->password;
+        return $this->passwordHash;
     }
-
-    /**
-     * @param mixed $password
-     */
-    public function setPassword($password): void
-    {
-        $this->password = $password;
-    }
+//
+//    /**
+//     * @param mixed $password
+//     */
+//    public function setPassword($password): void
+//    {
+//        $this->password = $password;
+//    }
 
     /**
      * @param mixed $created

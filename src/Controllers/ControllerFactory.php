@@ -1,24 +1,24 @@
 <?php
 
 
-namespace Application\Controllers;
+namespace App\Controllers;
 
-use Application\Controllers;
-use Application\Gateways;
-use Application\Gateways\AdminGateway;
-use Application\Gateways\DeletedUserGateway;
-use Application\Gateways\FeedbackGateway;
-use Application\Gateways\NotificationGateway;
-use Application\Gateways\UsersGateway;
-use Application\PlatesTemplate;
-use Application\Repositories\AdminTransaction;
-use Application\Repositories\DashboardTransaction;
-use Application\Transactions;
-use Application\Transactions\Filesystem;
-use Application\Transactions\FrontendFeedbackTransaction;
-use Application\Transactions\NotificationTransaction;
-use Application\Transactions\RegisterTransaction;
-use Application\Transactions\UserListTransaction;
+use App\Controllers;
+use App\Gateways;
+use App\Gateways\AdminGateway;
+use App\Gateways\DeletedUserGateway;
+use App\Gateways\FeedbackGateway;
+use App\Gateways\NotificationGateway;
+use App\Gateways\UsersGateway;
+use App\PlatesTemplate;
+use App\Repositories\AdminTransaction;
+use App\Repositories\DashboardTransaction;
+use App\Transactions;
+use App\Transactions\Filesystem;
+use App\Transactions\FrontendFeedbackTransaction;
+use App\Transactions\NotificationTransaction;
+use App\Transactions\RegisterTransaction;
+use App\Transactions\UserListTransaction;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
 
@@ -39,15 +39,15 @@ class ControllerFactory
     {
         $usersGateway = new Gateways\UsersGateway($this->getDatabase());
         $transaction = new Transactions\LoginTransaction($usersGateway);
-        return new \Application\Controllers\MainController($this->getRequest(), $transaction, $this->getRenderer(), $this->getSession());
+        return new \App\Controllers\MainController($this->getRequest(), $transaction, $this->getRenderer(), $this->getSession());
     }
 
     public function makeUserController()
     {
         $userGateway = new Gateways\UsersGateway($this->getDatabase());
-        $usersTransaction = new Transactions\UsersTransactions($userGateway, new \Application\Request(), new Filesystem(IMAGES_DIR));
+        $usersTransaction = new Transactions\UsersTransactions($userGateway, new \App\Request(), new Filesystem(IMAGES_DIR));
 
-        return new \Application\Controllers\UsersController(
+        return new \App\Controllers\UsersController(
             $this->getRequest(),
             $usersTransaction,
             $this->getRenderer(),
@@ -80,7 +80,7 @@ class ControllerFactory
     public function makeAdminFeedbackController()
     {
         $userGateway = new Gateways\UsersGateway($this->getDatabase());
-        $request = new \Application\Request();
+        $request = new \App\Request();
         $filesystem = new Transactions\Filesystem(IMAGES_DIR);
         $usersTransaction = new Transactions\UsersTransactions($userGateway, $request, $filesystem);
         $feedbackGateway = new Gateways\FeedbackGateway(get_database());
@@ -107,7 +107,7 @@ class ControllerFactory
                 new UsersGateway($this->getDatabase()),
                 new NotificationGateway($this->getDatabase()),
                 new Filesystem(IMAGES_DIR),
-                new \Application\Request()
+                new \App\Request()
             ),
             $this->getRenderer(),
             $this->getRequest()
@@ -148,7 +148,7 @@ class ControllerFactory
     private function getSession()
     {
         if ($this->session === null) {
-            $this->session = \Application\Session::getSession();
+            $this->session = \App\Session::getSession();
         }
 
         return $this->session;
