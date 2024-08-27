@@ -20,11 +20,11 @@ class Feedback
     private $title;
     #[ORM\Column(type: 'string')]
     private $feedback_data;
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: 'string', nullable: true)]
     private $attachment;
     #[ORM\Column(type: 'datetime')]
     private $created;
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column(type: 'datetime', nullable: true)]
     private $updated;
 
     public function getId(): null
@@ -126,5 +126,17 @@ class Feedback
     public function setAttachment($attachment): void
     {
         $this->attachment = $attachment;
+    }
+
+    public function setCreated(): void
+    {
+        // WILL be saved in the database
+        $this->created = new DateTime("now");
+    }
+
+    public function setUpdated(): void
+    {
+        // WILL be saved in the database
+        $this->updated = new DateTime("now");
     }
 }

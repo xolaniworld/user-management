@@ -8,7 +8,7 @@ use PDO;
 
 class FeedbackGateway extends AbstractGateway
 {
-    protected $table = 'feedback';
+    protected $table = 'feedbacks';
 
     public function insertSenderReceiverTitleFeedbackAttachment($user, $receiver, $title, $description, $attachment)
     {

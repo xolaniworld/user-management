@@ -27,8 +27,10 @@ class FrontendFeedbackTransaction
     {
         $receiver= 'Admin';
         $notitype='Send Feedback';
-
-        $attachment = $this->filesystem->upload($attachmentFile);
+        $attachment = null;
+        if ($attachmentFile["size"] !== 0) {
+            $attachment = $this->filesystem->upload($attachmentFile);
+        }
         $notiReceiver = 'Admin';
         $this->notificationGateway->insertUserReceiverType($user, $notiReceiver, $notitype);
         $this->feedbackGateway->insertSenderReceiverTitleFeedbackAttachment($user, $receiver, $title, $description, $attachment);

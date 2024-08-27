@@ -45,10 +45,10 @@ function get_database() {
 
     // Establish database connection.
     try {
-        $dbh = new PDO("mysql:host=" . $_ENV['DATABASE_HOST']
-            . ";dbname=" . $_ENV['DATABASE_NAME'],
-            $_ENV['DATABASE_USER'],
-            $_ENV['DATABASE_PASS'],
+        $dbh = new PDO("mysql:host=" . $_ENV['DB_HOST']
+            . ";dbname=" . $_ENV['DB_DATABASE'],
+            $_ENV['DB_USERNAME'],
+            $_ENV['DB_PASSWORD'],
             [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"]
         );
         return $dbh;
@@ -70,10 +70,10 @@ $config = ORMSetup::createAttributeMetadataConfiguration(
 //*******************************************************************************************************
 $connection = DriverManager::getConnection([
     'driver' => 'pdo_mysql',
-    'dbname' => $_ENV['DATABASE_NAME'],
-    'user' => $_ENV['DATABASE_USER'],
-    'password' => $_ENV['DATABASE_PASS'],
-    'host' => $_ENV['DATABASE_HOST'],
+    'dbname' => $_ENV['DB_DATABASE'],
+    'user' => $_ENV['DB_USERNAME'],
+    'password' => $_ENV['DB_PASSWORD'],
+    'host' => $_ENV['DB_HOST'],
 ], $config);
 
 //*******************************************************************************************************

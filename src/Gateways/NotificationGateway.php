@@ -7,7 +7,8 @@ class NotificationGateway extends AbstractGateway
 {
     public function insertUserReceiverType($user, $notification_receiver, $notification_type)
     {
-        $sqlnoti="insert into notifications (notification_user,notification_receiver,notification_type) values (:notification_user,:notification_receiver,:notification_type)";
+        $sqlnoti="insert into notifications (notification_user,notification_receiver,notification_type, time, created, updated) 
+                values (:notification_user,:notification_receiver,:notification_type, now(), now(), now())";
         $querynoti = $this->pdo->prepare($sqlnoti);
         $querynoti-> bindParam(':notification_user', $user, PDO::PARAM_STR);
         $querynoti-> bindParam(':notification_receiver', $notification_receiver, PDO::PARAM_STR);
