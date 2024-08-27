@@ -7,17 +7,6 @@ use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 $controllerFactory = new \Application\Controllers\ControllerFactory();
 
 return function (RoutingConfigurator $routes) use ($controllerFactory) {
-//    $routes->add('home', '/')
-//        ->controller(\Application\Controllers\MainController::class)
-//        // ...
-//    ;
-//        $routes->add('hello', new Route('/', [
-//                '_controller' => function (Request $request) {
-//                    return new Response(
-//                        sprintf("Hello %s", $request->get('name'))
-//                    );
-//                }]
-//        ));
 
         $routes->add('home', '/')
         ->controller(
@@ -223,5 +212,4 @@ return function (RoutingConfigurator $routes) use ($controllerFactory) {
             }
         )
     ;
-
 };
