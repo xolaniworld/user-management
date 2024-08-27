@@ -54,15 +54,15 @@ PHP User Management System is a powerful PHP script that offers a secure user ma
 
 ## Wireframe
 
- <img src="/Sc/wireframe.png">
+ <img src="/images/wireframe.png">
 
 ## Screenshots
 
 | Screenshots  | Screenshots |
 | ------------- | ------------- |
-| <img src="/Sc/1.PNG"> | <img src="/Sc/2.PNG"> |
-| <img src="/Sc/3.PNG"> | <img src="/Sc/4.PNG"> |
-| <img src="/Sc/5.PNG"> | <img src="/Sc/6.PNG"> |
+| <img src="/images/1.PNG"> | <img src="/images/2.PNG"> |
+| <img src="/images/3.PNG"> | <img src="/images/4.PNG"> |
+| <img src="/images/5.PNG"> | <img src="/images/6.PNG"> |
 
 ### How to Install
 
