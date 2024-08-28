@@ -1,8 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Model;
 
-use App\Gateways\AdminGateway;
+use App\Gateway\AdminGateway;
 
 class Admin
 {

@@ -4,7 +4,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
-$controllerFactory = new \App\Controllers\ControllerFactory();
+$controllerFactory = new \App\Controller\ControllerFactory();
 
 return function (RoutingConfigurator $routes) use ($controllerFactory) {
 
@@ -142,9 +142,9 @@ return function (RoutingConfigurator $routes) use ($controllerFactory) {
     $routes->add('admin-deleteduser', '/admin/deleteduser')
         ->controller(
             function (Request $request) use ($controllerFactory) {
-                $deletedUserGateway = new \App\Gateways\DeletedUserGateway(get_database());
-                $transaction = new \App\Transactions\DeletedUsersTransaction($deletedUserGateway);
-                $controller = new \App\Controllers\DeletedUsersController(
+                $deletedUserGateway = new \App\Gateway\DeletedUserGateway(get_database());
+                $transaction = new \App\Transaction\DeletedUsersTransaction($deletedUserGateway);
+                $controller = new \App\Controller\DeletedUsersController(
                     $transaction,
                     new \App\PlatesTemplate(__DIR__ . '/../templates')
                 );
@@ -159,9 +159,9 @@ return function (RoutingConfigurator $routes) use ($controllerFactory) {
     $routes->add('admin-download', '/admin/download')
         ->controller(
             function (Request $request) use ($controllerFactory) {
-                $usersGateway = new \App\Gateways\UsersGateway(get_database());
-                $transaction = new \App\Transactions\DownloadTransaction($usersGateway);
-                $controller = new \App\Controllers\DownloadController($transaction);
+                $usersGateway = new \App\Gateway\UsersGateway(get_database());
+                $transaction = new \App\Transaction\DownloadTransaction($usersGateway);
+                $controller = new \App\Controller\DownloadController($transaction);
 
                 $controller->download();
                 exit;
