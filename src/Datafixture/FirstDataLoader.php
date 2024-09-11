@@ -2,6 +2,8 @@
 
 namespace App\Datafixture;
 
+use App\Entity\Admin;
+use App\Gateway\AdminGateway;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
@@ -11,18 +13,14 @@ class FirstDataLoader implements FixtureInterface
     public function load(ObjectManager $manager): void
     {
         $admin = new Admin();
-        $admin->createFromRegistration(
-            AdminRegistrationDTO::create(
-                'admin',
-                'admin@email.com',
-                    password_hash('963852741', PASSWORD_DEFAULT),
-                new \DateTime('now'),
-                new \DateTime('now')
-            )
-        );
+        $admin->setUsername('admin');
+        $admin->setEmail('admin@admin.com');
+        $admin->setPasswordHash(password_hash('963852741', PASSWORD_DEFAULT));
+        $admin->setCreatedAt(new \DateTime('now'));
+        $admin->setUpdatedAt(new \DateTime('now'));
         $manager->persist($admin);
-//
-//
+
+
 //        $faker = \Faker\Factory::create();
 //        for($i = 0; $i < 20; $i++) {
 //            $user = new User();
@@ -38,6 +36,6 @@ class FirstDataLoader implements FixtureInterface
 //            $user->setUpdated(new \DateTime('now'));
 //            $manager->persist($user);
 //        }
-//        $manager->flush();
+        $manager->flush();
     }
 }

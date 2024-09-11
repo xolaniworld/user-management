@@ -3,9 +3,9 @@
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
-use Doctrine\Migrations\Configuration\Connection\ExistingConnection;
 use Doctrine\Migrations\DependencyFactory;
-
+use Doctrine\Migrations\Configuration\Migration\PhpFile;
+use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
 
 //*******************************************************************************************************
 // Constants
@@ -64,7 +64,7 @@ function get_database() {
 //*******************************************************************************************************
 // Create a simple "default" Doctrine ORM configuration for Attributes
 //*******************************************************************************************************
-$migrationsConfig = new PhpFile('migrations.php');
+$migrationsConfig = new PhpFile(__DIR__ . '/config/migrations.php');
 
 //*******************************************************************************************************
 // Create a simple "default" Doctrine ORM configuration for Attributes
@@ -93,4 +93,4 @@ $entityManager =  new EntityManager($connection, $ORMConfig);
 //*******************************************************************************************************
 // Dependency Factory
 //*******************************************************************************************************
-return DependencyFactory::fromConnection($migrationsConfig, new ExistingConnection($entityManager));
+return DependencyFactory::fromEntityManager($migrationsConfig, new ExistingEntityManager($entityManager));

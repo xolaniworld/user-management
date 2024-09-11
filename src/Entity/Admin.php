@@ -53,6 +53,11 @@ class Admin
         $this->username = $username;
     }
 
+    public function setPasswordHash(string $passwordHash)
+    {
+        $this->passwordHash = $passwordHash;
+    }
+
     public function getEmail()
     {
         return $this->email;
@@ -74,21 +79,21 @@ class Admin
     /**
      * @param mixed $created
      */
-    public function setCreated(DateTime $created): void
+    public function setCreatedAt(DateTime $createdAt): void
     {
-        $this->created = $created;
+        $this->createdAt = $createdAt;
     }
 
     public function getUpdated()
     {
-        return $this->updated;
+        return $this->updatedAt;
     }
 
     /**
      * @param mixed $created
      */
-    public function setUpdated(DateTime $updated): void
+    public function setUpdatedAt(DateTime $updatedAt): void
     {
-        $this->updated = $updated;
+        $this->updatedAt = $updatedAt;
     }
 }
