@@ -3,12 +3,23 @@
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
+use Doctrine\Migrations\Configuration\Migration\PhpFile;
+
+// Or use one of the Doctrine\Migrations\Configuration\Configuration\* loaders
+$migrationConfig = new PhpFile(__DIR__ . '/../migrations.php');
+
+//$paths = [ __DIR__.'/../src/Entity'];
+//$isDevMode = true;
 
 // Create a simple "default" Doctrine ORM configuration for Attributes
-$config = ORMSetup::createAttributeMetadataConfiguration(
-    paths: array(__DIR__."/src"),
+$ormConfig = ORMSetup::createAttributeMetadataConfiguration(
+    paths: [__DIR__."/src"],
     isDevMode: true,
 );
+
+//$config = array_merge($ormConfig, $migrationConfig);
+
+//dump($config); exit;
 
 // configuring the database connection
 $connection = DriverManager::getConnection([

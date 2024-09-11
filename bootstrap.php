@@ -3,6 +3,9 @@
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
+use Doctrine\Migrations\Configuration\Connection\ExistingConnection;
+use Doctrine\Migrations\DependencyFactory;
+
 
 //*******************************************************************************************************
 // Constants
@@ -57,10 +60,16 @@ function get_database() {
     }
 }
 
+
 //*******************************************************************************************************
 // Create a simple "default" Doctrine ORM configuration for Attributes
 //*******************************************************************************************************
-$config = ORMSetup::createAttributeMetadataConfiguration(
+$migrationsConfig = new PhpFile('migrations.php');
+
+//*******************************************************************************************************
+// Create a simple "default" Doctrine ORM configuration for Attributes
+//*******************************************************************************************************
+$ORMConfig  = ORMSetup::createAttributeMetadataConfiguration(
     paths: [__DIR__."/src"],
     isDevMode: true,
 );
@@ -74,9 +83,14 @@ $connection = DriverManager::getConnection([
     'user' => $_ENV['DB_USERNAME'],
     'password' => $_ENV['DB_PASSWORD'],
     'host' => $_ENV['DB_HOST'],
-], $config);
+], $ORMConfig);
 
 //*******************************************************************************************************
-// obtaining the entity manager
+// Obtaining the entity manager
 //*******************************************************************************************************
-$entityManager =  new EntityManager($connection, $config);
+$entityManager =  new EntityManager($connection, $ORMConfig);
+
+//*******************************************************************************************************
+// Dependency Factory
+//*******************************************************************************************************
+return DependencyFactory::fromConnection($migrationsConfig, new ExistingConnection($entityManager));
