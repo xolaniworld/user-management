@@ -7,7 +7,7 @@ use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 require __DIR__ . '/../bootstrap.php';
 
 $commands = [
-    new \Application\Commands\LoadFixturesCommand()
+    new \App\Command\LoadFixturesCommand()
 ];
 
 ConsoleRunner::run(

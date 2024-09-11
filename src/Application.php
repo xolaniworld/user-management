@@ -20,7 +20,7 @@ class Application
         // looks inside *this* directory
         $fileLocator = new FileLocator([__DIR__]);
         $loader = new PhpFileLoader($fileLocator);
-        $routes = $loader->load('RouteProvider.php');
+        $routes = $loader->load('routes.php');
 
 //        $routes = new RouteCollection();
 //        $routes->add('hello', new Route('/', [

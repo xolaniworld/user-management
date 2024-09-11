@@ -6,6 +6,6 @@ require __DIR__ . '/../bootstrap.php';
 
 include dirname(__DIR__) . '/src/routes.php';
 
-$app = new \Application\Application();
+$app = new \App\Application();
 
 $app->run();

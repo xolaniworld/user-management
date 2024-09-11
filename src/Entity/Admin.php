@@ -2,47 +2,44 @@
 
 namespace App\Entity;
 
+use App\DataTransferObject\AdminRegistrationDTO;
 use App\Model\AdminRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\GeneratedValue;
 
-#[ORM\Entity(repositoryClass: AdminRepository::class)]
+#[Entity(repositoryClass: AdminRepository::class)]
 #[ORM\Table(name: 'admins')]
 class Admin
 {
-    #[ORM\Id]
-    #[ORM\Column(type: 'integer')]
-    #[ORM\GeneratedValue]
-    private int|null $id = null;
+    #[Id]
+    #[Column, GeneratedValue]
+    private int $id;
 
-    #[ORM\Column(type: 'string')]
+    #[Column]
     private string $username;
 
-    #[ORM\Column(type: 'string')]
+    #[Column]
     private string $email;
 
-    #[ORM\Column(type: 'string')]
-    private string $password_hash;
+    #[Column(name: 'password_hash')]
+    private string $passwordHash;
 
-    #[ORM\Column(type: 'datetime')]
-    private DateTime $created_at;
+    #[Column(name: 'created_at')]
+    private DateTime $createdAt;
 
-    #[ORM\Column(type: 'datetime')]
-    private $updated_at = null;
+    #[Column(name: 'updated_at')]
+    private DateTime $updatedAt;
+
 
     public function getId(): null
     {
         return $this->id;
     }
 
-//    public function authenticate(string $password): bool
-//    {
-//        return password_verify($this->password, $this)
-//    }
-
-    /**
-     * @return mixed
-     */
     public function getUsername()
     {
         return $this->username;
@@ -56,9 +53,6 @@ class Admin
         $this->username = $username;
     }
 
-    /**
-     * @return mixed
-     */
     public function getEmail()
     {
         return $this->email;
@@ -72,21 +66,10 @@ class Admin
         $this->email = $email;
     }
 
-    /**
-     * @return mixed
-     */
     public function getPasswordHash()
     {
         return $this->passwordHash;
     }
-//
-//    /**
-//     * @param mixed $password
-//     */
-//    public function setPassword($password): void
-//    {
-//        $this->password = $password;
-//    }
 
     /**
      * @param mixed $created
@@ -96,9 +79,6 @@ class Admin
         $this->created = $created;
     }
 
-    /**
-     * @return mixed
-     */
     public function getUpdated()
     {
         return $this->updated;
