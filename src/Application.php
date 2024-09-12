@@ -22,15 +22,6 @@ class Application
         $loader = new PhpFileLoader($fileLocator);
         $routes = $loader->load('routes.php');
 
-//        $routes = new RouteCollection();
-//        $routes->add('hello', new Route('/', [
-//                '_controller' => function (Request $request) {
-//                    return new Response(
-//                        sprintf("Hello %s", $request->get('name'))
-//                    );
-//                }]
-//        ));
-
         $request = Request::createFromGlobals();
 
         $matcher = new UrlMatcher($routes, new RequestContext());

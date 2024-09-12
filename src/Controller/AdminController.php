@@ -3,11 +3,15 @@
 
 namespace App\Controller;
 
-
+use Symfony\Component\HttpFoundation\Response;
+use App\Gateway\AdminGateway;
 use App\Model\Admin;
+use App\PlatesTemplate;
 use App\RendererInterface;
 use App\Repository\AdminTransaction;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\ServerRequestInterface;
+use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class AdminController extends AbstractController
@@ -18,19 +22,28 @@ class AdminController extends AbstractController
     private $renderer;
     private $model;
 
-    public function __construct(AdminTransaction $transaction, ServerRequestInterface $request, Session $session, RendererInterface $renderer)
+    public function __construct()
     {
-        $this->transaction = $transaction;
-        $this->request = $request;
-        $this->session = $session;
-        $this->renderer = $renderer;
+        $this->transaction = new AdminTransaction(new AdminGateway(get_database()));
+        $this->renderer = new PlatesTemplate(__DIR__ . '/../../templates');
+        $symfonyRequest = \Symfony\Component\HttpFoundation\Request::createFromGlobals();
+        $psr17Factory = new Psr17Factory();
+        $psrHttpFactory = new PsrHttpFactory($psr17Factory, $psr17Factory, $psr17Factory, $psr17Factory);
+        $this->request = $psrHttpFactory->createRequest($symfonyRequest);
+        $this->session = \App\Session::getSession();
+
+//        return new AdminController($t, $this->getRequest(), $this->getSession(), $this->getRenderer());
+//        $this->transaction = new AdminTransaction();
+//        $this->request = $request;
+//        $this->session = $session;
+//        $this->renderer = $renderer;
         $this->model = new Admin();
     }
 
     public function index()
     {
         $redirect = null;
-        return $this->renderer->render('admin/index', compact('redirect'));
+        return $this->render('admin/index', compact('redirect'));
     }
 
     /**

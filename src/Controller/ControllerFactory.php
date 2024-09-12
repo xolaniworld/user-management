@@ -145,6 +145,9 @@ class ControllerFactory
         return $this->database;
     }
 
+    /**
+     * @return mixed
+     */
     private function getSession()
     {
         if ($this->session === null) {
@@ -154,6 +157,9 @@ class ControllerFactory
         return $this->session;
     }
 
+    /**
+     * @return PlatesTemplate
+     */
     private function getRenderer()
     {
         if ($this->renderer === null) {
@@ -163,6 +169,9 @@ class ControllerFactory
         return $this->renderer;
     }
 
+    /**
+     * @return \Psr\Http\Message\ServerRequestInterface
+     */
     private function getRequest()
     {
         if ($this->request === null) {
