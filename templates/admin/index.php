@@ -12,7 +12,7 @@
                     <h1 class="text-center text-bold mt-4x">Admin Login</h1>
                     <div class="well row pt-2x pb-3x bk-light">
                         <div class="col-md-8 col-md-offset-2">
-                            <form method="POST">
+                            <form method="POST" action="/admin/login">
 
                                 <label for="" class="text-uppercase text-sm">Your Username </label>
                                 <input type="text" value="admin" placeholder="Username" name="username" class="form-control mb" required>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Controller\AdminController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
@@ -79,13 +80,25 @@ return function (RoutingConfigurator $routes) use ($controllerFactory) {
     ;
 
     $routes->add('admin', '/admin')
+        ->controller([AdminController::class, 'index'])
+//        ->controller(
+//            function (Request $request) use ($controllerFactory) {
+//                return new Response(
+//                    $controllerFactory->makeAdminController()->index()
+//                );
+//            }
+//        )
+        ->methods(['GET'])
+    ;
+
+    $routes->add('admin_login', '/admin/login')
         ->controller(
             function (Request $request) use ($controllerFactory) {
                 return new Response(
                     $controllerFactory->makeAdminController()->login()
                 );
             }
-        )
+        )->methods(['POST'])
     ;
 
     $routes->add('admin-dashboard', '/admin/dashboard')

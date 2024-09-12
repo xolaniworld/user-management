@@ -27,16 +27,20 @@ class AdminController extends AbstractController
         $this->model = new Admin();
     }
 
-    public function login()
+    public function index()
     {
         $redirect = null;
+        return $this->renderer->render('admin/index', compact('redirect'));
+    }
 
-        if ($this->request->getMethod() === 'POST') {
-            $input = $this->request->getParsedBody();
-            $redirect = $this->model->login($input['username'], $input['password']);
-            $this->session->set('alogin', $input['username']);
-        }
-
+    /**
+     * @return mixed
+     */
+    public function login(): mixed
+    {
+        $input = $this->request->getParsedBody();
+        $redirect = $this->model->login($input['username'], $input['password']);
+        $this->session->set('alogin', $input['username']);
         // Render a template
         return $this->renderer->render('admin/index', compact('redirect'));
     }
