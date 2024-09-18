@@ -10,15 +10,22 @@ class LoginTransaction
 {
     private $usersGateway;
 
+    /**
+     * @param UsersGateway $usersGateway
+     */
     public function __construct(UsersGateway $usersGateway)
     {
         $this->usersGateway = $usersGateway;
     }
 
-    public function submitLogin($email, $password)
+    /**
+     * @param $email
+     * @param $password
+     * @return bool
+     */
+    public function authenticate($email, $password): bool
     {
-        $status = '1';
-        $passwordHash = $this->usersGateway->getPasswordHasByEmail($email, $status);
+        $passwordHash = $this->usersGateway->getPasswordHasByEmail($email);
 
         if ($passwordHash === null) {
             return false;

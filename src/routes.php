@@ -1,43 +1,31 @@
 <?php
 
 use App\Controller\AdminController;
+use App\Controller\MainController;
+use App\Controller\UsersController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use App\Controller\FeedbackController;
 
 $controllerFactory = new \App\Controller\ControllerFactory();
 
 return function (RoutingConfigurator $routes) use ($controllerFactory) {
 
-        $routes->add('home', '/')
-        ->controller(
-            function (Request $request) use ($controllerFactory) {
-                return new Response(
-                    $controllerFactory->makeMainController()->home()
-                );
-            }
-        )
-        ;
+    $routes->add('home', '/')
+        ->controller([MainController::class, 'home'])
+        ->methods(['GET']);
+
+    $routes->add('home_login', '/')
+        ->controller([MainController::class, 'login'])
+        ->methods(['POST']);
 
     $routes->add('profile', '/profile')
-        ->controller(
-            function (Request $request) use ($controllerFactory) {
-                return new Response(
-                    $controllerFactory->makeUserController()->profile()
-                );
-            }
-        )
-    ;
+        ->controller([UsersController::class, 'profile'])
+        ->methods(['GET']);
 
     $routes->add('feedback', '/feedback')
-        ->controller(
-            function (Request $request) use ($controllerFactory) {
-                return new Response(
-                    $controllerFactory->makeFeedbackController()->frontend()
-                );
-            }
-        )
-    ;
+        ->controller([FeedbackController::class, 'frontend']);
 
     $routes->add('notification', '/notification')
         ->controller(
@@ -50,14 +38,7 @@ return function (RoutingConfigurator $routes) use ($controllerFactory) {
     ;
 
     $routes->add('messages', '/messages')
-        ->controller(
-            function (Request $request) use ($controllerFactory) {
-                return new Response(
-                    $controllerFactory->makeFeedbackController()->messages()
-                );
-            }
-        )
-    ;
+        ->controller([FeedbackController::class, 'messages']);
 
     $routes->add('change-password', '/change-password')
         ->controller(
@@ -81,15 +62,7 @@ return function (RoutingConfigurator $routes) use ($controllerFactory) {
 
     $routes->add('admin', '/admin')
         ->controller([AdminController::class, 'index'])
-//        ->controller(
-//            function (Request $request) use ($controllerFactory) {
-//                return new Response(
-//                    $controllerFactory->makeAdminController()->index()
-//                );
-//            }
-//        )
-        ->methods(['GET'])
-    ;
+        ->methods(['GET']);
 
     $routes->add('admin_login', '/admin/login')
         ->controller(

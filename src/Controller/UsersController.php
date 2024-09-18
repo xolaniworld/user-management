@@ -4,9 +4,13 @@
 namespace App\Controller;
 
 use App\Auth;
+use App\Gateway\UsersGateway;
 use App\PlatesTemplate;
+use App\Transaction\Filesystem;
 use App\Transaction\UsersTransactions;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\ServerRequestInterface;
+use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class UsersController extends AbstractController
@@ -16,12 +20,18 @@ class UsersController extends AbstractController
     private $session;
     private $template;
 
-    public function __construct(ServerRequestInterface $request, UsersTransactions $transaction, PlatesTemplate $template, Session $session)
+    public function __construct()
     {
-        $this->request = $request;
-        $this->transaction = $transaction;
-        $this->template = $template;
-        $this->session = $session;
+        $symfonyRequest = \Symfony\Component\HttpFoundation\Request::createFromGlobals();
+        $psr17Factory = new Psr17Factory();
+        $psrHttpFactory = new PsrHttpFactory($psr17Factory, $psr17Factory, $psr17Factory, $psr17Factory);
+        $this->request = $psrHttpFactory->createRequest($symfonyRequest);
+        $this->transaction = new UsersTransactions(
+            new UsersGateway(get_database()),
+            new \App\Request(),
+            new Filesystem(IMAGES_DIR)
+        );
+        $this->session = \App\Session::getSession();
     }
 
     public function profile()
@@ -38,7 +48,7 @@ class UsersController extends AbstractController
         $result = $this->transaction->findByEmail($alogin);
         $cnt = 1;
 
-        return $this->template->render('profile', compact('result','email', 'alogin', 'cnt', 'msg'));
+        return $this->render('profile', compact('result','email', 'alogin', 'cnt', 'msg'));
     }
 
     public function changePassword()

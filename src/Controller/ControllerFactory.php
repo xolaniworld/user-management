@@ -35,13 +35,6 @@ class ControllerFactory
         return new AdminController($t, $this->getRequest(), $this->getSession(), $this->getRenderer());
     }
 
-    public function makeMainController()
-    {
-        $usersGateway = new Gateway\UsersGateway($this->getDatabase());
-        $transaction = new Transaction\LoginTransaction($usersGateway);
-        return new \App\Controller\MainController($this->getRequest(), $transaction, $this->getRenderer(), $this->getSession());
-    }
-
     public function makeUserController()
     {
         $userGateway = new Gateway\UsersGateway($this->getDatabase());

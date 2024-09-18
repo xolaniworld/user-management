@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Auth;
+use App\Gateway\NotificationGateway;
 use App\RendererInterface;
 use App\Transaction\NotificationTransaction;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -13,11 +14,11 @@ class NotificationController extends AbstractController
     private $renderer;
     private $session;
 
-    public function __construct(NotificationTransaction $transaction, RendererInterface $renderer, Session $session)
+    public function __construct()
     {
-        $this->transaction =  $transaction;
-        $this->renderer = $renderer;
-        $this->session = $session;
+        $gateway = new NotificationGateway(get_database());
+        $this->transaction =  new NotificationTransaction($gateway);
+        $this->session = \App\Session::getSession();;
     }
 
     public function notification()
@@ -29,7 +30,7 @@ class NotificationController extends AbstractController
         $this->transaction->findNotificationsByreceiver($receiver);
 
         // Render a template
-        return $this->renderer->render('notification', [
+        return $this->render('notification', [
             'alogin' => $receiver,
             'results' => $this->transaction->getNotications(),
             'count' => $this->transaction->getTotal(),
