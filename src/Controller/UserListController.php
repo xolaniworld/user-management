@@ -1,9 +1,13 @@
 <?php
 namespace App\Controller;
 
+use App\Gateway\DeletedUserGateway;
+use App\Gateway\UsersGateway;
 use App\RendererInterface;
 use App\Transaction\UserListTransaction;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\ServerRequestInterface;
+use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
 
 class UserListController extends AbstractController
 {
@@ -11,11 +15,19 @@ class UserListController extends AbstractController
     private $request;
     private $renderer;
 
-    public function __construct(UserListTransaction $transaction, RendererInterface $renderer, ServerRequestInterface $request)
+    public function __construct(
+//        UserListTransaction $transaction, RendererInterface $renderer, ServerRequestInterface $request
+    )
     {
-        $this->transaction = $transaction;
-        $this->renderer = $renderer;
-        $this->request = $request;
+        $this->transaction = new UserListTransaction(
+            new UsersGateway(get_database()),
+            new DeletedUserGateway(get_database())
+        );
+
+        $symfonyRequest = \Symfony\Component\HttpFoundation\Request::createFromGlobals();
+        $psr17Factory = new Psr17Factory();
+        $psrHttpFactory = new PsrHttpFactory($psr17Factory, $psr17Factory, $psr17Factory, $psr17Factory);
+        $this->request = $psrHttpFactory->createRequest($symfonyRequest);
     }
 
     public function all()
@@ -44,6 +56,6 @@ class UserListController extends AbstractController
 
         list($results, $rowCount) = $this->transaction->findAllUsers();
 
-        return $this->renderer->render('admin/userlist', compact('results', 'rowCount', 'msg'));
+        return $this->render('admin/userlist', compact('results', 'rowCount', 'msg'));
     }
 }

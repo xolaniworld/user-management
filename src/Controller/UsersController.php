@@ -69,7 +69,7 @@ class UsersController extends AbstractController
             }
         }
 
-        return $this->template->render('change_password', compact('alogin','msg', 'error'));
+        return $this->render('change_password', compact('alogin','msg', 'error'));
     }
 
     public function edit()

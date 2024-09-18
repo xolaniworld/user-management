@@ -2,11 +2,15 @@
 
 use App\Controller\AdminController;
 use App\Controller\MainController;
+use App\Controller\NotificationController;
+use App\Controller\RegisterController;
+use App\Controller\UserListController;
 use App\Controller\UsersController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use App\Controller\FeedbackController;
+use App\Controller\DashboardController;
 
 $controllerFactory = new \App\Controller\ControllerFactory();
 
@@ -28,92 +32,41 @@ return function (RoutingConfigurator $routes) use ($controllerFactory) {
         ->controller([FeedbackController::class, 'frontend']);
 
     $routes->add('notification', '/notification')
-        ->controller(
-            function (Request $request) use ($controllerFactory) {
-                return new Response(
-                    $controllerFactory->makeNotificationController()->notification()
-                );
-            }
-        )
-    ;
+        ->controller([NotificationController::class, 'notification']);
 
     $routes->add('messages', '/messages')
         ->controller([FeedbackController::class, 'messages']);
 
-    $routes->add('change-password', '/change-password')
-        ->controller(
-            function (Request $request) use ($controllerFactory) {
-                return new Response(
-                    $controllerFactory->makeUserController()->changePassword()
-                );
-            }
-        )
-    ;
+    $routes->add('change_password', '/change-password')
+        ->controller([UsersController::class, 'changePassword']);
+
+    $routes->add('register_view', '/register')
+        ->controller([RegisterController::class, 'view'])
+        ->methods(['GET']);
 
     $routes->add('register', '/register')
-        ->controller(
-            function (Request $request) use ($controllerFactory) {
-                return new Response(
-                    $controllerFactory->makeRegisterController()->register()
-                );
-            }
-        )
-    ;
+        ->controller([RegisterController::class, 'register'])
+        ->methods(['POST']);
 
     $routes->add('admin', '/admin')
         ->controller([AdminController::class, 'index'])
         ->methods(['GET']);
 
     $routes->add('admin_login', '/admin/login')
-        ->controller(
-            function (Request $request) use ($controllerFactory) {
-                return new Response(
-                    $controllerFactory->makeAdminController()->login()
-                );
-            }
-        )->methods(['POST'])
-    ;
+        ->controller([AdminController::class, 'login'])
+        ->methods(['POST']);
 
     $routes->add('admin-dashboard', '/admin/dashboard')
-        ->controller(
-            function (Request $request) use ($controllerFactory) {
-                return new Response(
-                    $controllerFactory->makeDashboardController()->dashboard()
-                );
-            }
-        )
-    ;
-
+        ->controller([DashboardController::class, 'dashboard']);
 
     $routes->add('admin-userlist', '/admin/userlist')
-        ->controller(
-            function (Request $request) use ($controllerFactory) {
-                return new Response(
-                    $controllerFactory->makeUserListController()->all()
-                );
-            }
-        )
-    ;
+        ->controller([UserListController::class, 'all']);
 
     $routes->add('admin-profile', '/admin/profile')
-        ->controller(
-            function (Request $request) use ($controllerFactory) {
-                return new Response(
-                    $controllerFactory->makeAdminController()->profile()
-                );
-            }
-        )
-    ;
+        ->controller([AdminController::class, 'profile']);
 
     $routes->add('admin-feedback', '/admin/feedback')
-        ->controller(
-            function (Request $request) use ($controllerFactory) {
-                return new Response(
-                    $controllerFactory->makeAdminFeedbackController()->feedback()
-                );
-            }
-        )
-    ;
+        ->controller([\App\Controller\AdminFeedbackController::class, 'feedback']);
 
     $routes->add('admin-notification', '/admin/notification')
         ->controller(

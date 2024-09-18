@@ -4,20 +4,43 @@
 namespace App\Controller;
 
 
+use App\Gateway\NotificationGateway;
+use App\Gateway\UsersGateway;
 use App\RendererInterface;
+use App\Request;
+use App\Transaction\Filesystem;
 use App\Transaction\RegisterTransaction;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\ServerRequestInterface;
+use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
 
-class RegisterController
+class RegisterController extends AbstractController
 {
     private $transaction;
     private $renderer;
     private $request;
-    public function __construct(RegisterTransaction $transaction,  RendererInterface $renderer, ServerRequestInterface $request)
+    public function __construct(
+    //    RegisterTransaction $transaction,  RendererInterface $renderer, ServerRequestInterface $request
+    )
     {
-        $this->transaction = $transaction;
-        $this->renderer = $renderer;
-        $this->request = $request;
+        $this->transaction = new RegisterTransaction(
+            new UsersGateway(get_database()),
+            new NotificationGateway(get_database()),
+            new Filesystem(IMAGES_DIR),
+            new \App\Request()
+        );
+
+        $symfonyRequest = \Symfony\Component\HttpFoundation\Request::createFromGlobals();
+        $psr17Factory = new Psr17Factory();
+        $psrHttpFactory = new PsrHttpFactory($psr17Factory, $psr17Factory, $psr17Factory, $psr17Factory);
+        $this->request = $psrHttpFactory->createRequest($symfonyRequest);
+    }
+
+    public function view()
+    {
+        $error = null;
+        $redirect = false;
+        return $this->render('register', compact('error', 'redirect'));
     }
 
     public function register()
@@ -36,6 +59,6 @@ class RegisterController
         }
 
         // Render a template
-        return $this->renderer->render('register', compact('error', 'redirect'));
+        return $this->render('register', compact('error', 'redirect'));
     }
 }

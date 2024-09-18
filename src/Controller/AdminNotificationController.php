@@ -3,10 +3,14 @@
 
 namespace App\Controller;
 
+use App\Gateway\AdminGateway;
+use App\Gateway\NotificationGateway;
 use App\RendererInterface;
 use App\Repository\AdminTransaction;
 use App\Transaction\NotificationTransaction;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\ServerRequestInterface;
+use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
 
 class AdminNotificationController extends AbstractController
 {
@@ -17,10 +21,13 @@ class AdminNotificationController extends AbstractController
 
     public function __construct(NotificationTransaction $notificationTransaction, AdminTransaction $adminTransaction, RendererInterface $renderer, ServerRequestInterface $request)
     {
-        $this->notificationTransaction = $notificationTransaction;
-        $this->adminTransaction = $adminTransaction;
-        $this->renderer = $renderer;
-        $this->request = $request;
+        $this->notificationTransaction =  new NotificationTransaction(new NotificationGateway(get_database()));
+        $this->adminTransaction = new AdminTransaction( new AdminGateway(get_database()));
+
+        $symfonyRequest = \Symfony\Component\HttpFoundation\Request::createFromGlobals();
+        $psr17Factory = new Psr17Factory();
+        $psrHttpFactory = new PsrHttpFactory($psr17Factory, $psr17Factory, $psr17Factory, $psr17Factory);
+        $this->request = $psrHttpFactory->createRequest($symfonyRequest);
     }
 
     public function notification()
@@ -40,6 +47,6 @@ class AdminNotificationController extends AbstractController
         $count = $this->notificationTransaction->getTotal();
         $cnt = 1;
 
-        return $this->renderer->render('admin/notification', compact('results', 'count', 'cnt'));
+        return $this->render('admin/notification', compact('results', 'count', 'cnt'));
     }
 }

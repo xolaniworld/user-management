@@ -12,8 +12,8 @@
                     foreach ($results as $result) { ?>
                         <h5 style="background:#ededed;padding:20px;">
                             <i class="fa fa-bell text-primary"></i>&nbsp;&nbsp;<b class="text-primary"><?= $this->e($result->time); ?></b>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= $this->e($result->notiuser); ?>
-                            -----> <?= $this->e($result->notitype); ?></h5>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= $this->e($result->notification_user); ?>
+                            -----> <?= $this->e($result->notification_type); ?></h5>
                         <?php $cnt++;
                     }
                 } ?>

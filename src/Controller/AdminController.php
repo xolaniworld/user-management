@@ -55,7 +55,7 @@ class AdminController extends AbstractController
         $redirect = $this->model->login($input['username'], $input['password']);
         $this->session->set('alogin', $input['username']);
         // Render a template
-        return $this->renderer->render('admin/index', compact('redirect'));
+        return $this->render('admin/index', compact('redirect'));
     }
 
     public function changePassword()
@@ -74,7 +74,7 @@ class AdminController extends AbstractController
             }
         }
 
-        return $this->renderer->render('admin/change-password', compact('msg', 'error'));
+        return $this->render('admin/change-password', compact('msg', 'error'));
     }
 
     public function profile()
@@ -92,6 +92,6 @@ class AdminController extends AbstractController
         $result = $this->transaction->getAll();
         $cnt = 1;
 
-        return $this->renderer->render('admin/profile', compact('result', 'cnt', 'name', 'email', 'msg'));
+        return $this->render('admin/profile', compact('result', 'cnt', 'name', 'email', 'msg'));
     }
 }
