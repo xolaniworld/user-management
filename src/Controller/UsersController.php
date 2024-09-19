@@ -5,13 +5,14 @@ namespace App\Controller;
 
 use App\Auth;
 use App\Gateway\UsersGateway;
+use App\Session;
 use App\PlatesTemplate;
 use App\Transaction\Filesystem;
 use App\Transaction\UsersTransactions;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Request;
 
 class UsersController extends AbstractController
 {
@@ -22,30 +23,38 @@ class UsersController extends AbstractController
 
     public function __construct()
     {
-        $symfonyRequest = \Symfony\Component\HttpFoundation\Request::createFromGlobals();
-        $psr17Factory = new Psr17Factory();
-        $psrHttpFactory = new PsrHttpFactory($psr17Factory, $psr17Factory, $psr17Factory, $psr17Factory);
-        $this->request = $psrHttpFactory->createRequest($symfonyRequest);
-        $this->transaction = new UsersTransactions(
-            new UsersGateway(get_database()),
-            new \App\Request(),
-            new Filesystem(IMAGES_DIR)
-        );
-        $this->session = \App\Session::getSession();
+//        $symfonyRequest = \Symfony\Component\HttpFoundation\Request::createFromGlobals();
+//        $psr17Factory = new Psr17Factory();
+//        $psrHttpFactory = new PsrHttpFactory($psr17Factory, $psr17Factory, $psr17Factory, $psr17Factory);
+//        $this->request = $psrHttpFactory->createRequest($symfonyRequest);
+//        $this->transaction = new UsersTransactions(
+//            new UsersGateway(get_database()),
+//            new \App\Request(),
+//            new Filesystem(IMAGES_DIR)
+//        );
+//        $this->session = \App\Session::getSession();
     }
 
-    public function profile()
+    public function profile(Request $request)
     {
         $this->authenticated();
 
         $email = $alogin = $cnt = $msg = '';
-        if ($this->request->getMethod() === 'POST') {
-            $this->transaction->submitEditFrontEnd();
+        $transaction = new UsersTransactions(
+            new UsersGateway(get_database()),
+            new \App\Request(),
+            new Filesystem(IMAGES_DIR)
+        );
+
+        if ($request->getMethod() === 'POST') {
+            $transaction->submitEditFrontEnd();
             $msg = "Information Updated Successfully";
         }
+        $session = \App\Session::getSession();
+        $alogin = $session->get('alogin');
 
-        $alogin = $this->session->get('alogin');
-        $result = $this->transaction->findByEmail($alogin);
+
+        $result = $transaction->findByEmail($alogin);
         $cnt = 1;
 
         return $this->render('profile', compact('result','email', 'alogin', 'cnt', 'msg'));
@@ -62,7 +71,13 @@ class UsersController extends AbstractController
 
         // Code for change password
         if ($this->request->getMethod() === 'POST') {
-            if ($this->transaction->changePassword($alogin, $input['password'], $input['newpassword'])) {
+            $transaction = new UsersTransactions(
+                new UsersGateway(get_database()),
+                new \App\Request(),
+                new Filesystem(IMAGES_DIR)
+            );
+
+            if ($transaction->changePassword($alogin, $input['password'], $input['newpassword'])) {
                 $msg = "Your Password succesfully changed";
             } else {
                 $error = "Your current password is not valid.";

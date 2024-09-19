@@ -26,7 +26,7 @@ return function (RoutingConfigurator $routes) use ($controllerFactory) {
 
     $routes->add('profile', '/profile')
         ->controller([UsersController::class, 'profile'])
-        ->methods(['GET']);
+        ->methods(['GET', 'POST']);
 
     $routes->add('feedback', '/feedback')
         ->controller([FeedbackController::class, 'frontend']);
@@ -63,7 +63,8 @@ return function (RoutingConfigurator $routes) use ($controllerFactory) {
         ->controller([UserListController::class, 'all']);
 
     $routes->add('admin-profile', '/admin/profile')
-        ->controller([AdminController::class, 'profile']);
+        ->controller([AdminController::class, 'profile'])
+        ->methods(['GET', 'POST']);
 
     $routes->add('admin-feedback', '/admin/feedback')
         ->controller([\App\Controller\AdminFeedbackController::class, 'feedback']);

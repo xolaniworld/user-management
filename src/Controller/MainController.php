@@ -11,26 +11,15 @@ use App\Transaction\LoginTransaction;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class MainController extends AbstractController
 {
-    private $request;
     private $transaction;
-    private $renderer;
-    private $session;
 
-    public function __construct(
-//        ServerRequestInterface $request, LoginTransaction $transaction, RendererInterface $renderer, Session $session
-    )
+    public function __construct()
     {
-        $this->transaction = new LoginTransaction(new UsersGateway(get_database()));
-        $this->renderer = new PlatesTemplate(__DIR__ . '/../../templates');
-        $symfonyRequest = \Symfony\Component\HttpFoundation\Request::createFromGlobals();
-        $psr17Factory = new Psr17Factory();
-        $psrHttpFactory = new PsrHttpFactory($psr17Factory, $psr17Factory, $psr17Factory, $psr17Factory);
-        $this->request = $psrHttpFactory->createRequest($symfonyRequest);
-        $this->session = \App\Session::getSession();
     }
 
     /**
@@ -44,14 +33,17 @@ class MainController extends AbstractController
     }
 
     /**
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function login()
+    public function login(Request $request)
     {
         $redirect = false;
-        $post = $this->request->getParsedBody();
-        if ($this->transaction->authenticate($post['username'], $post['password'])) {
-            $this->session->set('alogin', $post['username']);
+        $post = $request->request->all();
+        $transaction = new LoginTransaction(new UsersGateway(get_database()));
+        if ($transaction->authenticate($post['username'], $post['password'])) {
+            $session = \App\Session::getSession();
+            $session->set('alogin', $post['username']);
             $redirect = true;
         }
 

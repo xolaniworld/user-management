@@ -10,6 +10,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AbstractController
 {
+    /**
+     * @var RendererInterface
+     */
     private RendererInterface $renderer;
 
     public function authenticated()

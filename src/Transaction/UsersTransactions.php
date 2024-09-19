@@ -6,6 +6,7 @@ namespace App\Transaction;
 
 use App\Gateway\UsersGateway;
 use App\Request;
+use Symfony\Component\Filesystem\Exception\IOException;
 
 class UsersTransactions
 {
@@ -62,11 +63,20 @@ class UsersTransactions
 
         if ($adminUser) {
             $gender = $this->request->getPost('gender');
-            $image = $this->filesystem->upload($imageFiles);
+            try {
+                $image = $this->filesystem->upload($imageFiles);
+            } catch (\Exception $e) {
+                //log
+                $image = '';
+            }
             return $this->usersGateway->updateByIdWithGender($name, $email, $gender, $mobileno, $designation, $image, $idedit);
         } else {
-
-            $image = $this->filesystem->upload($imageFiles);
+            try {
+                $image = $this->filesystem->upload($imageFiles);
+            } catch (\Exception $e) {
+                //log
+                $image = '';
+            }
             return $this->usersGateway->updateById($name, $email, $mobileno, $designation, $image, $idedit);
         }
     }
