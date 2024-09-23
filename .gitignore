@@ -3,3 +3,4 @@ vendor/
 config/db.php
 .env
 composer.phar
+public/images/

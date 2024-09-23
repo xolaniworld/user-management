@@ -1,5 +1,6 @@
 <?php
 
+namespace Tests\Unit;
 class FeedbackTransactionTest extends \PHPUnit\Framework\TestCase
 {
     private $prophet;

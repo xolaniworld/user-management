@@ -1,9 +1,12 @@
 <?php
 
 
+namespace Tests\Unit\Contollers;
+
 use Application\Controllers\FeedbackController;
 use Application\RendererInterface;
 use Application\Transactions\FrontendFeedbackTransaction;
+use Prophecy;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 

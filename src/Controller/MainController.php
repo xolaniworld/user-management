@@ -11,6 +11,7 @@ use App\Transaction\LoginTransaction;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -45,6 +46,7 @@ class MainController extends AbstractController
             $session = \App\Session::getSession();
             $session->set('alogin', $post['username']);
             $redirect = true;
+            return new RedirectResponse('/profile');
         }
 
         return $this->render('home', compact('redirect'));

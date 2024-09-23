@@ -1,6 +1,8 @@
 <?php
 
 
+namespace Tests\Unit;
+
 use Prophecy\Argument;
 
 class DashboardTransactionTest extends \PHPUnit\Framework\TestCase

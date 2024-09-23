@@ -11,7 +11,7 @@
                 <i class="fa fa-angle-down hidden-side"></i></a>
             <ul>
                 <li><a href="/change-password">Change Password</a></li>
-                <li><a href="logout.php">Logout</a></li>
+                <li><a href="/logout">Logout</a></li>
             </ul>
         </li>
     </ul>

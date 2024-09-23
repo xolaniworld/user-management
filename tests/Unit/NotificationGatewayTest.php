@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Unit;
+use __unit\PDO;
+
 class NotificationGateway extends \PHPUnit\Framework\TestCase
 {
     private $gateway;
@@ -26,12 +29,12 @@ class NotificationGateway extends \PHPUnit\Framework\TestCase
         $this->assertEquals('bar-1', $obj->notireceiver);
         $this->assertEquals('baz-1', $obj->notitype);
 
-        $this->pdo->exec('delete from notification where id='.$id);
+        $this->pdo->exec('delete from notification where id=' . $id);
     }
 
     public function testCountByreceiver()
     {
-        $this->assertGreaterThan(0,$this->gateway->countByreceiver('foo'));
+        $this->assertGreaterThan(0, $this->gateway->countByreceiver('foo'));
     }
 
     public function testFindByNotireceiver()

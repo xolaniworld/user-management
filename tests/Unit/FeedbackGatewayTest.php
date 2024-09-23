@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Unit;
+use __unit\PDO;
+
 class FeedbackGateway extends \PHPUnit\Framework\TestCase
 {
     private $gateway;
@@ -18,7 +21,7 @@ class FeedbackGateway extends \PHPUnit\Framework\TestCase
     {
         $this->gateway->insertSenderreceiverTitleFeedbackAttachment('user-1', 'receiver-1', 'title-1', 'description-1', 'attachment-1');
         $id = $this->pdo->lastInsertId();
-        $sth = $this->pdo->query('select sender, receiver, title,feedbackdata,attachment from feedback where id='.$id, PDO::FETCH_OBJ);
+        $sth = $this->pdo->query('select sender, receiver, title,feedbackdata,attachment from feedback where id=' . $id, PDO::FETCH_OBJ);
         $obj = $sth->fetch();
 
         $this->assertEquals('user-1', $obj->sender);
@@ -32,7 +35,7 @@ class FeedbackGateway extends \PHPUnit\Framework\TestCase
 
     public function test_countByreceiver()
     {
-        $this->assertGreaterThan(0,      $this->gateway->countByreceiver('receiver'));
+        $this->assertGreaterThan(0, $this->gateway->countByreceiver('receiver'));
     }
 
     public function test_findByreceiver()
@@ -46,7 +49,7 @@ class FeedbackGateway extends \PHPUnit\Framework\TestCase
     {
         $this->gateway->insertByUserreceiverDescription('sender-2', 'receiver-2', 'message-2');
         $id = $this->pdo->lastInsertId();
-        $sth = $this->pdo->query('select sender, receiver, feedbackdata from feedback where id='.$id, PDO::FETCH_OBJ);
+        $sth = $this->pdo->query('select sender, receiver, feedbackdata from feedback where id=' . $id, PDO::FETCH_OBJ);
         $obj = $sth->fetch();
 
         $this->assertEquals('sender-2', $obj->sender);

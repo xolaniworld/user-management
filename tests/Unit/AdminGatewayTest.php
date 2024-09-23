@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Unit;
+
 use Prophecy\Argument;
 
 class AdminGatewayTest extends \PHPUnit\Framework\TestCase

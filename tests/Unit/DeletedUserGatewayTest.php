@@ -1,6 +1,9 @@
 <?php
 
 
+namespace Tests\Unit;
+use __unit\PDO;
+
 class DeletedUserGateway extends \PHPUnit\Framework\TestCase
 {
     private $gateway;

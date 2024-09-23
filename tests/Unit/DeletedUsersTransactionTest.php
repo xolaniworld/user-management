@@ -1,6 +1,8 @@
 <?php
 
 
+namespace Tests\Unit;
+
 use Application\Gateways\DeletedUserGateway;
 
 class DeletedUsersTransactionTest extends \PHPUnit\Framework\TestCase

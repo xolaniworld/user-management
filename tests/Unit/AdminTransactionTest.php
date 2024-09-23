@@ -1,5 +1,6 @@
 <?php
 
+namespace Tests\Unit;
 class AdminTransactionTest extends \PHPUnit\Framework\TestCase
 {
     private $prophet;
@@ -52,7 +53,7 @@ class AdminTransactionTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    protected function tearDown():void
+    protected function tearDown(): void
     {
         $this->prophet->checkPredictions();
     }

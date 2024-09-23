@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Unit;
+use __unit\PDO;
+
 class UsersGatewayTest extends \PHPUnit\Framework\TestCase
 {
     private $pdo;
@@ -33,7 +36,7 @@ class UsersGatewayTest extends \PHPUnit\Framework\TestCase
     public function testCountByEmailPasswordAndStatus()
     {
         $result = $this->gateway->countByEmailPasswordAndStatus($this->email, $this->md5Password, $this->status);
-        $this->assertGreaterThan(0,$result);
+        $this->assertGreaterThan(0, $result);
     }
 
     public function testCountByUsernameAndPassword()
@@ -73,7 +76,7 @@ class UsersGatewayTest extends \PHPUnit\Framework\TestCase
         $id = $this->pdo->lastInsertId();
 
         $newpassword = md5('newpassword');
-        $this->gateway->updatePasswordByUsername($newpassword,  $this->email);
+        $this->gateway->updatePasswordByUsername($newpassword, $this->email);
         $result = $this->gateway->findByEmail($this->email);
         $this->assertEquals($newpassword, $result->password);
 
